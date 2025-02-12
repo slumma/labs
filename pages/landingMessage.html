@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging Page</title>
+    <link rel="stylesheet" href="../css/message.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <header>
+                <h2 class="text-align:center">Recent Messages</h2>
+            </header>
+            <ul>
+                <li class="unread">Jane Doe</li>
+                <li>John Smith</li>
+                <li class="unread">Emily Johnson</li>
+                <!-- Add more contacts as needed -->
+            </ul>
+            <button class="new-message-button">New Message</button> <!-- Button moved here -->
+        </aside>
+        <main class="chat-area">
+            <header>
+                <h2>Chat with Jane Doe</h2>
+            </header>
+            <div class="messages">
+                <div class="message received">
+                    <p>Hello! How are you?</p>
+                    <span class="timestamp">10:00 AM</span>
+                </div>
+                <div class="message sent">
+                    <p>I'm good, thank you! How about you?</p>
+                    <span class="timestamp">10:02 AM</span>
+                </div>
+                <!-- Add more messages as needed -->
+            </div>
+            <footer>
+                <input type="text" placeholder="Type your message...">
+                <button>Send</button>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>
