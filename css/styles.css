@@ -1,0 +1,90 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    flex-direction: column;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container Styles */
+.table-container, .detail-container, .login-container {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+th {
+    background-color: #9e9e9e;
+    color: white;
+    text-align: center;
+}
+
+/* Buttons */
+.detail-button, .action-button, .status-button, button {
+    padding: 8px 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.detail-button:hover, 
+.action-button:hover, 
+.status-button:hover, 
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Form & Input Styles */
+input {
+    display: block;
+    width: 180px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button-container .action-button {
+    flex: 1;
+    margin: 0 5px;
+}
+
+/* Status Cell */
+.status-cell {
+    text-align: right;
+}
