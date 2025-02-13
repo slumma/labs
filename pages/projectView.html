@@ -7,39 +7,86 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <div class="table-container">
-        <h2>Projects</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Project Name</th>
-                    <th>Due Date</th>
-                    <th>Funding</th>
-                    <th>View</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Education Project</td>
-                    <td>May 5, 2025</td>
-                    <td>$5,000</td>
-                    <td><button class="detail-button">Detailed View</button></td>
-                </tr>
-                <tr>
-                    <td>Health Research Project</td>
-                    <td>October 17, 2025</td>
-                    <td>$10,000</td>
-                    <td><button class="detail-button">Detailed View</button></td>
-                </tr>
-                <tr>
-                    <td>Small Business Project</td>
-                    <td>January 4, 2026</td>
-                    <td>$15,000</td>
-                    <td><button class="detail-button">Detailed View</button></td>
-                </tr>
-            </tbody>
-        </table>
-        <br />
-        <button>View Business Partners</button>
+    
+        <h2>Education Project</h2>
+        <h5>Due May 5, 2025</h5>
+    <div class="tables-wrapper">
+        <div class="table-container">
+            <div class="table-title">Tasks</div>
+                <table>
+                    <tr>
+                        <th>Task</th>
+                        <th>Staff</th>
+                        <th>Due Date</th>
+                        <th>Edit</th>
+                    </tr>
+                    <tr>
+                        <td>Consultation</td>
+                        <td>
+                            <select class="status-dropdown">
+                                <option value="x" selected>3 Staff</option>
+                                <option value="x">Mike Greene</option>
+                                <option value="x">Casey Stokes</option>
+                                <option value="x">Michelle</option>
+                            </select>
+                        </td>
+                        <td>05/05/2025</td>
+                        <td>
+                            <button class="button">Edit Task</select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Overview</td>
+                        <td>
+                            <select class="status-dropdown">
+                                <option value="x" selected>2 Staff</option>
+                                <option value="x">Lena Jones</option>
+                                <option value="x">Jake Wright</option>
+                            </select>
+                        </td>
+                        <td>07/13/2025</td>
+                        <td>
+                            <button class="button">Edit Task</select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="table-container">
+                <div class="notes-header">
+                    <div class="table-title">Notes</div>
+                    <button class="add-note-button">Add Note</button>
+                </div>
+                <table>
+                    <tr>
+                        <th>Note</th>
+                        <th>Date Added</th>
+                        <th>Edit</th>
+                    </tr>
+                    <tr>
+                        <td>Assigned Casey Stokes to Consultation</td>
+                        <td>02/13/2025</td>
+                        <td>
+                            <button class="button edit-note">Edit Note</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Created Task "Overview"</td>
+                        <td>02/11/2025</td>
+                        <td>
+                            <button class="button edit-note">Edit Note</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>POC for DOE changed to Mike Breene: (703) 444-0019 mbreene22@DOE.com</td>
+                        <td>02/01/2025</td>
+                        <td>
+                            <button class="button edit-note">Edit Note</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </body>
+</html>

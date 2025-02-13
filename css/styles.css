@@ -57,7 +57,7 @@ th {
     left: 50%;
 }
 button {
-    padding: 10px 50px;
+    padding: 10px 30px;
     background-color: #007BFF;
     color: white;
     border: none;
@@ -163,4 +163,41 @@ input {
 /* Hover effect */
 .partner-detail-button:hover {
     background-color: #2980b9;
+}
+
+.tables-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 50px; /* Space between tables */
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Each Table Container */
+.table-container {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Titles Above Tables */
+.table-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button.edit-note {
+    white-space: nowrap;
 }
