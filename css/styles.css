@@ -42,8 +42,22 @@ th {
 }
 
 /* Buttons */
-.detail-button, .action-button, .status-button, button {
+.detail-button, .action-button, .status-button {
     padding: 8px 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s;
+    transform: translatex(70%);
+    left: 50%;
+}
+button {
+    padding: 10px 50px;
     background-color: #007BFF;
     color: white;
     border: none;
