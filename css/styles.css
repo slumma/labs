@@ -102,3 +102,65 @@ input {
 .status-cell {
     text-align: right;
 }
+
+.status-dropdown {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #333;  /* Matches the button color */
+    border-radius: 4px;
+    background-color: white;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Style on hover and focus */
+.status-dropdown:hover,
+.status-dropdown:focus {
+    border-color: #b6b6b6;  /* Darker blue on hover */
+    outline: none;
+}
+
+/* Style for dropdown options */
+.status-dropdown option {
+    background-color: white;
+    color: #333;
+    font-size: 14px;
+}
+
+/* If you want a more modern look, remove the default dropdown arrow */
+.status-dropdown {
+    appearance: none; /* Hides default dropdown arrow */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+    padding-right: 30px; /* Space for custom arrow */
+}
+
+.partner-detail-button {
+    padding: 8px 12px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap; /* Prevents text wrapping */
+    display: inline-block; /* Keeps it inside the cell */
+    min-width: 120px; /* Adjust as needed to fit text */
+    text-align: center;
+    transition: background 0.3s ease-in-out;
+}
+
+.partner-actions {
+    width: 150px; /* Ensures column width is sufficient */
+    text-align: center;
+}
+
+/* Hover effect */
+.partner-detail-button:hover {
+    background-color: #2980b9;
+}

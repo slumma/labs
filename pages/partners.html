@@ -22,28 +22,60 @@
             <tbody>
                 <tr>
                     <td>Federal Bureau of Investigation</td>
-                    <td>Active</td>
+                    <td>
+                        <select class="status-dropdown">
+                            <option value="Prospect">Prospect</option>
+                            <option value="Initial Contact">Initial Contact</option>
+                            <option value="In Negotiation">In Negotiation</option>
+                            <option value="Memo Signed">Memo Signed</option>
+                            <option value="Active Partner" selected>Active Partner</option>
+                        </select>
+                    </td>
                     <td>John Smith</td>
                     <td>johnsmith@gmail.com</td>
-                    <td><button class="detail-button">Detailed View</button></td>
+                    <td class="partner-actions"><button class="partner-detail-button">Detailed View</button></td>
+
                 </tr>
                 <tr>
                     <td>Department of Defense</td>
-                    <td>In Contact</td>
+                    <td>
+                        <select class="status-dropdown">
+                            <option value="Prospect">Prospect</option>
+                            <option value="Initial Contact">Initial Contact</option>
+                            <option value="In Negotiation">In Negotiation</option>
+                            <option value="Memo Signed">Memo Signed</option>
+                            <option value="Active Partner">Active Partner</option>
+                        </select>
+                    </td>
                     <td>Larry Hogan</td>
                     <td>larryHOGAN@gmail.com</td>
-                    <td><button class="detail-button">Detailed View</button></td>
+                    <td class="partner-actions"><button class="partner-detail-button">Detailed View</button></td>
+
                 </tr>
                 <tr>
                     <td>Department of Education</td>
-                    <td>Inactive</td>
+                    <td>
+                        <select class="status-dropdown">
+                            <option value="Prospect">Prospect</option>
+                            <option value="Initial Contact">Initial Contact</option>
+                            <option value="In Negotiation">In Negotiation</option>
+                            <option value="Memo Signed">Memo Signed</option>
+                            <option value="Active Partner">Active Partner</option>
+                        </select>
+                    </td>
                     <td>Jack Carrol</td>
                     <td>JackCarrol@gmail.com</td>
-                    <td><button class="detail-button">Detailed View</button></td>
+                    <td class="partner-actions"><button class="partner-detail-button">Detailed View</button></td>
+
                 </tr>
             </tbody>
+            
+                
         </table>
         <br />
+        <button>Add Partner</button>
+        <button>Edit Partner</button>
+        <button>Delete Partner</button>
     </div>
 </body>
 </html>
