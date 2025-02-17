@@ -1,30 +1,26 @@
 ﻿@page
-@model lab484.Pages.Faculty.FacultyLandingModel
+@model lab484.Pages.Admin.AdminLandingModel
 @{
 }
 
-<h2>Available Grants</h2>
+<h2>Available Projects</h2>
 <table class="table table-bordered table-responsive table-hover">
     <thead>
         <tr>
-            <th>Grant Name</th>
-            <th>Amount</th>
-            <th>Supplier</th>
-            <th>Award Date</th>
-            <th>Project</th>
+            <th>Project Name</th>
+            <th>Due Date</th>
+            <th>Funding</th>
             <th>Detailed View</th>
         </tr>
     </thead>
     <tbody>
         @{
-            foreach (var grant in Model.grantList)
+            foreach (var project in @Model.projectList)
             {
                 <tr>
-                    <td class="text-danger">@grant.GrantID</td>
-                    <td>@string.Format("{0:C}", grant.Amount)</td> <! -- formats as dollar value !>
-                    <td>@grant.Supplier</td>
-                    <td>@grant.AwardDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
-                    <td>@grant.Project</td>
+                    <td class="text-danger">@project.ProjectID</td>
+                    <td>@string.Format("{0:C}", project.Amount)</td> <! -- formats as dollar value !>
+                    <td>@project.DueDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
                     <td>
                         <div class="text-center">
                         <button class="btn btn-outline-primary">Details</button>

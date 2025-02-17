@@ -4,26 +4,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
 
-namespace lab484.Pages.Faculty
+namespace lab484.Pages.Admin
 {
-    public class FacultyLandingModel : PageModel
+    public class AdminLandingModel : PageModel
     {
-        public required List<GrantSimple> grantList { get; set; } = new List<GrantSimple>();
+        public required List<ProjectSimple> projectList { get; set; } = new List<ProjectSimple>();
         public void OnGet()
         {
-            SqlDataReader grantReader = DBClass.GrantReader();
-            while (grantReader.Read())
+            SqlDataReader projectReader = DBClass.ProjectReader();
+            while (projectReader.Read())
             {
-                grantList.Add(new GrantSimple
+                projectList.Add(new ProjectSimple
                 {
-                    GrantID = Int32.Parse(grantReader["GrantID"].ToString()),
-                    Supplier = grantReader["Supplier"].ToString(),
-                    Project = grantReader["Project"].ToString(),
-                    Amount = float.Parse(grantReader["Amount"].ToString()),  // fix
-                    Category = grantReader["Category"].ToString(),
-                    Description = grantReader["Description"].ToString(),
-                    SubmissionDate = DateTime.Parse(grantReader["SubmissionDate"].ToString()),
-                    AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString())
+                    ProjectID = Int32.Parse(projectReader["ProjectID"].ToString()),
+                    ProjectName = projectReader["ProjectName"].ToString(),
+                    Amount = float.Parse(projectReader["Amount"].ToString()),  // fuck me
+                    DueDate = DateTime.Parse(projectReader["DueDate"].ToString())
                 });
             }
 

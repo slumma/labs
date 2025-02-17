@@ -53,6 +53,17 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+        public static SqlDataReader ProjectReader()
+        {
+            SqlCommand cmdProductRead = new SqlCommand();
+            cmdProductRead.Connection = DBConnection;
+            cmdProductRead.Connection.ConnectionString = DBConnString;
+            cmdProductRead.CommandText = "SELECT project.ProjectID, project.ProjectName, project.DueDate, sum(grants.amount) AS Amount\r\nfrom project\r\nJOIN grants on project.ProjectID = grants.ProjectID\r\ngroup by project.ProjectID, project.ProjectName, project.duedate;";
+            cmdProductRead.Connection.Open();
+            SqlDataReader tempReader = cmdProductRead.ExecuteReader();
+            return tempReader;
+        }
+
         /*
         public static void UpdateProduct(Product p)
         {
