@@ -4,31 +4,22 @@
     ViewData["Title"] = "Home page";
 }
 
-<h2>User View</h2>
-<table class="table table-bordered table-responsive table-hover">
-    <thead>
-        <tr>
-            <th>User ID:</th>
-            <th>username:</th>
-            <th>password:</th>
-            <th>first name:</th>
-            <th>last name:</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            foreach (var user in Model.userList)
-            {
-                <tr>
-                    <td class="text-danger">@user.UserID</td>
-                    <td>@user.UserName</td>
-                    <td>@user.Password</td>
-                    <td>@user.FirstName</td>
-                    <td>@user.LastName</td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
 
+<h2 class="text-center">Grant Management System</h2>
+<p class="text-center">created by: Nick Clement and Sam Ogden</p>
 <br />
+<form>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingUsername" placeholder="Username" />
+        <label for="floatingUsername">Username</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+        <label for="floatingPassword">Password</label>
+    </div>
+    <br />
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary" asp-page="/viewDB/viewUsers">Login</button>
+    </div>
+
+</form>
