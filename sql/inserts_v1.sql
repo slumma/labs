@@ -16,11 +16,11 @@ VALUES
 
 
 
-INSERT INTO dbo.project (DueDate)
+INSERT INTO dbo.project (ProjectName, DueDate)
 VALUES
-('2025-06-01'),
-('2025-07-01'),
-('2025-08-01');
+('Education','2025-06-01'),
+('New System','2025-07-01'),
+('Renovation','2025-08-01');
 
 
 
