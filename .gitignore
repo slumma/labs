@@ -100,6 +100,7 @@ StyleCopReport.xml
 *.jfm
 *.vsidx
 *.suo
+.suo
 
 # Chutzpah Test files
 _Chutzpah*
