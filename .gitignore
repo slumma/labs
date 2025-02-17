@@ -376,3 +376,20 @@ obj/
 *.dll
 *.exe
 *.cache
+
+# Ignore environment-specific config files
+wwwroot/
+*.csproj.user
+*.suo
+*.vscode/
+bin/
+obj/
+
+# Ignore environment-specific config files
+lab484/.vs/
+lab484/bin/
+lab484/obj/
+*.csproj.user
+*.suo
+*.vscode/
+
