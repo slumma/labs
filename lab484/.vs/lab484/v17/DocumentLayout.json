@@ -1,11 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\CIS 484\\labs\\lab484\\",
+  "WorkspaceRootPath": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\",
   "Documents": [
     {
-<<<<<<< HEAD
+      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\faculty\\detailedview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\faculty\\detailedview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\faculty\\editgrant.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\faculty\\editgrant.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\faculty\\editgrant.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\faculty\\editgrant.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\faculty\\associatefac.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -14,14 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\faculty\\associatefac.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\faculty\\associatefac.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\faculty\\detailedview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\faculty\\detailedview.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\faculty\\detailedview.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\faculty\\detailedview.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\db\\dbclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,10 +53,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-=======
-      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\cis 484\\labs\\lab484\\lab484\\pages\\faculty\\facultylanding.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\faculty\\facultylanding.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
->>>>>>> 31fc9578cdcaf52c7b7d0059672675845c0e45dd
     }
   ],
   "DocumentGroupContainers": [
@@ -67,29 +62,41 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EditGrant.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\EditGrant.cshtml.cs",
+              "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\EditGrant.cshtml.cs",
+              "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\EditGrant.cshtml.cs",
+              "RelativeToolTip": "lab484\\Pages\\Faculty\\EditGrant.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-17T22:46:28.948Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-<<<<<<< HEAD
+              "DocumentIndex": 1,
               "Title": "EditGrant.cshtml",
               "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\EditGrant.cshtml",
               "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\EditGrant.cshtml",
               "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\EditGrant.cshtml",
               "RelativeToolTip": "lab484\\Pages\\Faculty\\EditGrant.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-02-17T22:46:21.214Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "AssociateFac.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\AssociateFac.cshtml.cs",
               "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\AssociateFac.cshtml.cs",
@@ -102,7 +109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "AssociateFac.cshtml",
               "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\AssociateFac.cshtml",
               "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\AssociateFac.cshtml",
@@ -115,28 +122,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "DetailedView.cshtml",
               "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\DetailedView.cshtml",
               "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\DetailedView.cshtml",
               "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\DetailedView.cshtml",
               "RelativeToolTip": "lab484\\Pages\\Faculty\\DetailedView.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAC0AAABZAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAkwCUAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-02-17T21:20:23.753Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DetailedView.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\DetailedView.cshtml.cs",
-              "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\DetailedView.cshtml.cs",
-              "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\DetailedView.cshtml.cs",
-              "RelativeToolTip": "lab484\\Pages\\Faculty\\DetailedView.cshtml.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwB4AAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-17T21:23:15.025Z",
               "EditorCaption": ""
             },
             {
@@ -147,7 +141,7 @@
               "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\FacultyLanding.cshtml.cs",
               "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml.cs",
               "RelativeToolTip": "lab484\\Pages\\Faculty\\FacultyLanding.cshtml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-17T17:37:47.489Z",
               "EditorCaption": ""
@@ -155,22 +149,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 8,
-=======
->>>>>>> 31fc9578cdcaf52c7b7d0059672675845c0e45dd
               "Title": "FacultyLanding.cshtml",
-              "DocumentMoniker": "C:\\CIS 484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
+              "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
               "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
-              "ToolTip": "C:\\CIS 484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
+              "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
               "RelativeToolTip": "lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
-<<<<<<< HEAD
-              "ViewState": "AgIAAAYAAAAAAAAAAAAUwB0AAAAcAAAAAAAAAA==",
-=======
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
->>>>>>> 31fc9578cdcaf52c7b7d0059672675845c0e45dd
+              "ViewState": "AgIAAAYAAAAAAAAAAAAUwB0AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-17T21:54:33.988Z",
+              "WhenOpened": "2025-02-17T16:41:45.666Z",
               "EditorCaption": ""
-<<<<<<< HEAD
             },
             {
               "$type": "Document",
@@ -219,7 +206,7 @@
               "RelativeDocumentMoniker": "lab484\\Pages\\Data Classes\\User.cs",
               "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Data Classes\\User.cs",
               "RelativeToolTip": "lab484\\Pages\\Data Classes\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-17T20:48:50.526Z",
               "EditorCaption": ""
@@ -247,8 +234,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-02-17T02:37:54.303Z"
-=======
->>>>>>> 31fc9578cdcaf52c7b7d0059672675845c0e45dd
             }
           ]
         }
