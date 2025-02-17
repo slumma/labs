@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace lab484.Pages.Faculty
 {
-    public class FacultyLandingModel : PageModel
+    public class AdminLandingModel : PageModel
     {
         public required List<GrantSimple> grantList { get; set; } = new List<GrantSimple>();
         public void OnGet()
