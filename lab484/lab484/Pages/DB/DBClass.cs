@@ -65,6 +65,10 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+
+        // testing 
+
+
         /*
         public static void UpdateProduct(Product p)
         {
