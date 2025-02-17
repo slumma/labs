@@ -1,8 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\",
+  "WorkspaceRootPath": "C:\\CIS 484\\labs\\lab484\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\faculty\\associatefac.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\faculty\\associatefac.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -49,6 +50,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+=======
+      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\cis 484\\labs\\lab484\\lab484\\pages\\faculty\\facultylanding.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\faculty\\facultylanding.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+>>>>>>> 31fc9578cdcaf52c7b7d0059672675845c0e45dd
     }
   ],
   "DocumentGroupContainers": [
@@ -58,7 +63,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 2,
+=======
+          "SelectedChildIndex": 1,
+>>>>>>> 31fc9578cdcaf52c7b7d0059672675845c0e45dd
           "Children": [
             {
               "$type": "Document",
@@ -80,6 +89,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+<<<<<<< HEAD
               "Title": "AssociateFac.cshtml",
               "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\AssociateFac.cshtml",
               "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\AssociateFac.cshtml",
@@ -132,15 +142,22 @@
             {
               "$type": "Document",
               "DocumentIndex": 7,
+=======
+>>>>>>> 31fc9578cdcaf52c7b7d0059672675845c0e45dd
               "Title": "FacultyLanding.cshtml",
-              "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
+              "DocumentMoniker": "C:\\CIS 484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
               "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
-              "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
+              "ToolTip": "C:\\CIS 484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
               "RelativeToolTip": "lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
+<<<<<<< HEAD
               "ViewState": "AgIAAAYAAAAAAAAAAAAUwB0AAAAcAAAAAAAAAA==",
+=======
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+>>>>>>> 31fc9578cdcaf52c7b7d0059672675845c0e45dd
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-17T16:41:45.666Z",
+              "WhenOpened": "2025-02-17T21:54:33.988Z",
               "EditorCaption": ""
+<<<<<<< HEAD
             },
             {
               "$type": "Document",
@@ -217,6 +234,8 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-02-17T02:37:54.303Z"
+=======
+>>>>>>> 31fc9578cdcaf52c7b7d0059672675845c0e45dd
             }
           ]
         }

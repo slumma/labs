@@ -30,13 +30,13 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
-        public static SqlDataReader SingleGrantReader(int GrantID)
+        public static SqlDataReader SingleUser(int UserID)
         {
             SqlCommand cmdProductRead = new SqlCommand();
             cmdProductRead.Connection = DBConnection;
             cmdProductRead.Connection.ConnectionString =
             DBConnString;
-            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectID AS Project, \r\n    g.Amount, \r\n    gs.StatusName AS Category, \r\n    'Grant for project ' + CAST(p.ProjectID AS NVARCHAR) AS Description, \r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\n\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID\r\n\r\nWHERE g.GrantID =" + GrantID + ";";
+            cmdProductRead.CommandText = "SELECT * FROM users WHERE UserID = " + UserID;
             cmdProductRead.Connection.Open();
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
