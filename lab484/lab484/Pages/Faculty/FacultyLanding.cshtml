@@ -2,3 +2,36 @@
 @model lab484.Pages.Faculty.FacultyLandingModel
 @{
 }
+
+<h2>Available Grants</h2>
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>Grant Name</th>
+            <th>Amount</th>
+            <th>Supplier</th>
+            <th>Award Date</th>
+            <th>Project</th>
+            <th>Detailed View</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var grant in Model.grantList)
+            {
+                <tr>
+                    <td class="text-danger">@grant.GrantID</td>
+                    <td>@string.Format("{0:C}", grant.Amount)</td> <! -- formats as dollar value !>
+                    <td>@grant.Supplier</td>
+                    <td>@grant.AwardDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
+                    <td>@grant.Project</td>
+                    <td>
+                        <div class="text-center">
+                        <button class="btn btn-outline-primary">Details</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
