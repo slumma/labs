@@ -393,3 +393,5 @@ lab484/obj/
 *.suo
 *.vscode/
 
+/lab484/lab484/bin/Debug
+/lab484/lab484/obj
