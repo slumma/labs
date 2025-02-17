@@ -1,0 +1,25 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<h2 class="text-center">Grant Management System</h2>
+<p class="text-center">created by: Nick Clement and Sam Ogden</p>
+<br />
+<form>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingUsername" placeholder="Username" />
+        <label for="floatingUsername">Username</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+        <label for="floatingPassword">Password</label>
+    </div>
+    <br />
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary" asp-page="/viewDB/viewUsers">Login</button>
+    </div>
+
+</form>
