@@ -30,5 +30,11 @@ namespace lab484.Pages.Faculty
             // Close your connection in DBClass
             DBClass.DBConnection.Close();
         }
+
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("/Faculty/DetailedView");
+
+        }
     }
 }

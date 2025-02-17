@@ -21,13 +21,13 @@
             {
                 <tr>
                     <td class="text-danger">@grant.GrantID</td>
-                    <td>@string.Format("{0:C}", grant.Amount)</td> <! -- formats as dollar value !>
+                    <td>@string.Format("{0:C}", grant.Amount)</td> <!-- formats as dollar value -->
                     <td>@grant.Supplier</td>
-                    <td>@grant.AwardDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
+                    <td>@grant.AwardDate.ToString("MM/dd/yyyy")</td> <!-- formats as date, no time -->
                     <td>@grant.Project</td>
                     <td>
                         <div class="text-center">
-                        <button class="btn btn-outline-primary">Details</button>
+                            <a class="btn btn-outline-primary" asp-page="/Faculty/DetailedView" asp-route-grantID="@grant.GrantID">Details</a>
                         </div>
                     </td>
                 </tr>
