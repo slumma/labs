@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\viewdb\\viewusers.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\viewdb\\viewusers.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\viewdb\\viewusers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\viewdb\\viewusers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\faculty\\facultylanding.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\faculty\\facultylanding.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\viewdb\\viewusers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\viewdb\\viewusers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\viewdb\\viewusers.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|solutionrelative:lab484\\pages\\viewdb\\viewusers.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1145574F-D392-44C9-AC96-01D1BBCF12E3}|lab484\\lab484.csproj|c:\\users\\sam\\schoolwork\\484\\labs\\lab484\\lab484\\pages\\db\\dbclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -39,38 +43,51 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "FacultyLanding.cshtml",
+              "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
+              "RelativeDocumentMoniker": "lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
+              "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
+              "RelativeToolTip": "lab484\\Pages\\Faculty\\FacultyLanding.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-17T16:41:45.666Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "viewUsers.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\viewDB\\viewUsers.cshtml.cs",
               "RelativeDocumentMoniker": "lab484\\Pages\\viewDB\\viewUsers.cshtml.cs",
               "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\viewDB\\viewUsers.cshtml.cs",
               "RelativeToolTip": "lab484\\Pages\\viewDB\\viewUsers.cshtml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-17T04:36:46.26Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "viewUsers.cshtml",
               "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\viewDB\\viewUsers.cshtml",
               "RelativeDocumentMoniker": "lab484\\Pages\\viewDB\\viewUsers.cshtml",
               "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\viewDB\\viewUsers.cshtml",
               "RelativeToolTip": "lab484\\Pages\\viewDB\\viewUsers.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-02-17T04:36:06.072Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Index.cshtml.cs",
               "RelativeDocumentMoniker": "lab484\\Pages\\Index.cshtml.cs",
               "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Index.cshtml.cs",
               "RelativeToolTip": "lab484\\Pages\\Index.cshtml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-17T02:48:09.091Z",
               "EditorCaption": ""
@@ -83,14 +100,14 @@
               "RelativeDocumentMoniker": "lab484\\Pages\\Index.cshtml",
               "ToolTip": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\Index.cshtml",
               "RelativeToolTip": "lab484\\Pages\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-02-17T02:37:54.303Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "DBClass.cs",
               "DocumentMoniker": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\Pages\\DB\\DBClass.cs",
               "RelativeDocumentMoniker": "lab484\\Pages\\DB\\DBClass.cs",

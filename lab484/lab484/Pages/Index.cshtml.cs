@@ -8,16 +8,15 @@ namespace lab484.Pages
 {
     public class IndexModel : PageModel
     {
-        public List<User> userList { get; set; }
 
         public IndexModel()
         {
-            userList = new List<User>();
 
         }
 
         public void OnGet()
         {
         }
+
     }
 }
