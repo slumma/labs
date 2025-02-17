@@ -9,65 +9,65 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = lab484
 build_property.RootNamespace = lab484
-build_property.ProjectDir = C:\Users\sam\SchoolWork\484\labs\lab484\lab484\
+build_property.ProjectDir = C:\CIS 484\labs\lab484\lab484\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\sam\SchoolWork\484\labs\lab484\lab484
+build_property.MSBuildProjectDirectory = C:\CIS 484\labs\lab484\lab484
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Admin/AdminLanding.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/Admin/AdminLanding.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5MYW5kaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Error.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Faculty/AssociateFac.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/Faculty/AssociateFac.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxBc3NvY2lhdGVGYWMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Faculty/DetailedView.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/Faculty/DetailedView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxEZXRhaWxlZFZpZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Faculty/EditGrant.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/Faculty/EditGrant.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxFZGl0R3JhbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Faculty/FacultyLanding.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/Faculty/FacultyLanding.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxGYWN1bHR5TGFuZGluZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Index.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Privacy.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/viewDB/viewUsers.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/viewDB/viewUsers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdmlld0RCXHZpZXdVc2Vycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/_ViewImports.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/_ViewStart.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Shared/_Layout.cshtml]
+[C:/CIS 484/labs/lab484/lab484/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-hxqnmwzsjt
