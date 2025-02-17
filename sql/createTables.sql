@@ -12,6 +12,7 @@ CREATE TABLE grantSupplier(
 
 CREATE TABLE project(
 	ProjectID int Identity(1,1) PRIMARY KEY,
+	ProjectName nvarchar(200), 
 	DueDate datetime);
 
 -- for super/subtype relationships you can use 
