@@ -172,23 +172,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\sam\\.nuget\\packages\\": {},
+    "C:\\Users\\def13\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\lab484.csproj",
+      "projectUniqueName": "C:\\CIS 484\\labs\\lab484\\lab484\\lab484.csproj",
       "projectName": "lab484",
-      "projectPath": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\lab484.csproj",
-      "packagesPath": "C:\\Users\\sam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sam\\SchoolWork\\484\\labs\\lab484\\lab484\\obj\\",
+      "projectPath": "C:\\CIS 484\\labs\\lab484\\lab484\\lab484.csproj",
+      "packagesPath": "C:\\Users\\def13\\.nuget\\packages\\",
+      "outputPath": "C:\\CIS 484\\labs\\lab484\\lab484\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\sam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\def13\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -197,7 +197,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
