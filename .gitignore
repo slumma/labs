@@ -365,3 +365,14 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Ignore Visual Studio and build artifacts
+.vs/
+bin/
+obj/
+*.suo
+*.user
+*.pdb
+*.dll
+*.exe
+*.cache

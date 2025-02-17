@@ -28,6 +28,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/CIS 484/labs/lab484/lab484/Pages/Faculty/AssociateFac.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxBc3NvY2lhdGVGYWMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CIS 484/labs/lab484/lab484/Pages/Faculty/DetailedView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxEZXRhaWxlZFZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CIS 484/labs/lab484/lab484/Pages/Faculty/EditGrant.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxFZGl0R3JhbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/CIS 484/labs/lab484/lab484/Pages/Faculty/FacultyLanding.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxGYWN1bHR5TGFuZGluZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
