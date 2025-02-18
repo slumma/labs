@@ -67,41 +67,60 @@ namespace InventoryManagement.Pages.DB
 
         public static void UpdateGrant(GrantSimple grant)
         {
-            // define the SQL query with parameters
-            string sqlQuery = "UPDATE grants SET " +
-                              "SupplierID = (SELECT SupplierID FROM grantSupplier WHERE SupplierName = @Supplier), " +
-                              "ProjectID = (SELECT ProjectID FROM project WHERE ProjectID = @Project), " +
-                              "Amount = @Amount, " +
-                              "StatusName = (SELECT StatusName FROM grantStatus WHERE GrantID = @GrantID), " +
-                              "Description = @Description, " +
-                              "SubmissionDate = @SubmissionDate, " +
-                              "AwardDate = @AwardDate " +
-                              "WHERE GrantID = @GrantID";
+            //  SQL queries with parameters
+            string checkSupplierQuery = "SELECT SupplierID FROM grantSupplier WHERE SupplierName = @Supplier";
+            string insertSupplierQuery = "INSERT INTO grantSupplier (SupplierName) OUTPUT INSERTED.SupplierID VALUES (@Supplier)";
+            string updateGrantQuery = "UPDATE grants SET " +
+                                      "SupplierID = @SupplierID, " +
+                                      "ProjectID = @Project, " +
+                                      "Amount = @Amount, " +
+                                      "StatusName = @Category, " +
+                                      "descriptions = @Description, " +
+                                      "SubmissionDate = @SubmissionDate, " +
+                                      "AwardDate = @AwardDate " +
+                                      "WHERE GrantID = @GrantID";
 
-            // Create a new *Parameterized* SQL command
-            using (SqlCommand cmdGrantUpdate = new SqlCommand(sqlQuery, DBClass.DBConnection))
+            // create a new SQL command to check if the supplier exists
+            using (SqlCommand cmdCheckSupplier = new SqlCommand(checkSupplierQuery, DBClass.DBConnection))
             {
-                // Define and add the parameters
-                cmdGrantUpdate.Parameters.AddWithValue("@Supplier", grant.Supplier);
-                cmdGrantUpdate.Parameters.AddWithValue("@Project", grant.Project);
-                cmdGrantUpdate.Parameters.AddWithValue("@Amount", grant.Amount);
-                cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Category);
-                cmdGrantUpdate.Parameters.AddWithValue("@Description", grant.Description);
-                cmdGrantUpdate.Parameters.AddWithValue("@SubmissionDate", grant.SubmissionDate);
-                cmdGrantUpdate.Parameters.AddWithValue("@AwardDate", grant.AwardDate);
-                cmdGrantUpdate.Parameters.AddWithValue("@GrantID", grant.GrantID);
+                // Define and add the parameters for the check supplier query
+                cmdCheckSupplier.Parameters.AddWithValue("@Supplier", grant.Supplier);
 
-                // Open the connection if it is not already open
-                if (cmdGrantUpdate.Connection.State != System.Data.ConnectionState.Open)
+                cmdCheckSupplier.Connection.ConnectionString = DBClass.DBConnString;
+                cmdCheckSupplier.Connection.Open();
+
+                // Execute the query to check if the supplier exists
+                var supplierId = cmdCheckSupplier.ExecuteScalar();
+
+                if (supplierId == null)
                 {
-                    cmdGrantUpdate.Connection.ConnectionString = DBClass.DBConnString;
-                    cmdGrantUpdate.Connection.Open();
+                    // If the supplier does not exist, insert it and get the new SupplierID
+                    using (SqlCommand cmdInsertSupplier = new SqlCommand(insertSupplierQuery, DBClass.DBConnection))
+                    {
+                        cmdInsertSupplier.Parameters.AddWithValue("@Supplier", grant.Supplier);
+                        supplierId = cmdInsertSupplier.ExecuteScalar();
+                    }
                 }
 
-                // Execute the query
-                cmdGrantUpdate.ExecuteNonQuery();
+                // Create a new SQL command to update the grant
+                using (SqlCommand cmdGrantUpdate = new SqlCommand(updateGrantQuery, DBClass.DBConnection))
+                {
+                    // Define and add the parameters for the update grant query
+                    cmdGrantUpdate.Parameters.AddWithValue("@SupplierID", supplierId);
+                    cmdGrantUpdate.Parameters.AddWithValue("@Project", grant.Project);
+                    cmdGrantUpdate.Parameters.AddWithValue("@Amount", grant.Amount);
+                    cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Category);
+                    cmdGrantUpdate.Parameters.AddWithValue("@Description", grant.Description);
+                    cmdGrantUpdate.Parameters.AddWithValue("@SubmissionDate", grant.SubmissionDate);
+                    cmdGrantUpdate.Parameters.AddWithValue("@AwardDate", grant.AwardDate);
+                    cmdGrantUpdate.Parameters.AddWithValue("@GrantID", grant.GrantID);
+
+                    // Execute the update query
+                    cmdGrantUpdate.ExecuteNonQuery();
+                }
             }
         }
+
 
 
         /*
