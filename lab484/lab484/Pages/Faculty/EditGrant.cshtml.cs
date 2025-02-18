@@ -36,11 +36,13 @@ namespace lab484.Pages.Faculty
 
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid) // if the inputs are not valid (either null or unallowed) it wont save
+            {
+                return Page();
+            }
+
             DBClass.UpdateGrant(GrantToUpdate);
-            DBClass.DBConnection.Close();
-
-            return RedirectToPage("/Faculty/DetailedView", new { grantID = GrantToUpdate.GrantID }); // passes grantID into the DetailedView page, had to use 'new' keyword  to create anonymous object to avoid errors
-
+            return RedirectToPage("DetailedView", new { grantID = GrantToUpdate.GrantID });
         }
 
         public IActionResult OnPostClear()
@@ -51,7 +53,7 @@ namespace lab484.Pages.Faculty
             GrantToUpdate.Status = string.Empty;
             GrantToUpdate.Description = string.Empty;
 
-            ModelState.Clear();
+            ModelState.Clear(); // Clear the model state to refresh the form
 
             return Page();
         }

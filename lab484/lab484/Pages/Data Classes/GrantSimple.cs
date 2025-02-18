@@ -14,7 +14,7 @@ namespace lab484.Pages.Data_Classes
         public string Project { get; set; }
 
         [Required(ErrorMessage = "Amount is required")]
-        [Range(1, double.MaxValue, ErrorMessage = "Amount must be greater than 0")]
+        [Range(1, double.MaxValue, ErrorMessage = "Amount must be greater than 0")] // ensures that there are no negative grants
         public float Amount { get; set; }
 
         [Required(ErrorMessage = "Status is required")]
