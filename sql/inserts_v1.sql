@@ -1,20 +1,17 @@
 
-INSERT INTO dbo.users (Username, Password, FirstName, LastName)
+INSERT INTO dbo.users (Username, Password, FirstName, LastName, Email, Phone, HomeAddress)
 VALUES
-('jdoe', 'password123', 'John', 'Doe'),
-('asmith', 'password456', 'Alice', 'Smith'),
-('mjones', 'password789', 'Mike', 'Jones'),
-('bwatson', 'password101', 'Barbara', 'Watson'),
-('cclark', 'password112', 'Charles', 'Clark');
+('jdoe', 'password123', 'John', 'Doe', 'jdoe22@gmail.com', '(571) 488-8440', '221 Minton Cir, Moneta, VA 22661'),
+('asmith', 'password456', 'Alice', 'Smith', 'asmith77@gmail.com', '(678) 422-3129', '1152 Buford Rd, Alexandria, VA 22211'),
+('mjones', 'password789', 'Mike', 'Jones', 'mjones88@gmail.com', '(434) 555-9876', '789 Oak St, Richmond, VA 23220'),
+('bwatson', 'password101', 'Barbara', 'Watson', 'bwatson55@gmail.com', '(757) 444-1234', '456 Pine Ave, Norfolk, VA 23502'),
+('cclark', 'password112', 'Charles', 'Clark', 'cclark99@gmail.com', '(804) 777-6543', '123 Maple Dr, Charlottesville, VA 22903');
 
-
-INSERT INTO dbo.grantSupplier (SupplierName, OrgType)
+INSERT INTO dbo.grantSupplier (SupplierName, OrgType, BusinessAddress)
 VALUES
-('TechCorp', 'Private'),
-('InnovaTech', 'Government'),
-('GreenSolutions', 'Private');
-
-
+('TechCorp', 'Private', '500 Innovation Dr, San Francisco, CA 94103'),
+('InnovaTech', 'Government', '1200 Federal Plaza, Washington, DC 20500'),
+('GreenSolutions', 'Private', '300 Eco Way, Portland, OR 97201');
 
 INSERT INTO dbo.project (ProjectName, DueDate)
 VALUES

@@ -3,12 +3,16 @@ CREATE TABLE users(
 	Username nvarchar(200),
 	Password nvarchar(200),
 	FirstName nvarchar(200),
-	LastName nvarchar(200));
+	LastName nvarchar(200),
+	Email nvarchar(200),
+	Phone nvarchar(200),
+	HomeAddress nvarchar(200));
 
 CREATE TABLE grantSupplier(
 	SupplierID int Identity(1,1) PRIMARY KEY,
 	SupplierName nvarchar(200),
-	OrgType nvarchar(200));
+	OrgType nvarchar(200),
+	BusinessAddress nvarchar(200));
 
 CREATE TABLE project(
 	ProjectID int Identity(1,1) PRIMARY KEY,
