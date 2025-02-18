@@ -109,7 +109,7 @@ namespace InventoryManagement.Pages.DB
                     cmdGrantUpdate.Parameters.AddWithValue("@SupplierID", supplierId);
                     cmdGrantUpdate.Parameters.AddWithValue("@Project", grant.Project);
                     cmdGrantUpdate.Parameters.AddWithValue("@Amount", grant.Amount);
-                    cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Category);
+                    cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Status);
                     cmdGrantUpdate.Parameters.AddWithValue("@Description", grant.Description);
                     cmdGrantUpdate.Parameters.AddWithValue("@SubmissionDate", grant.SubmissionDate);
                     cmdGrantUpdate.Parameters.AddWithValue("@AwardDate", grant.AwardDate);
