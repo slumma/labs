@@ -34,6 +34,12 @@ namespace lab484.Pages.Faculty
             DBClass.DBConnection.Close();
         }
 
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("/Faculty/DetailedView", new { grantID = GrantToUpdate.GrantID }); // passes grantID into the DetailedView page, had to use 'new' keyword  to create anonymous object to avoid errors
+
+        }
+
         public IActionResult OnPostClear()
         {
             GrantToUpdate.Supplier = string.Empty;
