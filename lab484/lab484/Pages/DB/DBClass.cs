@@ -37,7 +37,7 @@ namespace InventoryManagement.Pages.DB
             cmdProductRead.Connection = DBConnection;
             cmdProductRead.Connection.ConnectionString =
             DBConnString;
-            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectID AS Project, \r\n    g.Amount, \r\n    gs.StatusName AS Category, \r\n    'Grant for project ' + CAST(p.ProjectID AS NVARCHAR) AS Description, \r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\n\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID\r\n\r\nWHERE g.GrantID =" + GrantID + ";";
+            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectName AS Project, \r\n    g.Amount, \r\n    g.StatusName, \r\n    g.descriptions,\r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\n\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID WHERE g.GrantID =" + GrantID + ";";
             cmdProductRead.Connection.Open();
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
@@ -48,7 +48,7 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdProductRead = new SqlCommand();
             cmdProductRead.Connection = DBConnection;
             cmdProductRead.Connection.ConnectionString = DBConnString;
-            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectID AS Project, \r\n    g.Amount, \r\n    gs.StatusName AS Category, \r\n    'Grant for project ' + CAST(p.ProjectID AS NVARCHAR) AS Description, \r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;\r\n";
+            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectName AS Project, \r\n    g.Amount, \r\n    g.StatusName, \r\n    g.descriptions,\r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\n\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;\r\n";
             cmdProductRead.Connection.Open();
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
@@ -64,6 +64,64 @@ namespace InventoryManagement.Pages.DB
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
         }
+
+        public static void UpdateGrant(GrantSimple grant)
+        {
+            //  SQL queries with parameters
+            string checkSupplierQuery = "SELECT SupplierID FROM grantSupplier WHERE SupplierName = @Supplier";
+            string insertSupplierQuery = "INSERT INTO grantSupplier (SupplierName) OUTPUT INSERTED.SupplierID VALUES (@Supplier)";
+            string updateGrantQuery = "UPDATE grants SET " +
+                                      "SupplierID = @SupplierID, " +
+                                      "ProjectID = @Project, " +
+                                      "Amount = @Amount, " +
+                                      "StatusName = @Category, " +
+                                      "descriptions = @Description, " +
+                                      "SubmissionDate = @SubmissionDate, " +
+                                      "AwardDate = @AwardDate " +
+                                      "WHERE GrantID = @GrantID";
+
+            // create a new SQL command to check if the supplier exists
+            using (SqlCommand cmdCheckSupplier = new SqlCommand(checkSupplierQuery, DBClass.DBConnection))
+            {
+                // Define and add the parameters for the check supplier query
+                cmdCheckSupplier.Parameters.AddWithValue("@Supplier", grant.Supplier);
+
+                cmdCheckSupplier.Connection.ConnectionString = DBClass.DBConnString;
+                cmdCheckSupplier.Connection.Open();
+
+                // Execute the query to check if the supplier exists
+                var supplierId = cmdCheckSupplier.ExecuteScalar();
+
+                if (supplierId == null)
+                {
+                    // If the supplier does not exist, insert it and get the new SupplierID
+                    using (SqlCommand cmdInsertSupplier = new SqlCommand(insertSupplierQuery, DBClass.DBConnection))
+                    {
+                        cmdInsertSupplier.Parameters.AddWithValue("@Supplier", grant.Supplier);
+                        supplierId = cmdInsertSupplier.ExecuteScalar();
+                    }
+                }
+
+                // Create a new SQL command to update the grant
+                using (SqlCommand cmdGrantUpdate = new SqlCommand(updateGrantQuery, DBClass.DBConnection))
+                {
+                    // Define and add the parameters for the update grant query
+                    cmdGrantUpdate.Parameters.AddWithValue("@SupplierID", supplierId);
+                    cmdGrantUpdate.Parameters.AddWithValue("@Project", grant.Project);
+                    cmdGrantUpdate.Parameters.AddWithValue("@Amount", grant.Amount);
+                    cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Status);
+                    cmdGrantUpdate.Parameters.AddWithValue("@Description", grant.Description);
+                    cmdGrantUpdate.Parameters.AddWithValue("@SubmissionDate", grant.SubmissionDate);
+                    cmdGrantUpdate.Parameters.AddWithValue("@AwardDate", grant.AwardDate);
+                    cmdGrantUpdate.Parameters.AddWithValue("@GrantID", grant.GrantID);
+
+                    // Execute the update query
+                    cmdGrantUpdate.ExecuteNonQuery();
+                }
+            }
+        }
+
+
 
         /*
         public static void UpdateProduct(Product p)

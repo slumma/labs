@@ -18,7 +18,7 @@ namespace lab484.Pages.Admin
                 {
                     ProjectID = Int32.Parse(projectReader["ProjectID"].ToString()),
                     ProjectName = projectReader["ProjectName"].ToString(),
-                    Amount = float.Parse(projectReader["Amount"].ToString()),  // fuck me
+                    Amount = float.Parse(projectReader["Amount"].ToString()),  
                     DueDate = DateTime.Parse(projectReader["DueDate"].ToString())
                 });
             }
