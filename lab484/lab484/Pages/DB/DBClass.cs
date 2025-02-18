@@ -35,9 +35,23 @@ namespace InventoryManagement.Pages.DB
         {
             SqlCommand cmdProductRead = new SqlCommand();
             cmdProductRead.Connection = DBConnection;
-            cmdProductRead.Connection.ConnectionString =
-            DBConnString;
-            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectName AS Project, \r\n    g.Amount, \r\n    g.StatusName, \r\n    g.descriptions,\r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\n\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID WHERE g.GrantID =" + GrantID + ";";
+            cmdProductRead.Connection.ConnectionString = DBConnString;
+            cmdProductRead.CommandText = @"SELECT 
+                                        g.GrantID, 
+                                        s.SupplierName AS Supplier, 
+                                        p.ProjectName AS Project, 
+                                        g.Amount, 
+                                        g.StatusName, 
+                                        g.descriptions,
+                                        g.SubmissionDate, 
+                                        g.AwardDate
+                                    FROM grants g
+                                    JOIN grantSupplier s ON g.SupplierID = s.SupplierID
+                                    JOIN project p ON g.ProjectID = p.ProjectID
+                                    LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID 
+                                    WHERE g.GrantID = @GrantID";
+            cmdProductRead.Parameters.AddWithValue("@GrantID", GrantID);
+
             cmdProductRead.Connection.Open();
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
@@ -48,7 +62,19 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdProductRead = new SqlCommand();
             cmdProductRead.Connection = DBConnection;
             cmdProductRead.Connection.ConnectionString = DBConnString;
-            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectName AS Project, \r\n    g.Amount, \r\n    g.StatusName, \r\n    g.descriptions,\r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\n\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;\r\n";
+            cmdProductRead.CommandText = @"SELECT 
+                                    g.GrantID, 
+                                    s.SupplierName AS Supplier, 
+                                    p.ProjectName AS Project, 
+                                    g.Amount, 
+                                    g.StatusName, 
+                                    g.descriptions,
+                                    g.SubmissionDate, 
+                                    g.AwardDate
+                                   FROM grants g
+                                   JOIN grantSupplier s ON g.SupplierID = s.SupplierID
+                                   JOIN project p ON g.ProjectID = p.ProjectID
+                                   LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;";
             cmdProductRead.Connection.Open();
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
@@ -72,7 +98,6 @@ namespace InventoryManagement.Pages.DB
             string insertSupplierQuery = "INSERT INTO grantSupplier (SupplierName) OUTPUT INSERTED.SupplierID VALUES (@Supplier)";
             string updateGrantQuery = "UPDATE grants SET " +
                                       "SupplierID = @SupplierID, " +
-                                      "ProjectID = @Project, " +
                                       "Amount = @Amount, " +
                                       "StatusName = @Category, " +
                                       "descriptions = @Description, " +
@@ -80,46 +105,58 @@ namespace InventoryManagement.Pages.DB
                                       "AwardDate = @AwardDate " +
                                       "WHERE GrantID = @GrantID";
 
-            // create a new SQL command to check if the supplier exists
-            using (SqlCommand cmdCheckSupplier = new SqlCommand(checkSupplierQuery, DBClass.DBConnection))
+            // Create a new SQL command to check if the supplier exists
+            using (SqlConnection connection = new SqlConnection(DBClass.DBConnString))
             {
-                // Define and add the parameters for the check supplier query
-                cmdCheckSupplier.Parameters.AddWithValue("@Supplier", grant.Supplier);
-
-                cmdCheckSupplier.Connection.ConnectionString = DBClass.DBConnString;
-                cmdCheckSupplier.Connection.Open();
-
-                // Execute the query to check if the supplier exists
-                var supplierId = cmdCheckSupplier.ExecuteScalar();
-
-                if (supplierId == null)
+                connection.Open();
+                using (SqlCommand cmdCheckSupplier = new SqlCommand(checkSupplierQuery, connection))
                 {
-                    // If the supplier does not exist, insert it and get the new SupplierID
-                    using (SqlCommand cmdInsertSupplier = new SqlCommand(insertSupplierQuery, DBClass.DBConnection))
+                    // Define and add the parameters for the check supplier query
+                    cmdCheckSupplier.Parameters.AddWithValue("@Supplier", grant.Supplier);
+
+                    // Execute the query to check if the supplier exists
+                    var supplierId = cmdCheckSupplier.ExecuteScalar();
+
+                    if (supplierId == null)
                     {
-                        cmdInsertSupplier.Parameters.AddWithValue("@Supplier", grant.Supplier);
-                        supplierId = cmdInsertSupplier.ExecuteScalar();
+                        // If the supplier does not exist, insert it and get the new SupplierID
+                        using (SqlCommand cmdInsertSupplier = new SqlCommand(insertSupplierQuery, connection))
+                        {
+                            cmdInsertSupplier.Parameters.AddWithValue("@Supplier", grant.Supplier);
+                            supplierId = cmdInsertSupplier.ExecuteScalar();
+                            Console.WriteLine("New SupplierID: " + supplierId);
+                        }
                     }
-                }
+                    else
+                    {
+                        Console.WriteLine("Existing SupplierID: " + supplierId);
+                    }
 
-                // Create a new SQL command to update the grant
-                using (SqlCommand cmdGrantUpdate = new SqlCommand(updateGrantQuery, DBClass.DBConnection))
-                {
-                    // Define and add the parameters for the update grant query
-                    cmdGrantUpdate.Parameters.AddWithValue("@SupplierID", supplierId);
-                    cmdGrantUpdate.Parameters.AddWithValue("@Project", grant.Project);
-                    cmdGrantUpdate.Parameters.AddWithValue("@Amount", grant.Amount);
-                    cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Status);
-                    cmdGrantUpdate.Parameters.AddWithValue("@Description", grant.Description);
-                    cmdGrantUpdate.Parameters.AddWithValue("@SubmissionDate", grant.SubmissionDate);
-                    cmdGrantUpdate.Parameters.AddWithValue("@AwardDate", grant.AwardDate);
-                    cmdGrantUpdate.Parameters.AddWithValue("@GrantID", grant.GrantID);
+                    // Create a new SQL command to update the grant
+                    using (SqlCommand cmdGrantUpdate = new SqlCommand(updateGrantQuery, connection))
+                    {
+                        // Define and add the parameters for the update grant query
+                        cmdGrantUpdate.Parameters.AddWithValue("@SupplierID", supplierId);
+                        cmdGrantUpdate.Parameters.AddWithValue("@Amount", grant.Amount);
+                        cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Status);
+                        cmdGrantUpdate.Parameters.AddWithValue("@Description", grant.Description);
+                        cmdGrantUpdate.Parameters.AddWithValue("@SubmissionDate", grant.SubmissionDate);
+                        cmdGrantUpdate.Parameters.AddWithValue("@AwardDate", grant.AwardDate);
+                        cmdGrantUpdate.Parameters.AddWithValue("@GrantID", grant.GrantID);
 
-                    // Execute the update query
-                    cmdGrantUpdate.ExecuteNonQuery();
+                        // Execute the update query
+                        cmdGrantUpdate.ExecuteNonQuery();
+                        Console.WriteLine("Grant updated: " + grant.GrantID);
+                    }
                 }
             }
         }
+
+
+
+
+
+
 
 
 

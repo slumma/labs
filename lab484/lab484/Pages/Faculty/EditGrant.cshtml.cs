@@ -30,13 +30,17 @@ namespace lab484.Pages.Faculty
                 GrantToUpdate.Description = grantReader["descriptions"].ToString();
                 GrantToUpdate.SubmissionDate = DateTime.Parse(grantReader["SubmissionDate"].ToString());
                 GrantToUpdate.AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString());
+
             }
+
+            grantReader.Close();
+
             DBClass.DBConnection.Close();
         }
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid) // if the inputs are not valid (either null or unallowed) it wont save
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
@@ -44,6 +48,7 @@ namespace lab484.Pages.Faculty
             DBClass.UpdateGrant(GrantToUpdate);
             return RedirectToPage("DetailedView", new { grantID = GrantToUpdate.GrantID });
         }
+
 
         public IActionResult OnPostClear()
         {
@@ -57,5 +62,6 @@ namespace lab484.Pages.Faculty
 
             return Page();
         }
+
     }
 }

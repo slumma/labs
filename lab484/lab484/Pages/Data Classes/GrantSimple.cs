@@ -10,11 +10,10 @@ namespace lab484.Pages.Data_Classes
         [Required(ErrorMessage = "Supplier is required")]
         public string Supplier { get; set; }
 
-        [Required(ErrorMessage = "Project is required")]
         public string Project { get; set; }
 
         [Required(ErrorMessage = "Amount is required")]
-        [Range(1, double.MaxValue, ErrorMessage = "Amount must be greater than 0")] // ensures that there are no negative grants
+        [Range(1, double.MaxValue, ErrorMessage = "Amount must be greater than 0")]
         public float Amount { get; set; }
 
         [Required(ErrorMessage = "Status is required")]
