@@ -20,8 +20,8 @@ namespace lab484.Pages.Faculty
                     Supplier = grantReader["Supplier"].ToString(),
                     Project = grantReader["Project"].ToString(),
                     Amount = float.Parse(grantReader["Amount"].ToString()),  // fix
-                    Category = grantReader["Category"].ToString(),
-                    Description = grantReader["Description"].ToString(),
+                    Category = grantReader["StatusName"].ToString(),
+                    Description = grantReader["descriptions"].ToString(),
                     SubmissionDate = DateTime.Parse(grantReader["SubmissionDate"].ToString()),
                     AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString())
                 });

@@ -26,8 +26,8 @@ namespace lab484.Pages.Faculty
                 GrantToUpdate.Supplier = grantReader["Supplier"].ToString();
                 GrantToUpdate.Project = grantReader["Project"].ToString();
                 GrantToUpdate.Amount = float.Parse(grantReader["Amount"].ToString());
-                GrantToUpdate.Category = grantReader["Category"].ToString();
-                GrantToUpdate.Description = grantReader["Description"].ToString();
+                GrantToUpdate.Category = grantReader["StatusName"].ToString();
+                GrantToUpdate.Description = grantReader["descriptions"].ToString();
                 GrantToUpdate.SubmissionDate = DateTime.Parse(grantReader["SubmissionDate"].ToString());
                 GrantToUpdate.AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString());
             }
@@ -36,6 +36,9 @@ namespace lab484.Pages.Faculty
 
         public IActionResult OnPost()
         {
+            DBClass.UpdateGrant(GrantToUpdate);
+            DBClass.DBConnection.Close();
+
             return RedirectToPage("/Faculty/DetailedView", new { grantID = GrantToUpdate.GrantID }); // passes grantID into the DetailedView page, had to use 'new' keyword  to create anonymous object to avoid errors
 
         }

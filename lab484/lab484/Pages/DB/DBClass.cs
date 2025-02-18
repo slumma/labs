@@ -37,7 +37,7 @@ namespace InventoryManagement.Pages.DB
             cmdProductRead.Connection = DBConnection;
             cmdProductRead.Connection.ConnectionString =
             DBConnString;
-            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectID AS Project, \r\n    g.Amount, \r\n    gs.StatusName AS Category, \r\n    'Grant for project ' + CAST(p.ProjectID AS NVARCHAR) AS Description, \r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\n\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID\r\n\r\nWHERE g.GrantID =" + GrantID + ";";
+            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectID AS Project, \r\n    g.Amount, \r\n    g.StatusName, \r\n    g.descriptions,\r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\n\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID WHERE g.GrantID =" + GrantID + ";";
             cmdProductRead.Connection.Open();
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
@@ -48,7 +48,7 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdProductRead = new SqlCommand();
             cmdProductRead.Connection = DBConnection;
             cmdProductRead.Connection.ConnectionString = DBConnString;
-            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectID AS Project, \r\n    g.Amount, \r\n    gs.StatusName AS Category, \r\n    'Grant for project ' + CAST(p.ProjectID AS NVARCHAR) AS Description, \r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;\r\n";
+            cmdProductRead.CommandText = "SELECT \r\n    g.GrantID, \r\n    s.SupplierName AS Supplier, \r\n    p.ProjectID AS Project, \r\n    g.Amount, \r\n    g.StatusName, \r\n    g.descriptions,\r\n    g.SubmissionDate, \r\n    g.AwardDate\r\nFROM grants g\r\n\r\nJOIN grantSupplier s ON g.SupplierID = s.SupplierID\r\nJOIN project p ON g.ProjectID = p.ProjectID\r\nLEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;\r\n";
             cmdProductRead.Connection.Open();
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
@@ -64,6 +64,45 @@ namespace InventoryManagement.Pages.DB
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
         }
+
+        public static void UpdateGrant(GrantSimple grant)
+        {
+            // define the SQL query with parameters
+            string sqlQuery = "UPDATE grants SET " +
+                              "SupplierID = (SELECT SupplierID FROM grantSupplier WHERE SupplierName = @Supplier), " +
+                              "ProjectID = (SELECT ProjectID FROM project WHERE ProjectID = @Project), " +
+                              "Amount = @Amount, " +
+                              "StatusName = (SELECT StatusName FROM grantStatus WHERE GrantID = @GrantID), " +
+                              "Description = @Description, " +
+                              "SubmissionDate = @SubmissionDate, " +
+                              "AwardDate = @AwardDate " +
+                              "WHERE GrantID = @GrantID";
+
+            // Create a new *Parameterized* SQL command
+            using (SqlCommand cmdGrantUpdate = new SqlCommand(sqlQuery, DBClass.DBConnection))
+            {
+                // Define and add the parameters
+                cmdGrantUpdate.Parameters.AddWithValue("@Supplier", grant.Supplier);
+                cmdGrantUpdate.Parameters.AddWithValue("@Project", grant.Project);
+                cmdGrantUpdate.Parameters.AddWithValue("@Amount", grant.Amount);
+                cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Category);
+                cmdGrantUpdate.Parameters.AddWithValue("@Description", grant.Description);
+                cmdGrantUpdate.Parameters.AddWithValue("@SubmissionDate", grant.SubmissionDate);
+                cmdGrantUpdate.Parameters.AddWithValue("@AwardDate", grant.AwardDate);
+                cmdGrantUpdate.Parameters.AddWithValue("@GrantID", grant.GrantID);
+
+                // Open the connection if it is not already open
+                if (cmdGrantUpdate.Connection.State != System.Data.ConnectionState.Open)
+                {
+                    cmdGrantUpdate.Connection.ConnectionString = DBClass.DBConnString;
+                    cmdGrantUpdate.Connection.Open();
+                }
+
+                // Execute the query
+                cmdGrantUpdate.ExecuteNonQuery();
+            }
+        }
+
 
         /*
         public static void UpdateProduct(Product p)
