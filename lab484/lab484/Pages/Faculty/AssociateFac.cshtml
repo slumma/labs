@@ -1,6 +1,44 @@
-﻿@page
+﻿@page "{ProjectID:int}"
 @model lab484.Pages.Faculty.AssociateFacModel
+
 @{
+    ViewData["Title"] = "Associate Faculty";
 }
 
-<h2>Associate Faculty for project @Model.pid</h2>
+<h2>Project Staff for Project @Model.staffList.FirstOrDefault()?.ProjectName</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>UserID</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Home Address</th>
+            <th>Project ID</th>
+            <th>Project Name</th>
+            <th>Leader</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var staff in Model.staffList)
+        {
+            <tr>
+                <td>@staff.UserID</td>
+                <td>@staff.Username</td>
+                <td>@staff.FirstName</td>
+                <td>@staff.LastName</td>
+                <td>@staff.Email</td>
+                <td>@staff.Phone</td>
+                <td>@staff.HomeAddress</td>
+                <td>@staff.ProjectID</td>
+                <td>@staff.ProjectName</td>
+                <td>@staff.Leader ? "Yes" : "No"</td>
+                <td>@staff.Active ? "Yes" : "No"</td>
+            </tr>
+        }
+    </tbody>
+</table>

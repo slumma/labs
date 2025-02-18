@@ -31,7 +31,7 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
-        public static SqlDataReader FacultyReader()
+        public static SqlDataReader singleFacultyReader(int ProjectID)
         {
             SqlCommand cmdFacultyReader = new SqlCommand();
             cmdFacultyReader.Connection = DBConnection;
@@ -53,7 +53,10 @@ namespace InventoryManagement.Pages.DB
                                         JOIN 
                                             users u ON ps.UserID = u.UserID
                                         JOIN 
-                                            project p ON ps.ProjectID = p.ProjectID;";
+                                            project p ON ps.ProjectID = p.ProjectID
+                                        WHERE ps.ProjectID = @ProjectID;";
+
+            cmdFacultyReader.Parameters.AddWithValue("@ProjectID", ProjectID);
 
             cmdFacultyReader.Connection.Open(); // Open connection here, close in Model!
 
