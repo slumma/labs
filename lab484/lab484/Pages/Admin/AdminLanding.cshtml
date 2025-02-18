@@ -22,8 +22,8 @@
             {
                 <tr>
                     <td>@project.ProjectName</td>
-                    <td>@string.Format("{0:C}", project.Amount)</td> <! -- formats as dollar value !>
                     <td>@project.DueDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
+                    <td>@string.Format("{0:C}", project.Amount)</td> <! -- formats as dollar value !>
                     <td>
                         <div class="text-center">
                         <button class="btn btn-outline-primary">Details</button>
