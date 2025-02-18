@@ -28,11 +28,13 @@ CREATE TABLE project(
 CREATE TABLE BPrep (
     UserID INT PRIMARY KEY, -- dont use 'Identity(1,1)' here because it is a FK referencing the users table --> it MUST match the ID in users
     CommunicationStatus nvarchar(200),
+	SupplierID int,
+	FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID));
 
 CREATE TABLE employee (
     UserID INT PRIMARY KEY,
-	AdminStatus bit, -- no boolean data type in SQL server, this is a workaround
+	AdminStatus bit default 0, -- no boolean data type in SQL server, this is a workaround
     FOREIGN KEY (UserID) REFERENCES Users(UserID));
 
 CREATE TABLE faculty (

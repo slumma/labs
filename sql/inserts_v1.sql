@@ -21,11 +21,11 @@ VALUES
 
 
 
-INSERT INTO dbo.BPrep (UserID, CommunicationStatus)
+INSERT INTO dbo.BPrep (UserID, CommunicationStatus, SupplierID)
 VALUES 
-  ((SELECT UserID FROM dbo.users WHERE Username = 'jdoe'), 'Not Started'),
-  ((SELECT UserID FROM dbo.users WHERE Username = 'asmith'), 'In Progress'),
-  ((SELECT UserID FROM dbo.users WHERE Username = 'mjones'), 'Completed');
+  ((SELECT UserID FROM dbo.users WHERE Username = 'jdoe'), 'Not Started', 1),
+  ((SELECT UserID FROM dbo.users WHERE Username = 'asmith'), 'In Progress', 3),
+  ((SELECT UserID FROM dbo.users WHERE Username = 'mjones'), 'Completed', 2);
 
 
 INSERT INTO dbo.employee (UserID, AdminStatus)

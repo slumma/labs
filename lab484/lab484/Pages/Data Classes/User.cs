@@ -14,24 +14,20 @@
 
     public class Employee : User
     {
-        public new int UserID { get; set; }
         public Boolean? AdminStatus { get; set; }
 
     }
 
     public class BPrep : User
     {
-        public new int UserID { get; set; }
         public String? CommunicationStatus { get; set; }
     }
 
     public class Faculty : User
     {
-        public new int UserID { get; set; }
     }
 
     public class NonFaculty : User
     {
-        public new int UserID { get; set; }
     }
 }

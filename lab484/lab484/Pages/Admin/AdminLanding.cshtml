@@ -21,7 +21,7 @@
             foreach (var project in @Model.projectList)
             {
                 <tr>
-                    <td class="text-danger">@project.ProjectID</td>
+                    <td class="text-danger">@project.ProjectName</td>
                     <td>@string.Format("{0:C}", project.Amount)</td> <! -- formats as dollar value !>
                     <td>@project.DueDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
                     <td>
