@@ -2,7 +2,10 @@
 @model lab484.Pages.Admin.AdminLandingModel
 @{
 }
-
+<head>
+    <meta charset="utf-8" />
+    <title>Projects</title>
+</head>
 <h2>Available Projects</h2>
 <table class="table table-bordered table-responsive table-hover">
     <thead>
@@ -18,7 +21,7 @@
             foreach (var project in @Model.projectList)
             {
                 <tr>
-                    <td class="text-danger">@project.ProjectID</td>
+                    <td class="text-danger">@project.ProjectName</td>
                     <td>@string.Format("{0:C}", project.Amount)</td> <! -- formats as dollar value !>
                     <td>@project.DueDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
                     <td>
@@ -31,3 +34,6 @@
         }
     </tbody>
 </table>
+<div class="text-center">
+    <a class="btn btn-outline-primary" asp-page="BusinessPartners">View Business Partners</a>
+</div>

@@ -3,12 +3,16 @@ CREATE TABLE users(
 	Username nvarchar(200),
 	Password nvarchar(200),
 	FirstName nvarchar(200),
-	LastName nvarchar(200));
+	LastName nvarchar(200),
+	Email nvarchar(200),
+	Phone nvarchar(200),
+	HomeAddress nvarchar(200));
 
 CREATE TABLE grantSupplier(
 	SupplierID int Identity(1,1) PRIMARY KEY,
 	SupplierName nvarchar(200),
-	OrgType nvarchar(200));
+	OrgType nvarchar(200),
+	BusinessAddress nvarchar(200));
 
 CREATE TABLE project(
 	ProjectID int Identity(1,1) PRIMARY KEY,
@@ -24,11 +28,13 @@ CREATE TABLE project(
 CREATE TABLE BPrep (
     UserID INT PRIMARY KEY, -- dont use 'Identity(1,1)' here because it is a FK referencing the users table --> it MUST match the ID in users
     CommunicationStatus nvarchar(200),
+	SupplierID int,
+	FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID));
 
 CREATE TABLE employee (
     UserID INT PRIMARY KEY,
-	AdminStatus bit, -- no boolean data type in SQL server, this is a workaround
+	AdminStatus bit default 0, -- no boolean data type in SQL server, this is a workaround
     FOREIGN KEY (UserID) REFERENCES Users(UserID));
 
 CREATE TABLE faculty (
