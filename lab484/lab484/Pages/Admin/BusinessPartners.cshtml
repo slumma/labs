@@ -6,9 +6,9 @@
     <meta charset="utf-8" />
     <title>Business Partners</title>
 </head>
-<div class="table-container">
+<div>
     <h2>Partners</h2>
-    <table>
+    <table class="table table-bordered table-responsive table-hover">
         <thead>
             <tr>
                 <th>Business Partner</th>
@@ -19,6 +19,23 @@
             </tr>
         </thead>
         <tbody>
+            @{
+                foreach (var bp in @Model.bpList)
+                {
+                    <tr>
+                        <td>@bp.SupplierName</td>
+                        <td>@bp.StatusName</td>
+                        <td>@bp.FirstName @bp.LastName</td>
+                        <td>@bp.Email</td>
+                        <td>
+                            <div class="text-center">
+                                <a class="btn btn-outline-primary" asp-page="BPDetail">Detailed View</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            
         </tbody>
     </table>
     <a class="btn btn-outline-primary" asp-page="AdminLanding">Return to Projects</a>

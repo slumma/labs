@@ -91,6 +91,42 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+        public static SqlDataReader BPrepReader()
+        {
+            SqlCommand cmdProductRead = new SqlCommand();
+            cmdProductRead.Connection = DBConnection;
+            cmdProductRead.Connection.ConnectionString = DBConnString;
+            cmdProductRead.CommandText = "SELECT * FROM BPrep\r\nJOIN users on users.userid = bprep.userid;";
+            cmdProductRead.Connection.Open();
+            SqlDataReader tempReader = cmdProductRead.ExecuteReader();
+            return tempReader;
+        }
+
+        public static SqlDataReader GrantSupplierReader()
+        {
+            SqlCommand cmdProductRead = new SqlCommand();
+            cmdProductRead.Connection = DBConnection;
+            cmdProductRead.Connection.ConnectionString = DBConnString;
+            cmdProductRead.CommandText = "SELECT * FROM grantSupplier;";
+            cmdProductRead.Connection.Open();
+            SqlDataReader tempReader = cmdProductRead.ExecuteReader();
+            return tempReader;
+        }
+
+        public static SqlDataReader BPReader()
+        {
+            SqlCommand cmdProductRead = new SqlCommand();
+            cmdProductRead.Connection = DBConnection;
+            cmdProductRead.Connection.ConnectionString = DBConnString;
+            cmdProductRead.CommandText = "SELECT grantSupplier.SupplierID, grantSupplier.SupplierName, OrgType, " +
+                "  grantSupplier.BusinessAddress, bprep.UserID, CommunicationStatus, FirstName,\r\nLastName, email, " +
+                "phone, homeaddress, statusname\r\nfrom grantSupplier\r\nJOIN bprep on grantSupplier.SupplierID = bprep.supplierid" +
+                "\r\nJOIN users on users.userid = bprep.userid " +
+                "\r\nJOIN supplierStatus on grantsupplier.SupplierID = supplierStatus.SupplierID;";
+            cmdProductRead.Connection.Open();
+            SqlDataReader tempReader = cmdProductRead.ExecuteReader();
+            return tempReader;
+        }
         public static void UpdateGrant(GrantSimple grant)
         {
             //  SQL queries with parameters
