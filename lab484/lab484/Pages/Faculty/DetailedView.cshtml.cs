@@ -16,6 +16,7 @@ namespace lab484.Pages.Faculty
             while (grantReader.Read())
             {
                 grant.GrantID = Int32.Parse(grantReader["GrantID"].ToString());
+                grant.ProjectID = Int32.Parse(grantReader["ProjectID"].ToString());
                 grant.Supplier = grantReader["Supplier"].ToString();
                 grant.Project = grantReader["Project"].ToString();
                 grant.Amount = float.Parse(grantReader["Amount"].ToString());

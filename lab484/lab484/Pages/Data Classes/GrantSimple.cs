@@ -6,6 +6,7 @@ namespace lab484.Pages.Data_Classes
     public class GrantSimple
     {
         public int GrantID { get; set; }
+        public int ProjectID { get; set; }
 
         [Required(ErrorMessage = "Supplier is required")]
         public string Supplier { get; set; }

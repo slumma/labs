@@ -36,7 +36,25 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdFacultyReader = new SqlCommand();
             cmdFacultyReader.Connection = DBConnection;
             cmdFacultyReader.Connection.ConnectionString = DBConnString;
-            cmdFacultyReader.CommandText = "SELECT * FROM faculty";
+            cmdFacultyReader.CommandText = @"SELECT 
+                                            u.UserID,
+                                            u.Username,
+                                            u.FirstName,
+                                            u.LastName,
+                                            u.Email,
+                                            u.Phone,
+                                            u.HomeAddress,
+                                            ps.ProjectID,
+                                            p.ProjectName,
+                                            ps.Leader,
+                                            ps.Active
+                                        FROM 
+                                            projectStaff ps
+                                        JOIN 
+                                            users u ON ps.UserID = u.UserID
+                                        JOIN 
+                                            project p ON ps.ProjectID = p.ProjectID;";
+
             cmdFacultyReader.Connection.Open(); // Open connection here, close in Model!
 
             SqlDataReader tempReader = cmdFacultyReader.ExecuteReader();
@@ -51,21 +69,24 @@ namespace InventoryManagement.Pages.DB
             cmdSingleGrantRead.Connection.ConnectionString = DBConnString;
 
             cmdSingleGrantRead.CommandText = @"SELECT 
-                                        g.GrantID, 
-                                        s.SupplierName AS Supplier, 
-                                        p.ProjectName AS Project, 
-                                        g.Amount,
-                                        g.Category,
-                                        gstat.StatusName, 
-                                        g.descriptions,
-                                        g.SubmissionDate, 
-                                        g.AwardDate
-                                    FROM grants g
-                                    JOIN grantSupplier s ON g.SupplierID = s.SupplierID
-                                    JOIN grantStatus gstat ON g.GrantID = gstat.GrantID
-                                    JOIN project p ON g.ProjectID = p.ProjectID
-                                    LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID
-                                    WHERE g.GrantID = @GrantID";
+                                                g.GrantID, 
+                                                p.ProjectID,
+                                                s.SupplierName AS Supplier, 
+                                                p.ProjectName AS Project, 
+                                                g.Amount,
+                                                g.Category,
+                                                gstat.StatusName, 
+                                                g.descriptions,
+                                                g.SubmissionDate, 
+                                                g.AwardDate
+                                            FROM grants g
+                                            JOIN grantSupplier s ON g.SupplierID = s.SupplierID
+                                            JOIN grantStatus gstat ON g.GrantID = gstat.GrantID
+                                            JOIN project p ON g.ProjectID = p.ProjectID
+                                            LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID
+                                            WHERE g.GrantID = @GrantID;";
+
+                                    
 
             cmdSingleGrantRead.Parameters.AddWithValue("@GrantID", GrantID);
 
@@ -80,20 +101,22 @@ namespace InventoryManagement.Pages.DB
             cmdGrantReader.Connection = DBConnection;
             cmdGrantReader.Connection.ConnectionString = DBConnString;
             cmdGrantReader.CommandText = @"SELECT 
-                                            g.GrantID, 
-                                            s.SupplierName AS Supplier, 
-                                            p.ProjectName AS Project, 
-                                            g.Amount,
-                                            g.Category,
-                                            gstat.StatusName, 
-                                            g.descriptions,
-                                            g.SubmissionDate, 
-                                            g.AwardDate
-                                        FROM grants g
-                                        JOIN grantSupplier s ON g.SupplierID = s.SupplierID
-                                        JOIN grantStatus gstat ON g.GrantID = gstat.GrantID
-                                        JOIN project p ON g.ProjectID = p.ProjectID
-                                        LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;";
+                                        g.GrantID, 
+                                        p.ProjectID,
+                                        s.SupplierName AS Supplier, 
+                                        p.ProjectName AS Project, 
+                                        g.Amount,
+                                        g.Category,
+                                        gstat.StatusName, 
+                                        g.descriptions,
+                                        g.SubmissionDate, 
+                                        g.AwardDate
+                                    FROM grants g
+                                    JOIN grantSupplier s ON g.SupplierID = s.SupplierID
+                                    JOIN grantStatus gstat ON g.GrantID = gstat.GrantID
+                                    JOIN project p ON g.ProjectID = p.ProjectID
+                                    LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;";
+
 
             cmdGrantReader.Connection.Open();
             SqlDataReader tempReader = cmdGrantReader.ExecuteReader();

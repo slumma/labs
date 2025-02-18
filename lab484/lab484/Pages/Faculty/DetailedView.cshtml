@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <th>Project</th>
-            <td>@Model.grant.Project</td>
+            <td>@Model.grant.Project : ID (@Model.grant.ProjectID)</td>
         </tr>
         <tr>
             <th>Amount</th>
@@ -46,6 +46,6 @@
 </table>
 <div class="text-center">
     <a class="btn btn-outline-primary" asp-page="EditGrant" asp-route-grantID="@Model.grant.GrantID">Edit Grant</a>
-    <a class="btn btn-outline-primary" asp-page="AssociateFac" asp-route-grantID="@Model.grant.GrantID">Associate Member</a>
+    <a class="btn btn-outline-primary" asp-page="AssociateFac" asp-route-projectID="@Model.grant.ProjectID">Associate Member</a>
     <a class="btn btn-outline-primary" asp-page="FacultyLanding">Return to Grant List</a>
 </div>

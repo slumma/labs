@@ -5,8 +5,11 @@ namespace lab484.Pages.Faculty
 {
     public class AssociateFacModel : PageModel
     {
-        public void OnGet(int grantID)
+    
+        public int ProjectID { get; set; }
+        public void OnGet(int ProjectID)
         {
+            ProjectID = ProjectID;
         }
     }
 }

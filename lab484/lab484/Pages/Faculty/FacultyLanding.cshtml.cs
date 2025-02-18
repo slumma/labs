@@ -17,6 +17,7 @@ namespace lab484.Pages.Faculty
                 grantList.Add(new GrantSimple
                 {
                     GrantID = Int32.Parse(grantReader["GrantID"].ToString()),
+                    ProjectID = Int32.Parse(grantReader["ProjectID"].ToString()),
                     Supplier = grantReader["Supplier"].ToString(),
                     Project = grantReader["Project"].ToString(),
                     Amount = float.Parse(grantReader["Amount"].ToString()),
