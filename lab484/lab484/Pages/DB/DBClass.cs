@@ -36,20 +36,24 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdProductRead = new SqlCommand();
             cmdProductRead.Connection = DBConnection;
             cmdProductRead.Connection.ConnectionString = DBConnString;
+
             cmdProductRead.CommandText = @"SELECT 
                                         g.GrantID, 
                                         s.SupplierName AS Supplier, 
                                         p.ProjectName AS Project, 
-                                        g.Amount, 
-                                        g.StatusName, 
+                                        g.Amount,
+                                        g.Category,
+                                        gstat.StatusName, 
                                         g.descriptions,
                                         g.SubmissionDate, 
                                         g.AwardDate
                                     FROM grants g
                                     JOIN grantSupplier s ON g.SupplierID = s.SupplierID
+                                    JOIN grantStatus gstat ON g.GrantID = gstat.GrantID
                                     JOIN project p ON g.ProjectID = p.ProjectID
-                                    LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID 
+                                    LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID
                                     WHERE g.GrantID = @GrantID";
+
             cmdProductRead.Parameters.AddWithValue("@GrantID", GrantID);
 
             cmdProductRead.Connection.Open();
@@ -63,18 +67,21 @@ namespace InventoryManagement.Pages.DB
             cmdProductRead.Connection = DBConnection;
             cmdProductRead.Connection.ConnectionString = DBConnString;
             cmdProductRead.CommandText = @"SELECT 
-                                    g.GrantID, 
-                                    s.SupplierName AS Supplier, 
-                                    p.ProjectName AS Project, 
-                                    g.Amount, 
-                                    g.StatusName, 
-                                    g.descriptions,
-                                    g.SubmissionDate, 
-                                    g.AwardDate
-                                   FROM grants g
-                                   JOIN grantSupplier s ON g.SupplierID = s.SupplierID
-                                   JOIN project p ON g.ProjectID = p.ProjectID
-                                   LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;";
+                                            g.GrantID, 
+                                            s.SupplierName AS Supplier, 
+                                            p.ProjectName AS Project, 
+                                            g.Amount,
+                                            g.Category,
+                                            gstat.StatusName, 
+                                            g.descriptions,
+                                            g.SubmissionDate, 
+                                            g.AwardDate
+                                        FROM grants g
+                                        JOIN grantSupplier s ON g.SupplierID = s.SupplierID
+                                        JOIN grantStatus gstat ON g.GrantID = gstat.GrantID
+                                        JOIN project p ON g.ProjectID = p.ProjectID
+                                        LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;";
+
             cmdProductRead.Connection.Open();
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
@@ -133,13 +140,17 @@ namespace InventoryManagement.Pages.DB
             string checkSupplierQuery = "SELECT SupplierID FROM grantSupplier WHERE SupplierName = @Supplier";
             string insertSupplierQuery = "INSERT INTO grantSupplier (SupplierName) OUTPUT INSERTED.SupplierID VALUES (@Supplier)";
             string updateGrantQuery = "UPDATE grants SET " +
-                                      "SupplierID = @SupplierID, " +
-                                      "Amount = @Amount, " +
-                                      "StatusName = @Category, " +
-                                      "descriptions = @Description, " +
-                                      "SubmissionDate = @SubmissionDate, " +
-                                      "AwardDate = @AwardDate " +
-                                      "WHERE GrantID = @GrantID";
+                          "SupplierID = @SupplierID, " +
+                          "Amount = @Amount, " +
+                          "Category = @Category, " +
+                          "descriptions = @Description, " +
+                          "SubmissionDate = @SubmissionDate, " +
+                          "AwardDate = @AwardDate " +
+                          "WHERE GrantID = @GrantID; " +
+                          "UPDATE grantStatus SET " +
+                          "StatusName = @StatusName " +
+                          "WHERE GrantID = @GrantID;";
+
 
             // Create a new SQL command to check if the supplier exists
             using (SqlConnection connection = new SqlConnection(DBClass.DBConnString))
@@ -174,7 +185,8 @@ namespace InventoryManagement.Pages.DB
                         // Define and add the parameters for the update grant query
                         cmdGrantUpdate.Parameters.AddWithValue("@SupplierID", supplierId);
                         cmdGrantUpdate.Parameters.AddWithValue("@Amount", grant.Amount);
-                        cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Status);
+                        cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Category);
+                        cmdGrantUpdate.Parameters.AddWithValue("@StatusName", grant.Status);
                         cmdGrantUpdate.Parameters.AddWithValue("@Description", grant.Description);
                         cmdGrantUpdate.Parameters.AddWithValue("@SubmissionDate", grant.SubmissionDate);
                         cmdGrantUpdate.Parameters.AddWithValue("@AwardDate", grant.AwardDate);
