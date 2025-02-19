@@ -5,34 +5,45 @@
     ViewData["Title"] = "Associate Faculty";
 }
 
-<h2>Project Staff for @Model.staffList.FirstOrDefault()?.ProjectName</h2>
+<h2>Project Staff for @Model.ProjectName - ID: (@Model.ProjectID)</h2>
 
-<table class="table table-striped">
-    <thead>
+<table class="table table-striped table-hover">
+    <thead class="thead-light">
         <tr>
-            <th>Username</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Project Name</th>
-            <th>Leader</th>
-            <th>Active</th>
+            <th class="table-header text-primary font-weight-bold text-decoration-none">Username</th>
+            <th class="table-header text-primary font-weight-bold text-decoration-none">First Name</th>
+            <th class="table-header text-primary font-weight-bold text-decoration-none">Last Name</th>
+            <th class="table-header text-primary font-weight-bold text-decoration-none">Email</th>
+            <th class="table-header text-primary font-weight-bold text-decoration-none">Phone</th>
+            <th class="table-header text-primary font-weight-bold text-decoration-none">Leader</th>
+            <th class="table-header text-primary font-weight-bold text-decoration-none">Active</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var staff in Model.staffList)
+        @if (!Model.StaffList.Any())
         {
             <tr>
-                <td>@staff.Username</td>
-                <td>@staff.FirstName</td>
-                <td>@staff.LastName</td>
-                <td>@staff.Email</td>
-                <td>@staff.Phone</td>
-                <td>@staff.ProjectName</td>
-                <td>@staff.Leader</td>
-                <td>@staff.Active</td>
+                <td colspan="7" class="text-center">There are no faculty members working on this project.</td>
             </tr>
+        }
+        else
+        {
+            @foreach (var staff in Model.StaffList)
+            {
+                <tr>
+                    <td>@staff.Username</td>
+                    <td>@staff.FirstName</td>
+                    <td>@staff.LastName</td>
+                    <td>@staff.Email</td>
+                    <td>@staff.Phone</td>
+                    <td>@staff.Leader</td>
+                    <td>@staff.Active</td>
+                </tr>
+            }
         }
     </tbody>
 </table>
+
+<div>
+    <a class="btn btn-outline-primary" asp-page="DetailedView" asp-route-GrantID="@Model.GrantID">Back to Details</a>
+</div>

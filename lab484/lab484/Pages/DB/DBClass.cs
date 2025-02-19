@@ -126,6 +126,18 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+        public static SqlDataReader singleProjectReader(int ProjectID)
+        {
+            SqlCommand cmdProjectRead = new SqlCommand();
+            cmdProjectRead.Connection = DBConnection;
+            cmdProjectRead.Connection.ConnectionString = DBConnString;
+            cmdProjectRead.CommandText = "SELECT * from project WHERE ProjectID = @ProjectID;";
+            cmdProjectRead.Parameters.AddWithValue("@ProjectID", ProjectID);
+            cmdProjectRead.Connection.Open();
+            SqlDataReader tempReader = cmdProjectRead.ExecuteReader();
+            return tempReader;
+        }
+
         public static SqlDataReader ProjectReader()
         {
             SqlCommand cmdProjectRead = new SqlCommand();

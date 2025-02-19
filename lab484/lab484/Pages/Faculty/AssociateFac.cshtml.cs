@@ -8,14 +8,32 @@ namespace lab484.Pages.Faculty
 {
     public class AssociateFacModel : PageModel
     {
+        public int GrantID { get; set; }
+        public int ProjectID { get; set; }
 
-        public required List<ProjectStaff> staffList { get; set; } = new List<ProjectStaff>();
-        public void OnGet(int ProjectID)
+        // make variable so we can access it w/o reading list 
+        public string ProjectName { get; set; }
+        public required List<ProjectStaff> StaffList { get; set; } = new List<ProjectStaff>();
+
+        public void OnGet(int ProjectID, int GrantID)
         {
+            this.ProjectID = ProjectID;  // sets the ProjectID
+            this.GrantID = GrantID;      // sets the GrantID
+
+            SqlDataReader projectReader = DBClass.singleProjectReader(ProjectID);
+            if (projectReader.Read())
+            {
+                ProjectName = projectReader["ProjectName"].ToString();
+            }
+            DBClass.DBConnection.Close();
+
+
+
+
             SqlDataReader facultyReader = DBClass.singleFacultyReader(ProjectID);
             while (facultyReader.Read())
             {
-                staffList.Add(new ProjectStaff
+                StaffList.Add(new ProjectStaff
                 {
                     UserID = Int32.Parse(facultyReader["UserID"].ToString()),
                     Username = facultyReader["Username"].ToString(),
@@ -30,6 +48,10 @@ namespace lab484.Pages.Faculty
                     Active = bool.Parse(facultyReader["Active"].ToString())
                 });
             }
+
+            // populates the ProjectName variable so it can be used
+            // checks if there are any staff in list first
+;
 
             // Close your connection in DBClass
             DBClass.DBConnection.Close();
