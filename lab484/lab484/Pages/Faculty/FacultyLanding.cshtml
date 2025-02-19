@@ -7,10 +7,16 @@
 <table class="table table-bordered table-responsive table-hover">
     <thead>
         <tr>
-            <th>Grant Name</th>
-            <th>Amount</th>
+            <th>
+                <a asp-page="./FacultyLanding" asp-route-sortOrder="@(Model.CurrentSortOrder == "name_asc" ? "name_desc" : "name_asc")">Grant Name</a>
+            </th>
+            <th>
+                <a asp-page="./FacultyLanding" asp-route-sortOrder="@(Model.CurrentSortOrder == "amount_asc" ? "amount_desc" : "amount_asc")">Amount</a>
+            </th>
             <th>Supplier</th>
-            <th>Award Date</th>
+            <th>
+                <a asp-page="./FacultyLanding" asp-route-sortOrder="@(Model.CurrentSortOrder == "date_asc" ? "date_desc" : "date_asc")">Award Date</a>
+            </th>
             <th>Project</th>
             <th>Detailed View</th>
         </tr>
@@ -21,9 +27,9 @@
             {
                 <tr>
                     <td class="text-danger">@grant.GrantID</td>
-                    <td>@string.Format("{0:C}", grant.Amount)</td> <! -- formats as dollar value !>
+                    <td>@string.Format("{0:C}", grant.Amount)</td> <!-- formats as dollar value -->
                     <td>@grant.Supplier</td>
-                    <td>@grant.AwardDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
+                    <td>@grant.AwardDate.ToString("MM/dd/yyyy")</td> <!-- formats as date, no time -->
                     <td>@grant.Project</td>
                     <td>
                         <div class="text-center">
