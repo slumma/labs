@@ -31,6 +31,19 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+        public static SqlDataReader facReader()
+        {
+            SqlCommand cmdFacReader = new SqlCommand();
+            cmdFacReader.Connection = DBConnection;
+            cmdFacReader.Connection.ConnectionString = DBConnString;
+            cmdFacReader.CommandText = "SELECT u.* FROM users u INNER JOIN  faculty f ON u.UserID = f.UserID;";
+            cmdFacReader.Connection.Open(); // Open connection here, close in Model!
+
+            SqlDataReader tempReader = cmdFacReader.ExecuteReader();
+
+            return tempReader;
+        }
+
         public static SqlDataReader singleFacultyReader(int ProjectID)
         {
             SqlCommand cmdFacultyReader = new SqlCommand();
@@ -50,6 +63,8 @@ namespace InventoryManagement.Pages.DB
                                             ps.Active
                                         FROM 
                                             projectStaff ps
+                                        JOIN 
+                                            faculty f ON ps.UserID = f.UserID
                                         JOIN 
                                             users u ON ps.UserID = u.UserID
                                         JOIN 
@@ -242,9 +257,74 @@ namespace InventoryManagement.Pages.DB
         }
 
 
+        // insert user into ProjectStaff 
+        /*public static void InsertProjectStaff(int UserID, int projectID)
+        {
+            String sqlQuery = "INSERT INTO projectStaff (UserID, ProjectID, Leader, Active) VALUES(@UserID, @ProjectID, 0, 1);";
+
+            SqlConnection connection = new SqlConnection(DBConnString);
+            SqlCommand cmdInsertProduct = new SqlCommand(sqlQuery, connection);
+
+            // Add parameters to the command
+            cmdInsertProduct.Parameters.AddWithValue("@UserID", UserID);
+            cmdInsertProduct.Parameters.AddWithValue("@ProjectID", projectID);
+
+            connection.Open();
+            cmdInsertProduct.ExecuteNonQuery();
+            connection.Close();
+        }*/
+
+        public static void InsertProjectStaff(User u, int projectID)
+        {
+
+            SqlConnection connection = new SqlConnection(DBConnString);
+
+            String sqlQuery = "INSERT INTO projectStaff (UserID, ProjectID, Leader, Active) VALUES(@UserID, @ProjectID, 0, 1);";
+            SqlCommand cmdInsertProduct = new SqlCommand(sqlQuery, connection);
+
+            // Add parameters to the command
+            cmdInsertProduct.Parameters.AddWithValue("@UserID", u.UserID);
+            cmdInsertProduct.Parameters.AddWithValue("@ProjectID", projectID);
+
+            connection.Open();
+            int rowsAffected = cmdInsertProduct.ExecuteNonQuery();
+
+            connection.Close();
+        }
 
 
 
+        public static User GetUserByID(int userID)
+        {
+            User user = null;
+            String sqlQuery = "SELECT * FROM users WHERE UserID = @UserID";
+
+            SqlConnection connection = new SqlConnection(DBConnString);
+            SqlCommand cmdGetUser = new SqlCommand(sqlQuery, connection);
+            cmdGetUser.Parameters.AddWithValue("@UserID", userID);
+
+            connection.Open();
+            SqlDataReader reader = cmdGetUser.ExecuteReader();
+
+            if (reader.Read())
+            {
+                user = new User
+                {
+                    UserID = Int32.Parse(reader["UserID"].ToString()),
+                    UserName = reader["Username"].ToString(),
+                    FirstName = reader["FirstName"].ToString(),
+                    LastName = reader["LastName"].ToString(),
+                    Email = reader["Email"].ToString(),
+                    Phone = reader["Phone"].ToString(),
+                    HomeAddress = reader["HomeAddress"].ToString()
+                };
+            }
+
+            reader.Close();
+            connection.Close();
+
+            return user;
+        }
 
 
 

@@ -3,12 +3,15 @@ using lab484.Pages.Data_Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace lab484.Pages.Faculty
 {
     public class AssociateFacModel : PageModel
     {
+        [BindProperty]
         public int GrantID { get; set; }
+        [BindProperty]
         public int ProjectID { get; set; }
 
         // make variable so we can access it w/o reading list 
@@ -52,20 +55,43 @@ namespace lab484.Pages.Faculty
             }
             DBClass.DBConnection.Close();
 
-            using (SqlDataReader userReader = DBClass.UserReader())
+            using (SqlDataReader facReader = DBClass.facReader())
             {
-                while (userReader.Read())
+                while (facReader.Read())
                 {
                     UserList.Add(new User
                     {
-                        UserID = Int32.Parse(userReader["UserID"].ToString()),
-                        UserName = userReader["Username"].ToString()
+                        UserID = Int32.Parse(facReader["UserID"].ToString()),
+                        UserName = facReader["Username"].ToString()
                     });
                 }
             }
 
             // Close your connection in DBClass
             DBClass.DBConnection.Close();
+        }
+
+        public IActionResult OnPostAddFaculty(int UserID)
+        {
+            // Retrieve the User object based on UserID
+            User user = DBClass.GetUserByID(UserID);
+
+            Trace.WriteLine($"ProjectID: {this.ProjectID}");
+            Trace.WriteLine($"UserID: {UserID}");
+
+            if (user != null)
+            {
+                // why does ProjectID keep showing as 0 omg 
+                DBClass.InsertProjectStaff(user, this.ProjectID);
+            }
+
+
+            return RedirectToPage(new
+            {
+                ProjectID = this.ProjectID,
+                GrantID = this.GrantID
+            });
+
         }
     }
 }

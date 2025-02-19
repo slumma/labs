@@ -45,6 +45,8 @@
 
 <div class="mt-3">
     <form method="post" asp-page-handler="AddFaculty">
+        <input type="hidden" asp-for="ProjectID" />
+        <input type="hidden" asp-for="GrantID" />
         <div class="form-group">
             <label for="UserID">Select Faculty Member:</label>
             <select id="UserID" name="UserID" class="form-control">
