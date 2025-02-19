@@ -40,7 +40,7 @@ namespace lab484.Pages.Faculty
             // Close your connection in DBClass
             DBClass.DBConnection.Close();
 
-            // Sort the grantList based on SortOrder
+            // links up to AI usage on the view, this switch statement allows the program to sort the grants by the selected sort order
             switch (SortOrder)
             {
                 case "amount_asc":

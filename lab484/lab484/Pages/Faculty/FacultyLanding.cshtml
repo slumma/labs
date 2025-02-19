@@ -8,14 +8,15 @@
     <thead>
         <tr>
             <th>
-                <a asp-page="./FacultyLanding" asp-route-sortOrder="@(Model.CurrentSortOrder == "name_asc" ? "name_desc" : "name_asc")">Grant Name</a>
+                <!-- looked this up and used Copilot to help implement, but essentially this allows the user to click on the header of the table to sort by it -->
+                <a asp-page="./FacultyLanding" class="text-primary font-weight-bold text-decoration-none"  asp-route-sortOrder="@(Model.CurrentSortOrder == "name_asc" ? "name_desc" : "name_asc")">Grant Name</a>
             </th>
             <th>
-                <a asp-page="./FacultyLanding" asp-route-sortOrder="@(Model.CurrentSortOrder == "amount_asc" ? "amount_desc" : "amount_asc")">Amount</a>
+                <a asp-page="./FacultyLanding" class="text-primary font-weight-bold text-decoration-none" asp-route-sortOrder="@(Model.CurrentSortOrder == "amount_asc" ? "amount_desc" : "amount_asc")">Amount</a>
             </th>
             <th>Supplier</th>
             <th>
-                <a asp-page="./FacultyLanding" asp-route-sortOrder="@(Model.CurrentSortOrder == "date_asc" ? "date_desc" : "date_asc")">Award Date</a>
+                <a asp-page="./FacultyLanding" class="text-primary font-weight-bold text-decoration-none" asp-route-sortOrder="@(Model.CurrentSortOrder == "date_asc" ? "date_desc" : "date_asc")">Award Date</a>
             </th>
             <th>Project</th>
             <th>Detailed View</th>
