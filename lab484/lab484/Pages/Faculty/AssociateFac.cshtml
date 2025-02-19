@@ -2,7 +2,6 @@
 @model lab484.Pages.Faculty.AssociateFacModel
 
 @{
-    ViewData["Title"] = "Associate Faculty";
 }
 
 <h2>Project Staff for @Model.ProjectName - ID: (@Model.ProjectID)</h2>
@@ -44,6 +43,26 @@
     </tbody>
 </table>
 
-<div>
+<div class="mt-3">
+    <form method="post" asp-page-handler="AddFaculty">
+        <div class="form-group">
+            <label for="UserID">Select Faculty Member:</label>
+            <select id="UserID" name="UserID" class="form-control">
+                @foreach (var user in @Model.UserList)
+                {
+                    <option value="@user.UserID">@user.UserName</option>
+                }
+            </select>
+        </div>
+        <br />
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Associate Faculty</button>
+        </div>
+    </form>
+</div>
+
+<br />
+
+<div class="text-center">
     <a class="btn btn-outline-primary" asp-page="DetailedView" asp-route-GrantID="@Model.GrantID">Back to Details</a>
 </div>
