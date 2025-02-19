@@ -1,0 +1,18 @@
+﻿@page "{userID:int?}"
+@model lab484.Pages.MessagesModel
+
+@{
+    ViewData["Title"] = "Messages";
+}
+
+<h2>Select User to View Messages</h2>
+
+<form method="get" asp-page="/ViewMessages">
+    <div class="form-group">
+        <label for="UserID">Select Username:</label>
+        <select id="UserID" name="userID" asp-for="SelectedUsername" asp-items="Model.Usernames" class="form-control">
+            <option value="">Select a user</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">View Messages</button>
+</form>

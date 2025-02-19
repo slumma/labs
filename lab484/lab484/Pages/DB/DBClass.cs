@@ -49,7 +49,7 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdFacultyReader = new SqlCommand();
             cmdFacultyReader.Connection = DBConnection;
             cmdFacultyReader.Connection.ConnectionString = DBConnString;
-            cmdFacultyReader.CommandText = @"SELECT 
+            cmdFacultyReader.CommandText = @"SELECT DISTINCT
                                             u.UserID,
                                             u.Username,
                                             u.FirstName,
@@ -257,22 +257,49 @@ namespace InventoryManagement.Pages.DB
         }
 
 
-        // insert user into ProjectStaff 
-        /*public static void InsertProjectStaff(int UserID, int projectID)
+        public static SqlDataReader LoadMessages(int UserID)
         {
-            String sqlQuery = "INSERT INTO projectStaff (UserID, ProjectID, Leader, Active) VALUES(@UserID, @ProjectID, 0, 1);";
+            SqlCommand cmdMessageReader = new SqlCommand();
+            cmdMessageReader.Connection = DBConnection;
+            cmdMessageReader.Connection.ConnectionString = DBConnString;
 
-            SqlConnection connection = new SqlConnection(DBConnString);
-            SqlCommand cmdInsertProduct = new SqlCommand(sqlQuery, connection);
+            cmdMessageReader.CommandText = @"
+                SELECT 
+                    m.SenderID,
+                    u.Username AS SenderUsername,
+                    m.SubjectTitle,
+                    m.Contents,
+                    m.SentTime
+                FROM 
+                    userMessage m
+                JOIN 
+                    users u ON m.SenderID = u.UserID
+                WHERE 
+                    m.RecipientID = @UserID";
+            cmdMessageReader.Parameters.AddWithValue("@UserID", UserID);
 
-            // Add parameters to the command
-            cmdInsertProduct.Parameters.AddWithValue("@UserID", UserID);
-            cmdInsertProduct.Parameters.AddWithValue("@ProjectID", projectID);
+            cmdMessageReader.Connection.Open();
+            SqlDataReader tempReader = cmdMessageReader.ExecuteReader();
+            return tempReader;
+        }
 
-            connection.Open();
-            cmdInsertProduct.ExecuteNonQuery();
-            connection.Close();
-        }*/
+
+        // insert user into ProjectStaff 
+            /*public static void InsertProjectStaff(int UserID, int projectID)
+            {
+                String sqlQuery = "INSERT INTO projectStaff (UserID, ProjectID, Leader, Active) VALUES(@UserID, @ProjectID, 0, 1);";
+
+                SqlConnection connection = new SqlConnection(DBConnString);
+                SqlCommand cmdInsertProduct = new SqlCommand(sqlQuery, connection);
+
+                // Add parameters to the command
+                cmdInsertProduct.Parameters.AddWithValue("@UserID", UserID);
+                cmdInsertProduct.Parameters.AddWithValue("@ProjectID", projectID);
+
+                connection.Open();
+                cmdInsertProduct.ExecuteNonQuery();
+                connection.Close();
+            }*/
 
         public static void InsertProjectStaff(User u, int projectID)
         {
