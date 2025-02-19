@@ -40,7 +40,7 @@ CREATE TABLE nonfaculty (
     FOREIGN KEY (UserID) REFERENCES users(UserID));
 
 CREATE TABLE projectStaff(
-    ProjectStaffID int Identity(1,1) PRIMARY KEY,
+    ProjectStaffID int Identity(1,1) PRIMARY KEY, 
     ProjectID int, 
     UserID int, 
     Leader bit,
@@ -53,17 +53,18 @@ CREATE TABLE task(
     ProjectID int, 
     DueDate date,
     Objective nvarchar(200),
-    Staff nvarchar(200),
     FOREIGN KEY (ProjectID) REFERENCES project(ProjectID));
 
 CREATE TABLE TaskStaff(
     TaskStaffID int Identity(1,1) PRIMARY KEY,
     TaskID int, 
-    UserID int,
+    AssigneeID int,
+	AssignerID int,
     TaskOverview nvarchar(200),
     DueDate date,
     FOREIGN KEY (TaskID) REFERENCES task(TaskID),
-    FOREIGN KEY (UserID) REFERENCES employee(UserID));
+    FOREIGN KEY (AssigneeID) REFERENCES employee(UserID),
+	FOREIGN KEY (AssignerID) REFERENCES employee(UserID));
 
 CREATE TABLE meeting(
     MeetingID int Identity(1,1) PRIMARY KEY,

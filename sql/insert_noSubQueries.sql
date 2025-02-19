@@ -83,17 +83,17 @@ INSERT INTO projectStaff (ProjectID, UserID, Leader, Active) VALUES
 (5, 9, 0, 1);
 
 
-INSERT INTO task (ProjectID, DueDate, Objective, Staff) VALUES
-(1, '2025-03-01', 'Task Objective 1', 'Staff 1'),
-(2, '2025-04-01', 'Task Objective 2', 'Staff 2'),
-(3, '2025-05-01', 'Task Objective 3', 'Staff 3'),
-(4, '2025-06-01', 'Task Objective 4', 'Staff 4'),
-(5, '2025-07-01', 'Task Objective 5', 'Staff 5'),
-(6, '2025-08-01', 'Task Objective 6', 'Staff 6'),
-(7, '2025-09-01', 'Task Objective 7', 'Staff 7'),
-(8, '2025-10-01', 'Task Objective 8', 'Staff 8'),
-(9, '2025-11-01', 'Task Objective 9', 'Staff 9'),
-(10, '2025-12-01', 'Task Objective 10', 'Staff 10');
+INSERT INTO task (ProjectID, DueDate, Objective) VALUES
+(1, '2025-03-01', 'Task Objective 1'),
+(2, '2025-04-01', 'Task Objective 2'),
+(3, '2025-05-01', 'Task Objective 3'),
+(4, '2025-06-01', 'Task Objective 4'),
+(5, '2025-07-01', 'Task Objective 5'),
+(6, '2025-08-01', 'Task Objective 6'),
+(7, '2025-09-01', 'Task Objective 7'),
+(8, '2025-10-01', 'Task Objective 8'),
+(9, '2025-11-01', 'Task Objective 9'),
+(10, '2025-12-01', 'Task Objective 10');
 
 INSERT INTO TaskStaff (TaskID, UserID, TaskOverview, DueDate) VALUES
 (1, 1, 'Overview 1', '2025-03-01'),

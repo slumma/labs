@@ -48,7 +48,7 @@
         <input type="hidden" asp-for="ProjectID" />
         <input type="hidden" asp-for="GrantID" />
         <div class="form-group">
-            <label for="UserID">Select Faculty Member:</label>
+            <label for="UserID">Select Faculty Member to associate:</label>
             <select id="UserID" name="UserID" class="form-control">
                 @foreach (var user in @Model.UserList)
                 {

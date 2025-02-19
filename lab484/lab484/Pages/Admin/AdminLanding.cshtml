@@ -26,11 +26,11 @@
                     <td>@string.Format("{0:C}", project.Amount)</td> <! -- formats as dollar value !>
                     <td>
                         <div class="text-center">
-                        <button class="btn btn-outline-primary">Details</button>
+                        <a class="btn btn-outline-primary" asp-page="/Admin/ProjectDetail" asp-route-ProjectID="@project.ProjectID">Detailed View</a>
                         </div>
                     </td>
                 </tr>
-            }
+            } //<a class="btn btn-outline-primary" asp-page="/Faculty/DetailedView" asp-route-grantID="@grant.GrantID">Detailed View</a>
         }
     </tbody>
 </table>
