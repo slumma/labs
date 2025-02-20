@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace lab484.Pages
 {
@@ -30,6 +31,12 @@ namespace lab484.Pages
                 reader.Close();
                 DBClass.DBConnection.Close();
             }
+        }
+
+        public IActionResult OnPost()
+        {
+            int userID = Convert.ToInt32(SelectedUsername);
+            return RedirectToPage("ViewMessages", new { userID });
         }
     }
 }

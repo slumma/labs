@@ -40,6 +40,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Faculty/AddGrant.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxBZGRHcmFudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/Faculty/AssociateFac.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxBc3NvY2lhdGVGYWMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -70,6 +74,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/viewDB/viewUsers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcdmlld0RCXHZpZXdVc2Vycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/ViewMessages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlld01lc3NhZ2VzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/sam/SchoolWork/484/labs/lab484/lab484/Pages/_ViewImports.cshtml]

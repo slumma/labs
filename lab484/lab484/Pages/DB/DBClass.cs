@@ -354,42 +354,65 @@ namespace InventoryManagement.Pages.DB
         }
 
 
-
-
-
-        /*
-        public static void UpdateProduct(Product p)
+        public static SqlDataReader singleSenderReader(int UserID)
         {
-            String sqlQuery = "UPDATE Product SET ";
-            sqlQuery += "ProductName='" + p.ProductName + "',";
-            sqlQuery += "ProductCost=" + p.ProductCost + ",";
-            sqlQuery += "ProductDescription='" + p.ProductDescription + "' WHERE ProductID=" + p.ProductID;
-            SqlCommand cmdProductRead = new SqlCommand();
-            cmdProductRead.Connection = DBConnection;
-            cmdProductRead.Connection.ConnectionString = DBConnString;
-            cmdProductRead.CommandText = sqlQuery;
-            cmdProductRead.Connection.Open();
-            cmdProductRead.ExecuteNonQuery();
+            SqlCommand cmdsingleSenderReader = new SqlCommand();
+            cmdsingleSenderReader.Connection = DBConnection;
+            cmdsingleSenderReader.Connection.ConnectionString = DBConnString;
+            cmdsingleSenderReader.CommandText = @"SELECT 
+                                                    userMessage.*,
+                                                    sender.Username AS SenderUsername,
+                                                    recipient.Username AS RecipientUsername
+                                                FROM 
+                                                    userMessage
+                                                JOIN 
+                                                    Users AS sender ON userMessage.SenderID = sender.UserID
+                                                JOIN 
+                                                    Users AS recipient ON userMessage.RecipientID = recipient.UserID
+                                                WHERE 
+                                                    userMessage.SenderID = @UserID;";
+
+            cmdsingleSenderReader.Parameters.AddWithValue("@UserID", UserID);
+
+            cmdsingleSenderReader.Connection.Open(); // Open connection here, close in Model!
+
+            SqlDataReader tempReader = cmdsingleSenderReader.ExecuteReader();
+
+            return tempReader;
         }
 
-        public static void InsertProduct(Product p)
+        public static SqlDataReader singleRecipientReader(int UserID)
         {
-            String sqlQuery = "INSERT INTO Product(ProductName, ProductCost, ProductDescription) VALUES('";
-            sqlQuery += p.ProductName + "',";
-            sqlQuery += p.ProductCost + ",'";
-            sqlQuery += p.ProductDescription + "')";
+            SqlCommand cmdsingleSenderReader = new SqlCommand();
+            cmdsingleSenderReader.Connection = DBConnection;
+            cmdsingleSenderReader.Connection.ConnectionString = DBConnString;
+            cmdsingleSenderReader.CommandText = @"SELECT 
+                                                    userMessage.*,
+                                                    sender.Username AS SenderUsername,
+                                                    recipient.Username AS RecipientUsername
+                                                FROM 
+                                                    userMessage
+                                                JOIN 
+                                                    Users AS sender ON userMessage.SenderID = sender.UserID
+                                                JOIN 
+                                                    Users AS recipient ON userMessage.RecipientID = recipient.UserID
+                                                WHERE 
+                                                    userMessage.RecipientID = @UserID;";
 
-            SqlCommand cmdProductRead = new SqlCommand();
-            cmdProductRead.Connection = DBConnection;
-            cmdProductRead.Connection.ConnectionString = DBConnString;
-            cmdProductRead.CommandText = sqlQuery;
-            cmdProductRead.Connection.Open();
+            cmdsingleSenderReader.Parameters.AddWithValue("@UserID", UserID);
 
-            cmdProductRead.ExecuteNonQuery();
+            cmdsingleSenderReader.Connection.Open(); // Open connection here, close in Model!
+
+            SqlDataReader tempReader = cmdsingleSenderReader.ExecuteReader();
+
+            return tempReader;
         }
-        */
 
-        
+
+
+
+
+
     }
 }
 
