@@ -491,3 +491,6 @@ lab484/lab484/bin/Debug/net8.0/lab484.dll
 *.dll
 *.pdb
 lab484/lab484/obj/Debug/net8.0/lab484.AssemblyInfo.cs
+lab484/lab484/bin/Debug/net8.0/lab484.dll
+lab484/lab484/bin/Debug/net8.0/lab484.exe
+sql/inserts_v1.sql
