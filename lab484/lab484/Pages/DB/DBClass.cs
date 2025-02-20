@@ -389,64 +389,7 @@ namespace InventoryManagement.Pages.DB
         }
         */
 
-        public static SqlDataReader GeneralReaderQuery(string sqlQuery)
-        {
-
-            SqlCommand cmdProductRead = new SqlCommand();
-            cmdProductRead.Connection = DBConnection;
-            cmdProductRead.Connection.ConnectionString = DBConnString;
-            cmdProductRead.CommandText = sqlQuery;
-            cmdProductRead.Connection.Open();
-            SqlDataReader tempReader = cmdProductRead.ExecuteReader();
-
-            return tempReader;
-
-        }
-
-        public static void InsertQuery(string sqlQuery)
-        {
-
-            SqlCommand cmdProductRead = new SqlCommand();
-            cmdProductRead.Connection = DBConnection;
-            cmdProductRead.Connection.ConnectionString = DBConnString;
-            cmdProductRead.CommandText = sqlQuery;
-            cmdProductRead.Connection.Open();
-            cmdProductRead.ExecuteNonQuery();
-
-        }
-
-        public static int LoginQuery(string loginQuery)
-        {
-            // This method expects to receive an SQL SELECT
-            // query that uses the COUNT command.
-            SqlCommand cmdLogin = new SqlCommand();
-            cmdLogin.Connection = DBConnection;
-            cmdLogin.Connection.ConnectionString = DBConnString;
-            cmdLogin.CommandText = loginQuery;
-            cmdLogin.Connection.Open();
-            // ExecuteScalar() returns back data type Object
-            // Use a typecast to convert this to an int.
-            // Method returns first column of first row.
-            int rowCount = (int)cmdLogin.ExecuteScalar();
-            return rowCount;
-        }
-        public static int SecureLogin(string Username, string Password)
-        {
-            string loginQuery =
-            "SELECT COUNT(*) FROM Credentials where Username = @Username and Password = @Password";
-            SqlCommand cmdLogin = new SqlCommand();
-            cmdLogin.Connection = DBConnection;
-            cmdLogin.Connection.ConnectionString = DBConnString;
-            cmdLogin.CommandText = loginQuery;
-            cmdLogin.Parameters.AddWithValue("@Username", Username);
-            cmdLogin.Parameters.AddWithValue("@Password", Password);
-            cmdLogin.Connection.Open();
-            // ExecuteScalar() returns back data type Object
-            // Use a typecast to convert this to an int.
-            // Method returns first column of first row.
-            int rowCount = (int)cmdLogin.ExecuteScalar();
-            return rowCount;
-        }
+        
     }
 }
 
