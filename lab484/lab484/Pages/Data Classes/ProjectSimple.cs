@@ -5,6 +5,8 @@ namespace lab484.Pages.Data_Classes
     public class ProjectSimple
     {
         public int ProjectID { get; set; }
+
+        [Required(ErrorMessage = "ProjectID is required")]
         public string ProjectName { get; set; }
         [Required(ErrorMessage = "ProjectName is required")]
         public DateTime DueDate { get; set; }
