@@ -1,3 +1,4 @@
+using InventoryManagement.Pages.DB;
 using lab484.Pages.Data_Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,6 +14,14 @@ namespace lab484.Pages.Faculty
         {
 
         }
+
+        public IActionResult OnPost()
+        {
+            DBClass.InsertGrant(newGrant);
+            DBClass.DBConnection.Close();
+            return RedirectToPage("FacultyLanding");
+        }
+
     }
 }
 
