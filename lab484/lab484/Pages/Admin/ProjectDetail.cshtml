@@ -8,7 +8,7 @@
 </head>
 <h2>@Model.project.ProjectName</h2>
 <div>
-	<table>
+	<table class="table table-bordered table-responsive table-hover">
 		<thead>
 			<tr>
 				<td>Objective</td>
@@ -25,11 +25,12 @@
 					<td>@task.Objective</td>
 					<td>@task.DueDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
 					<td>
-						<select id="staffSelect" name="staffSelect">
-							<option value="x">Alice</option>
-							<option value="x">Bob</option>
-							<option value="x">Charlie</option>
-						</select>
+						monkey
+					</td>
+					<td>
+						<div class="text-center">
+							<a class="btn btn-outline-primary" asp-page="/Admin/ProjectDetail" asp-route-ProjectID="@task.TaskID">Detailed View</a>
+						</div>
 					</td>
 				</tr>
 			}
