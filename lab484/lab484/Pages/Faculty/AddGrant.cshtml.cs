@@ -15,12 +15,14 @@ namespace lab484.Pages.Faculty
 
         }
 
+        /*
         public IActionResult OnPost()
         {
+            
             DBClass.InsertGrant(newGrant);
-            DBClass.DBConnection.Close();
-            return RedirectToPage("FacultyLanding");
-        }
+            DBClass.DBConnection.Close();s
+            return RedirectToPage("FacultyLanding"); 
+        }*/
 
     }
 }

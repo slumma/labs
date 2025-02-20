@@ -475,6 +475,7 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+        /* need to fix this
         public static void InsertGrant(GrantSimple g)
         {
             String sqlQuery = "INSERT INTO grants (SupplierID, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount) " +
@@ -501,56 +502,10 @@ namespace InventoryManagement.Pages.DB
                 cmdInsertGrant.ExecuteNonQuery();
                 cmdInsertGrant.Connection.Close();
             }
-        }
+        } */
 
 
-        // methods used in InsertGrant to get IDs
-
-        public static int GetSupplierID(string supplierName)
-        {
-            if (DBConnection == null)
-            {
-                throw new Exception("DBConnection is null. Ensure the connection is properly initialized.");
-            }
-
-            using (SqlCommand cmd = new SqlCommand("SELECT SupplierID FROM grantSupplier WHERE SupplierName = @SupplierName", DBConnection))
-            {
-                cmd.Parameters.AddWithValue("@SupplierName", supplierName);
-                DBConnection.Open();
-                object result = cmd.ExecuteScalar();
-                DBConnection.Close();
-
-                if (result == null)
-                {
-                    throw new Exception("No supplier found with the given name: " + supplierName);
-                }
-
-                return (int)result;
-            }
-        }
-
-        public static int GetProjectID(string projectName)
-        {
-            if (DBConnection == null)
-            {
-                throw new Exception("DBConnection is null. Ensure the connection is properly initialized.");
-            }
-
-            using (SqlCommand cmd = new SqlCommand("SELECT ProjectID FROM project WHERE ProjectName = @ProjectName", DBConnection))
-            {
-                cmd.Parameters.AddWithValue("@ProjectName", projectName);
-                DBConnection.Open();
-                object result = cmd.ExecuteScalar();
-                DBConnection.Close();
-
-                if (result == null)
-                {
-                    throw new Exception("No project found with the given name: " + projectName);
-                }
-
-                return (int)result;
-            }
-        }
+ 
 
 
 
