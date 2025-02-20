@@ -58,10 +58,10 @@ VALUES
   ((SELECT ProjectID FROM dbo.project WHERE DueDate = '2025-07-01'), '2025-06-15', 'Prepare Final Report');
 
 
-INSERT INTO dbo.TaskStaff (TaskID, AssigneeID, AssignerID, TaskOverview, DueDate)
+INSERT INTO dbo.TaskStaff (TaskID, AssigneeID, AssignerID, DueDate)
 VALUES
-  ((SELECT TaskID FROM dbo.task WHERE Objective = 'Initial Planning Phase'), (SELECT UserID FROM dbo.users WHERE Username = 'bwatson'), (SELECT UserID FROM dbo.users WHERE Username = 'bwatson'), 'Outline project requirements', '2025-05-10'),  -- bwatson assigned to Task 1
-  ((SELECT TaskID FROM dbo.task WHERE Objective = 'Prepare Final Report'), (SELECT UserID FROM dbo.users WHERE Username = 'cclark'), (SELECT UserID FROM dbo.users WHERE Username = 'bwatson'), 'Review final report draft', '2025-06-10');  -- cclark assigned to Task 2
+  ((SELECT TaskID FROM dbo.task WHERE Objective = 'Initial Planning Phase'), (SELECT UserID FROM dbo.users WHERE Username = 'bwatson'), (SELECT UserID FROM dbo.users WHERE Username = 'bwatson'), '2025-05-10'),  -- bwatson assigned to Task 1
+  ((SELECT TaskID FROM dbo.task WHERE Objective = 'Prepare Final Report'), (SELECT UserID FROM dbo.users WHERE Username = 'cclark'), (SELECT UserID FROM dbo.users WHERE Username = 'bwatson'), '2025-06-10');  -- cclark assigned to Task 2
 
 
 INSERT INTO dbo.meeting (ProjectID, MeetingDate, Purpose)

@@ -80,6 +80,69 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+        public static SqlDataReader projectStaffReader(int ProjectID)
+        {
+            SqlCommand cmdProjectStaffReader = new SqlCommand();
+            cmdProjectStaffReader.Connection = DBConnection;
+            cmdProjectStaffReader.Connection.ConnectionString = DBConnString;
+            cmdProjectStaffReader.CommandText = @"SELECT DISTINCT
+                                            u.UserID,
+                                            u.Username,
+                                            u.FirstName,
+                                            u.LastName,
+                                            u.Email,
+                                            u.Phone,
+                                            u.HomeAddress,
+                                            ps.ProjectID,
+                                            p.ProjectName,
+                                            ps.Leader,
+                                            ps.Active
+                                        FROM 
+                                            projectStaff ps
+                                        JOIN 
+                                            faculty f ON ps.UserID = f.UserID
+                                        JOIN 
+                                            users u ON ps.UserID = u.UserID
+                                        JOIN 
+                                            project p ON ps.ProjectID = p.ProjectID
+                                        WHERE ps.ProjectID = @ProjectID;";
+
+            cmdProjectStaffReader.Parameters.AddWithValue("@ProjectID", ProjectID);
+
+            cmdProjectStaffReader.Connection.Open(); // Open connection here, close in Model!
+
+            SqlDataReader tempReader = cmdProjectStaffReader.ExecuteReader();
+
+            return tempReader;
+        }
+
+        public static SqlDataReader taskStaffReader(int projectID)
+        {
+            SqlCommand cmdTaskStaffRead = new SqlCommand();
+            cmdTaskStaffRead.Connection = DBConnection;
+            cmdTaskStaffRead.Connection.ConnectionString = DBConnString;
+
+            cmdTaskStaffRead.CommandText = "SELECT * from taskStaff\r\njoin task on task.taskid = taskstaff.taskid\r\n" +
+                "join users on taskstaff.assigneeID = users.UserID\r\nWHERE ProjectID = 1";
+            cmdTaskStaffRead.Parameters.AddWithValue("@ProjectID", projectID);
+            cmdTaskStaffRead.Connection.Open();
+            SqlDataReader tempReader = cmdTaskStaffRead.ExecuteReader();
+            return tempReader;
+        }
+
+        public static SqlDataReader taskReader(int projectID)
+        {
+            SqlCommand cmdTaskRead = new SqlCommand();
+            cmdTaskRead.Connection = DBConnection;
+            cmdTaskRead.Connection.ConnectionString = DBConnString;
+
+            cmdTaskRead.CommandText = "SELECT * from task WHERE ProjectID = 1";
+            cmdTaskRead.Parameters.AddWithValue("@ProjectID", projectID);
+            cmdTaskRead.Connection.Open();
+            SqlDataReader tempReader = cmdTaskRead.ExecuteReader();
+            return tempReader;
+        }
+
         public static SqlDataReader SingleGrantReader(int GrantID)
         {
             SqlCommand cmdSingleGrantRead = new SqlCommand();
@@ -146,7 +209,9 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdProjectRead = new SqlCommand();
             cmdProjectRead.Connection = DBConnection;
             cmdProjectRead.Connection.ConnectionString = DBConnString;
-            cmdProjectRead.CommandText = "SELECT * from project WHERE ProjectID = @ProjectID;";
+            cmdProjectRead.CommandText = "SELECT project.ProjectID, project.ProjectName, project.DueDate, sum(grants.amount) AS Amount from project" +
+                                            " JOIN grants on project.ProjectID = grants.ProjectID where project.ProjectID = @ProjectID" +
+                                            " group by project.ProjectID, project.ProjectName, project.duedate;";
             cmdProjectRead.Parameters.AddWithValue("@ProjectID", ProjectID);
             cmdProjectRead.Connection.Open();
             SqlDataReader tempReader = cmdProjectRead.ExecuteReader();

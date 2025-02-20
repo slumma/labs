@@ -2,5 +2,47 @@
 @model lab484.Pages.Admin.ProjectDetailModel
 @{
 }
+<head>
+	<meta charset="utf-8" />
+	<title>Project Name</title>
+</head>
+<h2>@Model.project.ProjectName</h2>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<td>Objective</td>
+				<td>Due Date</td>
+				<td>Staff</td>
+				<td>Detailed View</td>
+			</tr>
+		</thead>
+	<tbody>
+		@{
+			foreach (var task in Model.taskList)
+			{
+				<tr>
+					<td>@task.Objective</td>
+					<td>@task.DueDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
+					<td>
+						<select id="staffSelect" name="staffSelect">
+							<option value="x">Alice</option>
+							<option value="x">Bob</option>
+							<option value="x">Charlie</option>
+						</select>
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+	</table>
+</div>
+
+
+
+
+
+
+
 
 <a class="btn btn-outline-primary" asp-page="AdminLanding">Return to Projects</a>

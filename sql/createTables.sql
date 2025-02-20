@@ -60,7 +60,6 @@ CREATE TABLE TaskStaff(
     TaskID int, 
     AssigneeID int,
 	AssignerID int,
-    TaskOverview nvarchar(200),
     DueDate date,
     FOREIGN KEY (TaskID) REFERENCES task(TaskID),
     FOREIGN KEY (AssigneeID) REFERENCES employee(UserID),
