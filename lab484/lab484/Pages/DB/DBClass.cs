@@ -115,6 +115,8 @@ namespace InventoryManagement.Pages.DB
 
             return tempReader;
         }
+        
+
 
         public static SqlDataReader taskStaffReader(int projectID)
         {
@@ -136,7 +138,7 @@ namespace InventoryManagement.Pages.DB
             cmdTaskRead.Connection = DBConnection;
             cmdTaskRead.Connection.ConnectionString = DBConnString;
 
-            cmdTaskRead.CommandText = "SELECT * from task WHERE ProjectID = 1";
+            cmdTaskRead.CommandText = "SELECT * from task WHERE ProjectID = @ProjectID";
             cmdTaskRead.Parameters.AddWithValue("@ProjectID", projectID);
             cmdTaskRead.Connection.Open();
             SqlDataReader tempReader = cmdTaskRead.ExecuteReader();

@@ -10,7 +10,8 @@ namespace lab484.Pages.Admin
     public class ProjectDetailModel : PageModel
     {
         public ProjectSimple project { get; set; }
-        public User user { get; set; }
+        public List<User> userProjectList { get; set; } = new List<User>();
+        public List<User> userTaskList { get; set; } = new List<User>();
         public List<TaskStaff> taskStaffList { get; set; } = new List<TaskStaff>();
         public List<Tasks> taskList { get; set; } = new List<Tasks>();
         public void OnGet(int projectID)
@@ -26,6 +27,19 @@ namespace lab484.Pages.Admin
             }
             DBClass.DBConnection.Close();
 
+            SqlDataReader projectStaffReader = DBClass.projectStaffReader(projectID);
+            while (projectStaffReader.Read())
+            {
+                userProjectList.Add(new User
+                {
+                    FirstName = projectStaffReader["FirstName"].ToString(),
+                    LastName = projectStaffReader["LastName"].ToString(),
+                    Phone = projectStaffReader["Phone"].ToString(),
+                    Email = projectStaffReader["Email"].ToString()
+                });
+            }
+            DBClass.DBConnection.Close();
+
             SqlDataReader taskStaffReader = DBClass.taskStaffReader(projectID);
             while (taskStaffReader.Read())
             {
@@ -36,6 +50,11 @@ namespace lab484.Pages.Admin
                     AssigneeID = Int32.Parse(taskStaffReader["AssigneeID"].ToString()),
                     AssignerID = Int32.Parse(taskStaffReader["AssignerID"].ToString()),
                     DueDate = DateTime.Parse(taskStaffReader["DueDate"].ToString())
+                });
+                userTaskList.Add(new User
+                {
+                    FirstName = taskStaffReader["FirstName"].ToString(),
+                    LastName = taskStaffReader["LastName"].ToString()
                 });
             }
             DBClass.DBConnection.Close();

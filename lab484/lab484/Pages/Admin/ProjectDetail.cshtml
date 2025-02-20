@@ -6,43 +6,81 @@
 	<meta charset="utf-8" />
 	<title>Project Name</title>
 </head>
+
 <h2>@Model.project.ProjectName</h2>
-<div>
-	<table>
+<br />
+
+<!-- Project Staff Section -->
+<div class="container mt-4 p-4 border rounded shadow">
+	<h3>Project Staff</h3>
+	<table class="table table-bordered table-responsive table-hover">
 		<thead>
 			<tr>
-				<td>Objective</td>
-				<td>Due Date</td>
-				<td>Staff</td>
-				<td>Detailed View</td>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Phone</th>
 			</tr>
 		</thead>
-	<tbody>
-		@{
-			foreach (var task in Model.taskList)
+		<tbody>
+			@foreach (var projectStaff in Model.userProjectList)
+			{
+				<tr>
+					<td>@projectStaff.FirstName @projectStaff.LastName</td>
+					<td>@projectStaff.Email</td>
+					<td>@projectStaff.Phone</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<div">
+		<a class="btn btn-outline-primary" asp-page="/Admin/ProjectDetail">Add/Edit Staff</a>
+	</div>
+</div>
+
+<br />
+
+<!-- Tasks Section -->
+<div class="container mt-4 p-4 border rounded shadow">
+	<h3>Tasks</h3>
+	<table class="table table-bordered table-responsive table-hover">
+		<thead>
+			<tr>
+				<th>Objective</th>
+				<th>Due Date</th>
+				<th>Staff</th>
+				<th>Detailed View</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var task in Model.taskList)
 			{
 				<tr>
 					<td>@task.Objective</td>
-					<td>@task.DueDate.ToString("MM/dd/yyyy")</td> <! -- formats as date, no time !>
+					<td>@task.DueDate.ToString("MM/dd/yyyy")</td> <!-- Formats as date, no time -->
 					<td>
-						<select id="staffSelect" name="staffSelect">
-							<option value="x">Alice</option>
-							<option value="x">Bob</option>
-							<option value="x">Charlie</option>
+						<select class="form-select">
+							<option value="x" selected disabled>View Staff</option>
+							@foreach (var staffer in Model.userTaskList)
+							{
+								<option value="x">@staffer.FirstName @staffer.LastName</option>
+							}
 						</select>
+					</td>
+					<td class="text-center">
+						<a class="btn btn-outline-primary" asp-page="/Admin/ProjectDetail" asp-route-ProjectID="@task.TaskID">Detailed View</a>
 					</td>
 				</tr>
 			}
-		}
-	</tbody>
+		</tbody>
 	</table>
+	<div">
+		<a class="btn btn-outline-primary" asp-page="/Admin/ProjectDetail">Add Task</a>
+	</div>
 </div>
 
+<br />
 
-
-
-
-
-
-
-<a class="btn btn-outline-primary" asp-page="AdminLanding">Return to Projects</a>
+<!-- Return Button -->
+<div class="container text-center mt-4">
+	<a class="btn btn-outline-primary" asp-page="AdminLanding">Return to Projects</a>
+</div>
