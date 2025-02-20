@@ -15,11 +15,6 @@ namespace lab484.Pages
 
         public void OnGet()
         {
-            PopulateUsernames();
-        }
-
-        private void PopulateUsernames()
-        {
             Usernames = new List<SelectListItem>();
 
             using (SqlDataReader reader = DBClass.UserReader())
