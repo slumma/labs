@@ -499,6 +499,28 @@ namespace InventoryManagement.Pages.DB
 
 
 
+        public static void InsertUser(User user)
+        {
+            String sqlQuery = "INSERT INTO users (Username, Password, FirstName, LastName, Email, Phone, HomeAddress) " +
+                              "VALUES (@Username, @Password, @FirstName, @LastName, @Email, @Phone, @HomeAddress)";
+
+            using (SqlCommand cmdInsertUser = new SqlCommand(sqlQuery, DBConnection))
+            {
+                cmdInsertUser.Connection.ConnectionString = DBConnString;
+
+                cmdInsertUser.Parameters.AddWithValue("@Username", user.UserName);
+                cmdInsertUser.Parameters.AddWithValue("@Password", user.Password);
+                cmdInsertUser.Parameters.AddWithValue("@FirstName", user.FirstName);
+                cmdInsertUser.Parameters.AddWithValue("@LastName", user.LastName);
+                cmdInsertUser.Parameters.AddWithValue("@Email", user.Email);
+                cmdInsertUser.Parameters.AddWithValue("@Phone", user.Phone);
+                cmdInsertUser.Parameters.AddWithValue("@HomeAddress", user.HomeAddress);
+
+                cmdInsertUser.Connection.Open();
+                cmdInsertUser.ExecuteNonQuery();
+                cmdInsertUser.Connection.Close();
+            }
+        }
 
 
 

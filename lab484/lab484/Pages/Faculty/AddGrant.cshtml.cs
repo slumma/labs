@@ -24,29 +24,19 @@ namespace lab484.Pages.Faculty
 
             if (ModelState.IsValid)
             {
-                // Print the selected supplier name for debugging
-                Trace.WriteLine("Selected Supplier: " + newGrant.Supplier);
 
-                // Get the SupplierID from the selected SupplierName
+                // used AI for help with this, it associates the SupplierName in the list with the SupplierID
                 GrantSupplier selectedSupplier = SupplierList.FirstOrDefault(s => s.SupplierName == newGrant.Supplier);
+                int supplierID = selectedSupplier.SupplierID;
 
-                if (selectedSupplier != null)
-                {
-                    int supplierID = selectedSupplier.SupplierID;
-                    Trace.WriteLine("Supplier ID: " + supplierID); // Print SupplierID for debugging
-
-                    // Insert the new grant with the correct SupplierID
-                    DBClass.InsertGrant(newGrant, supplierID);
-                    return RedirectToPage("FacultyLanding");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid Supplier Selected");
-                    Trace.WriteLine("Invalid Supplier Selected");
-                }
+                DBClass.InsertGrant(newGrant, supplierID);
+                return RedirectToPage("FacultyLanding");
             }
-
-            Trace.WriteLine("Error");
+            else
+            {
+                ModelState.AddModelError("", "Invalid Supplier Selected");
+                Trace.WriteLine("Invalid Supplier Selected");
+            }
 
             return Page();
         }
@@ -95,6 +85,8 @@ namespace lab484.Pages.Faculty
             return Page();
         }
 
+
+        // make a method so i dont have to copy and paste it each time 
         private List<GrantSupplier> LoadSuppliers()
         {
             var suppliers = new List<GrantSupplier>();
