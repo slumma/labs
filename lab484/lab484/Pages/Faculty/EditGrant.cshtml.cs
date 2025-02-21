@@ -51,5 +51,25 @@ namespace lab484.Pages.Faculty
 
             return Page();
         }
+
+        public IActionResult OnPostClear()
+        {
+            ModelState.Clear();
+            GrantToUpdate = new GrantSimple
+            {
+                GrantID = GrantToUpdate.GrantID, // Keep the GrantID the same
+                Supplier = string.Empty,
+                Project = string.Empty,
+                Amount = 0,
+                Category = string.Empty,
+                Status = string.Empty,
+                Description = string.Empty,
+                SubmissionDate = DateTime.Now,
+                AwardDate = DateTime.Now
+            };
+
+            // Return the page with the cleared model
+            return Page();
+        }
     }
 }

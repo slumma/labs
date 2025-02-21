@@ -11,53 +11,16 @@ namespace lab484.Pages.Faculty
     {
         [BindProperty]
         public GrantSimple newGrant { get; set; }
-        public required List<GrantSupplier> SupplierList { get; set; }
+        public List<GrantSupplier> SupplierList { get; set; } = new List<GrantSupplier>();
 
         public void OnGet()
         {
-            SupplierList = new List<GrantSupplier>();
-            SqlDataReader SupplierReader = DBClass.GrantSupplierReader();
-
-            while (SupplierReader.Read())
-            {
-                SupplierList.Add(new GrantSupplier
-                {
-                    SupplierID = Int32.Parse(SupplierReader["SupplierID"].ToString()),
-                    SupplierName = SupplierReader["SupplierName"].ToString(),
-                    OrgType = SupplierReader["OrgType"].ToString(),
-                    BusinessAddress = SupplierReader["BusinessAddress"].ToString()
-                });
-            }
-            
-
-            SupplierReader.Close();
-            DBClass.DBConnection.Close();
+            SupplierList = LoadSuppliers();
         }
 
-        
-
-        public IActionResult OnPost()
+        public IActionResult OnPostAddGrant()
         {
-            // Load the SupplierList to ensure it is not null or empty
-            SqlDataReader SupplierReader = DBClass.GrantSupplierReader();
-            SupplierList = new List<GrantSupplier>();
-
-            if (SupplierReader.HasRows)
-            {
-                while (SupplierReader.Read())
-                {
-                    SupplierList.Add(new GrantSupplier
-                    {
-                        SupplierID = Int32.Parse(SupplierReader["SupplierID"].ToString()),
-                        SupplierName = SupplierReader["SupplierName"].ToString(),
-                        OrgType = SupplierReader["OrgType"].ToString(),
-                        BusinessAddress = SupplierReader["BusinessAddress"].ToString()
-                    });
-                }
-            }
-
-            SupplierReader.Close();
-            DBClass.DBConnection.Close();
+            SupplierList = LoadSuppliers();
 
             if (ModelState.IsValid)
             {
@@ -83,12 +46,75 @@ namespace lab484.Pages.Faculty
                 }
             }
 
-            // If there are validation errors, reload the supplier list
-            OnGet();
+            Trace.WriteLine("Error");
+
             return Page();
         }
 
+        public IActionResult OnPostClear()
+        {
+            ModelState.Clear();
+            newGrant = new GrantSimple
+            {
+                GrantID = newGrant.GrantID, // Keep the GrantID the same
+                Supplier = string.Empty,
+                Project = string.Empty,
+                Amount = 0,
+                Category = string.Empty,
+                Status = string.Empty,
+                Description = string.Empty,
+                SubmissionDate = DateTime.Now,
+                AwardDate = DateTime.Now
+            };
 
+            OnGet(); // just to reload the supplier list
 
+            // Return the page with the cleared model
+            return Page();
+        }
+
+        public IActionResult OnPostPopulate()
+        {
+            ModelState.Clear();
+            newGrant = new GrantSimple
+            {
+                Supplier = "TechCorp",
+                Project = "Education",
+                Amount = 1000000,
+                Category = "Federal",
+                Status = "Pending",
+                Description = "It's for the kids!",
+                SubmissionDate = DateTime.Now,
+                AwardDate = DateTime.Now
+            };
+
+            Trace.WriteLine("Populated");
+
+            SupplierList = LoadSuppliers(); // Reload supplier list
+
+            return Page();
+        }
+
+        private List<GrantSupplier> LoadSuppliers()
+        {
+            var suppliers = new List<GrantSupplier>();
+            using (SqlDataReader reader = DBClass.GrantSupplierReader())
+            {
+                while (reader.Read())
+                {
+                    suppliers.Add(new GrantSupplier
+                    {
+                        SupplierID = int.Parse(reader["SupplierID"].ToString()),
+                        SupplierName = reader["SupplierName"].ToString(),
+                        OrgType = reader["OrgType"].ToString(),
+                        BusinessAddress = reader["BusinessAddress"].ToString()
+                    });
+                }
+            }
+
+            DBClass.DBConnection.Close();
+
+            return suppliers;
+        }
     }
 }
