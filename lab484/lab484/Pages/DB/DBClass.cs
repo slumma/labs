@@ -1,5 +1,6 @@
 ﻿using lab484.Pages.Data_Classes;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace InventoryManagement.Pages.DB
 {
@@ -152,21 +153,19 @@ namespace InventoryManagement.Pages.DB
             cmdSingleGrantRead.Connection.ConnectionString = DBConnString;
 
             cmdSingleGrantRead.CommandText = @"SELECT 
-                                                g.GrantID, 
-                                                p.ProjectID,
-                                                s.SupplierName AS Supplier, 
-                                                p.ProjectName AS Project, 
-                                                g.Amount,
-                                                g.Category,
-                                                gstat.StatusName, 
-                                                g.descriptions,
-                                                g.SubmissionDate, 
-                                                g.AwardDate
-                                            FROM grants g
-                                            JOIN grantSupplier s ON g.SupplierID = s.SupplierID
-                                            JOIN grantStatus gstat ON g.GrantID = gstat.GrantID
-                                            JOIN project p ON g.ProjectID = p.ProjectID
-                                            LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID
+                                            g.GrantID, 
+                                            p.ProjectID,
+                                            s.SupplierName AS Supplier, 
+                                            p.ProjectName AS Project, 
+                                            g.Amount,
+                                            g.Category,
+                                            g.StatusName, 
+                                            g.descriptions,
+                                            g.SubmissionDate, 
+                                            g.AwardDate
+                                        FROM grants g
+                                        JOIN grantSupplier s ON g.SupplierID = s.SupplierID
+                                        LEFT JOIN project p ON g.ProjectID = p.ProjectID
                                             WHERE g.GrantID = @GrantID;";
 
                                     
@@ -184,21 +183,20 @@ namespace InventoryManagement.Pages.DB
             cmdGrantReader.Connection = DBConnection;
             cmdGrantReader.Connection.ConnectionString = DBConnString;
             cmdGrantReader.CommandText = @"SELECT 
-                                        g.GrantID, 
-                                        p.ProjectID,
-                                        s.SupplierName AS Supplier, 
-                                        p.ProjectName AS Project, 
-                                        g.Amount,
-                                        g.Category,
-                                        gstat.StatusName, 
-                                        g.descriptions,
-                                        g.SubmissionDate, 
-                                        g.AwardDate
-                                    FROM grants g
-                                    JOIN grantSupplier s ON g.SupplierID = s.SupplierID
-                                    JOIN grantStatus gstat ON g.GrantID = gstat.GrantID
-                                    JOIN project p ON g.ProjectID = p.ProjectID
-                                    LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID;";
+                                            g.GrantID, 
+                                            p.ProjectID,
+                                            s.SupplierName AS Supplier, 
+                                            p.ProjectName AS Project, 
+                                            g.Amount,
+                                            g.Category,
+                                            gs.StatusName, 
+                                            g.descriptions,
+                                            g.SubmissionDate, 
+                                            g.AwardDate
+                                        FROM grants g
+                                        JOIN grantSupplier s ON g.SupplierID = s.SupplierID
+                                        LEFT JOIN project p ON g.ProjectID = p.ProjectID
+                                        LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID";
 
 
             cmdGrantReader.Connection.Open();
@@ -279,13 +277,11 @@ namespace InventoryManagement.Pages.DB
                                       "SupplierID = @SupplierID, " +
                                       "Amount = @Amount, " +
                                       "Category = @Category, " +
+                                      "StatusName = @StatusName, " +
                                       "descriptions = @Description, " +
                                       "SubmissionDate = @SubmissionDate, " +
                                       "AwardDate = @AwardDate " +
-                                      "WHERE GrantID = @GrantID; " +
-                                      "UPDATE grantStatus SET " +
-                                      "StatusName = @StatusName " +
-                                      "WHERE GrantID = @GrantID;";
+                                      "WHERE GrantID = @GrantID; ";
 
             // db connection
             using (SqlConnection connection = new SqlConnection(DBClass.DBConnString))
@@ -475,22 +471,17 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
-        /* need to fix this
-        public static void InsertGrant(GrantSimple g)
+
+        public static void InsertGrant(GrantSimple g, int supplierID)
         {
-            String sqlQuery = "INSERT INTO grants (SupplierID, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount) " +
-                              "VALUES (@SupplierID, @ProjectID, @StatusName, @Category, @SubmissionDate, @Descriptions, @AwardDate, @Amount)";
+            String sqlQuery = "INSERT INTO grants (SupplierID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount) " +
+                              "VALUES (@SupplierID, @StatusName, @Category, @SubmissionDate, @Descriptions, @AwardDate, @Amount)";
 
             using (SqlCommand cmdInsertGrant = new SqlCommand(sqlQuery, DBConnection))
             {
                 cmdInsertGrant.Connection.ConnectionString = DBConnString;
 
-                // Assuming you have a method to get SupplierID and ProjectID based on Supplier and Project names
-                int supplierID = GetSupplierID(g.Supplier);
-                int projectID = GetProjectID(g.Project);
-
-                cmdInsertGrant.Parameters.AddWithValue("@SupplierID", supplierID);
-                cmdInsertGrant.Parameters.AddWithValue("@ProjectID", projectID);
+                cmdInsertGrant.Parameters.AddWithValue("@SupplierID", supplierID);;
                 cmdInsertGrant.Parameters.AddWithValue("@StatusName", g.Status);
                 cmdInsertGrant.Parameters.AddWithValue("@Category", g.Category);
                 cmdInsertGrant.Parameters.AddWithValue("@SubmissionDate", g.SubmissionDate);
@@ -498,14 +489,17 @@ namespace InventoryManagement.Pages.DB
                 cmdInsertGrant.Parameters.AddWithValue("@AwardDate", g.AwardDate);
                 cmdInsertGrant.Parameters.AddWithValue("@Amount", g.Amount);
 
+                Trace.WriteLine(supplierID);
+
                 cmdInsertGrant.Connection.Open();
                 cmdInsertGrant.ExecuteNonQuery();
                 cmdInsertGrant.Connection.Close();
             }
-        } */
+        }
 
 
- 
+
+
 
 
 

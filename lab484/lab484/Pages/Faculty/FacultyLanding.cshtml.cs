@@ -24,16 +24,16 @@ namespace lab484.Pages.Faculty
             {
                 grantList.Add(new GrantSimple
                 {
-                    GrantID = Int32.Parse(grantReader["GrantID"].ToString()),
-                    ProjectID = Int32.Parse(grantReader["ProjectID"].ToString()),
+                    GrantID = Convert.ToInt32(grantReader["GrantID"]),
+                    ProjectID = grantReader["ProjectID"] != DBNull.Value ? Convert.ToInt32(grantReader["ProjectID"]) : (int?)null, // Handle NULL ProjectID
                     Supplier = grantReader["Supplier"].ToString(),
-                    Project = grantReader["Project"].ToString(),
-                    Amount = float.Parse(grantReader["Amount"].ToString()),
+                    Project = grantReader["Project"].ToString(), // Handle NULL Project
+                    Amount = Convert.ToSingle(grantReader["Amount"]),
                     Category = grantReader["Category"].ToString(),
                     Status = grantReader["StatusName"].ToString(),
                     Description = grantReader["descriptions"].ToString(),
-                    SubmissionDate = DateTime.Parse(grantReader["SubmissionDate"].ToString()),
-                    AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString())
+                    SubmissionDate = Convert.ToDateTime(grantReader["SubmissionDate"]),
+                    AwardDate = Convert.ToDateTime(grantReader["AwardDate"])
                 });
             }
 

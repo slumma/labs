@@ -11,60 +11,45 @@ namespace lab484.Pages.Faculty
         [BindProperty]
         public GrantSimple GrantToUpdate { get; set; }
 
-        public EditGrantModel()
-        {
-            GrantToUpdate = new GrantSimple();
-        }
-
         public void OnGet(int grantID)
         {
+            // Fetch grant details using the grantID and populate GrantToUpdate
             SqlDataReader grantReader = DBClass.SingleGrantReader(grantID);
 
-            while (grantReader.Read())
+            if (grantReader.HasRows)
             {
-                GrantToUpdate.GrantID = Int32.Parse(grantReader["GrantID"].ToString());
-                GrantToUpdate.ProjectID = Int32.Parse(grantReader["ProjectID"].ToString());
-                GrantToUpdate.Supplier = grantReader["Supplier"].ToString();
-                GrantToUpdate.Project = grantReader["Project"].ToString();
-                GrantToUpdate.Amount = float.Parse(grantReader["Amount"].ToString());
-                GrantToUpdate.Category = grantReader["Category"].ToString();
-                GrantToUpdate.Status = grantReader["StatusName"].ToString();
-                GrantToUpdate.Description = grantReader["descriptions"].ToString();
-                GrantToUpdate.SubmissionDate = DateTime.Parse(grantReader["SubmissionDate"].ToString());
-                GrantToUpdate.AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString());
-
+                while (grantReader.Read())
+                {
+                    GrantToUpdate = new GrantSimple
+                    {
+                        GrantID = Int32.Parse(grantReader["GrantID"].ToString()),
+                        ProjectID = grantReader["ProjectID"] != DBNull.Value ? (int?)Int32.Parse(grantReader["ProjectID"].ToString()) : null,
+                        Supplier = grantReader["Supplier"].ToString(),
+                        Project = grantReader["Project"] != DBNull.Value ? grantReader["Project"].ToString() : null,
+                        Amount = float.Parse(grantReader["Amount"].ToString()),
+                        Category = grantReader["Category"].ToString(),
+                        Status = grantReader["StatusName"].ToString(),
+                        Description = grantReader["descriptions"].ToString(),
+                        SubmissionDate = DateTime.Parse(grantReader["SubmissionDate"].ToString()),
+                        AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString())
+                    };
+                }
             }
 
             grantReader.Close();
-
             DBClass.DBConnection.Close();
         }
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return Page();
+                // Update grant details
+                DBClass.UpdateGrant(GrantToUpdate);
+                return RedirectToPage("FacultyLanding");
             }
-
-            DBClass.UpdateGrant(GrantToUpdate);
-            return RedirectToPage("DetailedView", new { grantID = GrantToUpdate.GrantID });
-        }
-
-
-        public IActionResult OnPostClear()
-        {
-            GrantToUpdate.Supplier = string.Empty;
-            GrantToUpdate.Project = string.Empty;
-            GrantToUpdate.Amount = 0;
-            GrantToUpdate.Category = string.Empty;
-            GrantToUpdate.Status = string.Empty;
-            GrantToUpdate.Description = string.Empty;
-
-            ModelState.Clear(); // clear the model state to refresh the form
 
             return Page();
         }
-
     }
 }

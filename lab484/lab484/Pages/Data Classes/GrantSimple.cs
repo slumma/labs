@@ -6,13 +6,13 @@ namespace lab484.Pages.Data_Classes
     public class GrantSimple
     {
         public int GrantID { get; set; }
-        public int ProjectID { get; set; }
+        public int? ProjectID { get; set; }
 
         [Required(ErrorMessage = "Supplier is required")]
         public string Supplier { get; set; }
 
-
-        public string Project { get; set; }
+        public int SupplierID { get; set; }
+        public String? Project { get; set; }
 
         [Required(ErrorMessage = "Amount is required")]
         [Range(1, double.MaxValue, ErrorMessage = "Amount must be greater than 0")]

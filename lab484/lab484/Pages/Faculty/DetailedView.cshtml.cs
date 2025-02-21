@@ -16,7 +16,7 @@ namespace lab484.Pages.Faculty
             while (grantReader.Read())
             {
                 grant.GrantID = Int32.Parse(grantReader["GrantID"].ToString());
-                grant.ProjectID = Int32.Parse(grantReader["ProjectID"].ToString());
+                grant.ProjectID = grantReader["ProjectID"] != DBNull.Value ? Convert.ToInt32(grantReader["ProjectID"]) : (int?)null; // Handle NULL ProjectID
                 grant.Supplier = grantReader["Supplier"].ToString();
                 grant.Project = grantReader["Project"].ToString();
                 grant.Amount = float.Parse(grantReader["Amount"].ToString());
