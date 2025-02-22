@@ -12,6 +12,7 @@ CREATE TABLE grantSupplier(
     SupplierID int Identity(1,1) PRIMARY KEY,
     SupplierName nvarchar(200),
     OrgType nvarchar(200),
+	SupplierStatus nvarchar(200), --temporary
     BusinessAddress nvarchar(200));
 
 CREATE TABLE project(
@@ -104,6 +105,7 @@ CREATE TABLE grants(
     descriptions text,
     AwardDate date,
     Amount float,
+	GrantStatus nvarchar(200), --temporary
     FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID),
     FOREIGN KEY (ProjectID) REFERENCES project(ProjectID));
 

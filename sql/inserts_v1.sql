@@ -7,17 +7,16 @@ VALUES
 ('bwatson', 'password101', 'Barbara', 'Watson', 'bwatson55@gmail.com', '(757) 444-1234', '456 Pine Ave, Norfolk, VA 23502'),
 ('cclark', 'password112', 'Charles', 'Clark', 'cclark99@gmail.com', '(804) 777-6543', '123 Maple Dr, Charlottesville, VA 22903');
 
-INSERT INTO dbo.grantSupplier (SupplierName, OrgType, BusinessAddress)
+INSERT INTO dbo.grantSupplier (SupplierName, OrgType, BusinessAddress, SupplierStatus)
 VALUES
-('TechCorp', 'Private', '500 Innovation Dr, San Francisco, CA 94103'),
-('InnovaTech', 'Government', '1200 Federal Plaza, Washington, DC 20500'),
-('GreenSolutions', 'Private', '300 Eco Way, Portland, OR 97201');
+('TechCorp', 'Private', '500 Innovation Dr, San Francisco, CA 94103', 'Active'),
+('InnovaTech', 'Government', '1200 Federal Plaza, Washington, DC 20500', 'Inactive'),
+('GreenSolutions', 'Private', '300 Eco Way, Portland, OR 97201', 'Active');
 
 INSERT INTO dbo.project (ProjectName, DueDate)
 VALUES
 ('Education','2025-06-01'),
 ('New System','2025-07-01'),
-('Renovation','2025-08-01');
 
 
 
@@ -88,10 +87,10 @@ VALUES
   ((SELECT ProjectID FROM dbo.project WHERE DueDate = '2025-07-01'), 'Final report draft completed for review');
 
 
-INSERT INTO dbo.grants (SupplierID, ProjectID, SubmissionDate, AwardDate, Amount)
+INSERT INTO dbo.grants (SupplierID, ProjectID, SubmissionDate, AwardDate, Amount, GrantStatus)
 VALUES
-  ((SELECT SupplierID FROM dbo.grantSupplier WHERE SupplierName = 'TechCorp'), (SELECT ProjectID FROM dbo.project WHERE DueDate = '2025-06-01'), '2025-04-01', '2025-05-01', 100000),
-  ((SELECT SupplierID FROM dbo.grantSupplier WHERE SupplierName = 'InnovaTech'), (SELECT ProjectID FROM dbo.project WHERE DueDate = '2025-07-01'), '2025-05-01', '2025-06-01', 50000);
+  ((SELECT SupplierID FROM dbo.grantSupplier WHERE SupplierName = 'TechCorp'), (SELECT ProjectID FROM dbo.project WHERE DueDate = '2025-06-01'), '2025-04-01', '2025-05-01', 100000, 'Pending'),
+  ((SELECT SupplierID FROM dbo.grantSupplier WHERE SupplierName = 'InnovaTech'), (SELECT ProjectID FROM dbo.project WHERE DueDate = '2025-07-01'), '2025-05-01', '2025-06-01', 50000, 'Approved');
 
 
 INSERT INTO dbo.grantStatus (GrantID, StatusName)
