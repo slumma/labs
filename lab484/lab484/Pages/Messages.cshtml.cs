@@ -18,6 +18,7 @@ namespace lab484.Pages
         {
             Usernames = new List<SelectListItem>();
 
+            // execute the userReader method from dbclass to load the usernames 
             using (SqlDataReader reader = DBClass.UserReader())
             {
                 while (reader.Read())
@@ -35,6 +36,7 @@ namespace lab484.Pages
 
         public IActionResult OnPost()
         {
+            // sends the userID to the ViewMessages page in order to see the sent/received  messages 
             int userID = Convert.ToInt32(SelectedUsername);
             return RedirectToPage("ViewMessages", new { userID });
         }

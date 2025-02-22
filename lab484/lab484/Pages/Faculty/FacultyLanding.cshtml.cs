@@ -6,10 +6,14 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
 
+
+
+// where all users land when logging in as faculty
 namespace lab484.Pages.Faculty
 {
     public class FacultyLandingModel : PageModel
     {
+        // initialize lists and variables to be used 
         public required List<GrantSimple> grantList { get; set; } = new List<GrantSimple>();
 
         [BindProperty(SupportsGet = true)]
@@ -19,6 +23,7 @@ namespace lab484.Pages.Faculty
 
         public void OnGet()
         {
+            // reads the db for grants 
             SqlDataReader grantReader = DBClass.GrantReader();
             while (grantReader.Read())
             {
@@ -41,6 +46,7 @@ namespace lab484.Pages.Faculty
             DBClass.DBConnection.Close();
 
             // links up to AI usage on the view, this switch statement allows the program to sort the grants by the selected sort order
+            // allows for the columns to be sorted 
             switch (SortOrder)
             {
                 case "amount_asc":
@@ -66,8 +72,10 @@ namespace lab484.Pages.Faculty
             CurrentSortOrder = SortOrder;
         }
 
+
         public IActionResult OnPost()
         {
+            // redirects to the detailed view page with the specific grant using asp-route
             return RedirectToPage("DetailedView");
         }
     }

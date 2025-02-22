@@ -11,6 +11,7 @@ namespace lab484.Pages.Faculty
         [BindProperty]
         public GrantSimple GrantToUpdate { get; set; }
 
+        // takes the grantID as an argument to load the info from the DB to let the user edit it 
         public void OnGet(int grantID)
         {
             // Fetch grant details using the grantID and populate GrantToUpdate
@@ -40,6 +41,7 @@ namespace lab484.Pages.Faculty
             DBClass.DBConnection.Close();
         }
 
+        // when user presses save OnPost is executed 
         public IActionResult OnPost()
         {
             if (ModelState.IsValid)
@@ -52,6 +54,7 @@ namespace lab484.Pages.Faculty
             return Page();
         }
 
+        // clears all of the info in the form except the grantID
         public IActionResult OnPostClear()
         {
             ModelState.Clear();

@@ -14,6 +14,7 @@ namespace lab484.Pages.Admin
             SqlDataReader projectReader = DBClass.ProjectReader();
             while (projectReader.Read())
             {
+                // populate the projectList 
                 projectList.Add(new ProjectSimple
                 {
                     ProjectID = Int32.Parse(projectReader["ProjectID"].ToString()),
@@ -21,6 +22,7 @@ namespace lab484.Pages.Admin
                     DueDate = DateTime.Parse(projectReader["DueDate"].ToString()),
                     Amount = 0f
                 });
+                // if the amount isnt a value, try converting it to a string then parsing a float from it 
                 if (projectReader["Amount"] != DBNull.Value)
                 {
                     if (projectReader["Amount"].ToString() != "")
@@ -44,5 +46,3 @@ namespace lab484.Pages.Admin
         }
     }
 }
-
-//test commit

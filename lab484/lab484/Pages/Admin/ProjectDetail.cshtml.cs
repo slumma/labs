@@ -18,6 +18,7 @@ namespace lab484.Pages.Admin
         {
             project = new ProjectSimple();
 
+            // populates the project object with details 
             SqlDataReader singleProjectReader = DBClass.singleProjectReader(projectID);
             while (singleProjectReader.Read())
             {
@@ -27,6 +28,7 @@ namespace lab484.Pages.Admin
             }
             DBClass.DBConnection.Close();
 
+            // populates the staff list 
             SqlDataReader projectStaffReader = DBClass.projectStaffReader(projectID);
             while (projectStaffReader.Read())
             {
@@ -40,6 +42,7 @@ namespace lab484.Pages.Admin
             }
             DBClass.DBConnection.Close();
 
+            // populates the task list
             SqlDataReader taskStaffReader = DBClass.taskStaffReader(projectID);
             while (taskStaffReader.Read())
             {
@@ -75,9 +78,3 @@ namespace lab484.Pages.Admin
         }
     }
 }
-/*
-        public int TaskStaffID { get; set; }
-        public int TaskID { get; set; }
-        public int AssigneeID { get; set; }
-        public int AssignerID { get; set; }
-        public DateTime DueDate { get; set; }*/

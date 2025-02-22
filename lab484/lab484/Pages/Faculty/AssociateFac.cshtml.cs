@@ -55,6 +55,7 @@ namespace lab484.Pages.Faculty
             }
             DBClass.DBConnection.Close();
 
+            // as long as there are faculty in the db for the method to read from the user will be added to the userList 
             using (SqlDataReader facReader = DBClass.facReader())
             {
                 while (facReader.Read())
@@ -86,6 +87,7 @@ namespace lab484.Pages.Faculty
             }
 
 
+            // reloads the page 
             return RedirectToPage(new
             {
                 ProjectID = this.ProjectID,

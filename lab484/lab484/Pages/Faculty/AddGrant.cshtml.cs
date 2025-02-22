@@ -15,16 +15,18 @@ namespace lab484.Pages.Faculty
 
         public void OnGet()
         {
+            // made a method at the bottom of the file so i dont have to copy and paste it a bunch of times 
             SupplierList = LoadSuppliers();
         }
 
+        // executes when AddGrant is added, iinserts it into the db
         public IActionResult OnPostAddGrant()
         {
             SupplierList = LoadSuppliers();
 
+            // if everything is valid in the form, add to db with the supplierID selected 
             if (ModelState.IsValid)
             {
-
                 // used AI for help with this, it associates the SupplierName in the list with the SupplierID
                 GrantSupplier selectedSupplier = SupplierList.FirstOrDefault(s => s.SupplierName == newGrant.Supplier);
                 int supplierID = selectedSupplier.SupplierID;
@@ -32,15 +34,11 @@ namespace lab484.Pages.Faculty
                 DBClass.InsertGrant(newGrant, supplierID);
                 return RedirectToPage("FacultyLanding");
             }
-            else
-            {
-                ModelState.AddModelError("", "Invalid Supplier Selected");
-                Trace.WriteLine("Invalid Supplier Selected");
-            }
 
             return Page();
         }
 
+        // clears everything from form 
         public IActionResult OnPostClear()
         {
             ModelState.Clear();
@@ -57,12 +55,15 @@ namespace lab484.Pages.Faculty
                 AwardDate = DateTime.Now
             };
 
+            // if i wasnt reloading the supplier list it would throw an error, this was an easy fix 
             OnGet(); // just to reload the supplier list
 
             // Return the page with the cleared model
             return Page();
         }
 
+
+        // populate button 
         public IActionResult OnPostPopulate()
         {
             ModelState.Clear();
@@ -87,6 +88,7 @@ namespace lab484.Pages.Faculty
 
 
         // make a method so i dont have to copy and paste it each time 
+        // loads all of the suppliers in the db into the supplierlist so it can be shown in the dropdown menu 
         private List<GrantSupplier> LoadSuppliers()
         {
             var suppliers = new List<GrantSupplier>();

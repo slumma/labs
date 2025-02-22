@@ -12,6 +12,7 @@ namespace lab484.Pages.Admin
         public required List<BusinessPartner> bpList { get; set; } = new List<BusinessPartner>();
         public void OnGet()
         {
+            // populate BusinessPartners to be shown in view 
             SqlDataReader bpReader = DBClass.BPReader();
             while (bpReader.Read())
             {

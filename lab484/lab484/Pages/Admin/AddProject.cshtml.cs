@@ -15,6 +15,7 @@ namespace lab484.Pages.Admin
         public List<User> facultyList { get; set; } = new List<User>();
         [BindProperty] public List<int> assignedFacultyList { get; set; } = new List<int>();
 
+        // creates new project object and adds faculty to list
         public void OnGet()
         {
             newProject = new ProjectSimple()
@@ -22,8 +23,11 @@ namespace lab484.Pages.Admin
                 ProjectName = null,
                 DueDate = DateTime.Now
             };
+            // resets the facList
             facultyList.Clear();
+
             SqlDataReader facultyReader = DBClass.facReader();
+
             while (facultyReader.Read())
             {
                 facultyList.Add(new User
@@ -40,16 +44,17 @@ namespace lab484.Pages.Admin
         {
             
         }
-
+         
+        // add project button 
         public IActionResult OnPostAddProject()
         {
+            // adds the project if it has employees selected to work on it 
             if (assignedFacultyList != null && assignedFacultyList.Any())
             {
                 DBClass.AddProject(newProject, assignedFacultyList);
             }
             else
             {
-                ModelState.AddModelError("", "Please select at least one faculty member.");
                 facultyList.Clear();
                 SqlDataReader facultyReader = DBClass.facReader();
                 while (facultyReader.Read())
@@ -68,6 +73,7 @@ namespace lab484.Pages.Admin
             return RedirectToPage("AdminLanding");
         }
 
+        // populates the fields 
         public IActionResult OnPostPopulate()
         {
             ModelState.Clear();
@@ -76,8 +82,6 @@ namespace lab484.Pages.Admin
                 ProjectName = "Machine Project",
                 DueDate = DateTime.Now,
             };
-
-            Trace.WriteLine("Populated");
 
             //repopulate facultyList
             SqlDataReader facultyReader = DBClass.facReader();

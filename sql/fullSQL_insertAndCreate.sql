@@ -1,3 +1,138 @@
+CREATE TABLE users(
+    UserID int Identity(1,1) PRIMARY KEY,
+    Username nvarchar(200),
+    Password nvarchar(200),
+    FirstName nvarchar(200),
+    LastName nvarchar(200),
+    Email nvarchar(200),
+    Phone nvarchar(200),
+    HomeAddress nvarchar(200));
+
+CREATE TABLE grantSupplier(
+    SupplierID int Identity(1,1) PRIMARY KEY,
+    SupplierName nvarchar(200),
+    OrgType nvarchar(200),
+	SupplierStatus nvarchar(200), --temporary
+    BusinessAddress nvarchar(200));
+
+CREATE TABLE project(
+    ProjectID int Identity(1,1) PRIMARY KEY,
+    ProjectName nvarchar(200), 
+    DueDate datetime);
+
+CREATE TABLE BPrep (
+    UserID INT PRIMARY KEY,
+    CommunicationStatus nvarchar(200),
+    SupplierID int,
+    FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID),
+    FOREIGN KEY (UserID) REFERENCES users(UserID));
+
+CREATE TABLE employee (
+    UserID INT PRIMARY KEY,
+    AdminStatus bit default 0,
+    FOREIGN KEY (UserID) REFERENCES users(UserID));
+
+CREATE TABLE faculty (
+    UserID INT PRIMARY KEY,
+    FOREIGN KEY (UserID) REFERENCES users(UserID));
+
+CREATE TABLE nonfaculty (
+    UserID INT PRIMARY KEY,
+    FOREIGN KEY (UserID) REFERENCES users(UserID));
+
+CREATE TABLE projectStaff(
+    ProjectStaffID int Identity(1,1) PRIMARY KEY, 
+    ProjectID int, 
+    UserID int, 
+    Leader bit,
+    Active bit,
+    FOREIGN KEY (ProjectID) REFERENCES project(ProjectID),
+    FOREIGN KEY (UserID) REFERENCES faculty(UserID));
+
+CREATE TABLE task(
+    TaskID int Identity(1,1) PRIMARY KEY,
+    ProjectID int, 
+    DueDate date,
+    Objective nvarchar(200),
+    FOREIGN KEY (ProjectID) REFERENCES project(ProjectID));
+
+CREATE TABLE TaskStaff(
+    TaskStaffID int Identity(1,1) PRIMARY KEY,
+    TaskID int, 
+    AssigneeID int,
+	AssignerID int,
+    DueDate date,
+    FOREIGN KEY (TaskID) REFERENCES task(TaskID),
+    FOREIGN KEY (AssigneeID) REFERENCES employee(UserID),
+	FOREIGN KEY (AssignerID) REFERENCES employee(UserID));
+
+CREATE TABLE meeting(
+    MeetingID int Identity(1,1) PRIMARY KEY,
+    ProjectID int, 
+    MeetingDate date,
+    Purpose nvarchar(200),
+    FOREIGN KEY (ProjectID) REFERENCES project(ProjectID));
+
+CREATE TABLE attendance(
+    AttendanceID int Identity(1,1) PRIMARY KEY,
+    MeetingID int,
+    UserID int,
+    FOREIGN KEY (MeetingID) REFERENCES meeting(MeetingID),
+    FOREIGN KEY (UserID) REFERENCES users(UserID));
+
+CREATE TABLE meetingMinutes(
+    MinutesID int Identity(1,1) PRIMARY KEY,
+    MeetingID int,
+    UserID int, 
+    MinutesDate date,
+    FOREIGN KEY (MeetingID) REFERENCES meeting(MeetingID),
+    FOREIGN KEY (UserID) REFERENCES employee(UserID));
+
+CREATE TABLE notes(
+    NotesID int Identity(1,1) PRIMARY KEY,
+    ProjectID int, 
+    Content text, 
+    noteDate datetime DEFAULT GETDATE(),
+    FOREIGN KEY (ProjectID) REFERENCES project(ProjectID));
+
+CREATE TABLE grants(
+    GrantID int Identity(1,1) PRIMARY KEY,
+    SupplierID int, 
+    ProjectID int,
+    StatusName nvarchar(200),
+    Category nvarchar(200),
+    SubmissionDate date, 
+    descriptions text,
+    AwardDate date,
+    Amount float,
+	GrantStatus nvarchar(200), --temporary
+    FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID),
+    FOREIGN KEY (ProjectID) REFERENCES project(ProjectID));
+
+CREATE TABLE grantStatus(
+    StatusID int Identity(1,1) PRIMARY KEY,
+    GrantID int,
+    StatusName nvarchar(200),
+    ChangeDate datetime DEFAULT GETDATE(),
+    FOREIGN KEY (GrantID) REFERENCES grants(GrantID));
+
+CREATE TABLE supplierStatus(
+    StatusID int Identity(1,1) PRIMARY KEY,
+    SupplierID int, 
+    StatusName nvarchar(200),
+    ChangeDate datetime DEFAULT GETDATE(),
+    FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID));
+
+CREATE TABLE userMessage(
+    MessageID int Identity(1,1) PRIMARY KEY,
+    SenderID int,
+    RecipientID int,
+    SubjectTitle text,
+    Contents text,
+    SentTime datetime DEFAULT GETDATE(),
+    FOREIGN KEY (SenderID) REFERENCES users(UserID));
+
+
 INSERT INTO users (Username, Password, FirstName, LastName, Email, Phone, HomeAddress)
 VALUES
 ('samogden', 'password123', 'sam', 'ogden', 'sam@example.com', '555-1234', '123 Elm St'),
@@ -189,23 +324,23 @@ VALUES
 
 
 
-INSERT INTO grants (SupplierID, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount, GrantStatus)
+INSERT INTO grants (SupplierID, ProjectID, Category, SubmissionDate, descriptions, AwardDate, Amount, StatusName)
 VALUES
-(1, 1, 'Submitted', 'Federal', '2025-01-01', 'Grant for tech development', '2025-05-01', 100000, 'Active'),
-(2, 2, 'Under Review', 'State', '2025-03-01', 'Grant for educational programs', '2025-07-01', 50000, 'Pending'),
-(3, 3, 'Awarded', 'Business', '2025-06-01', 'Grant for health initiatives', '2025-11-01', 200000, 'Inactive'),
-(4, 1, 'Submitted', 'University', '2025-02-01', 'Grant for research', '2025-06-01', 150000, 'Active'),
-(5, 2, 'Under Review', 'Federal', '2025-04-01', 'Grant for tech infrastructure', '2025-08-01', 80000, 'Pending'),
-(6, 3, 'Awarded', 'State', '2025-05-01', 'Grant for educational tools', '2025-09-01', 120000, 'Inactive'),
-(7, 1, 'Submitted', 'Business', '2025-01-15', 'Grant for business development', '2025-06-15', 95000, 'Active'),
-(8, 2, 'Under Review', 'University', '2025-03-15', 'Grant for academic research', '2025-07-15', 50000, 'Pending'),
-(9, 3, 'Awarded', 'Federal', '2025-06-15', 'Grant for health research', '2025-11-15', 220000, 'Inactive'),
-(10, 1, 'Submitted', 'State', '2025-02-15', 'Grant for public health', '2025-06-15', 130000, 'Active'),
-(4, 2, 'Under Review', 'Business', '2025-04-15', 'Grant for business innovation', '2025-08-15', 85000, 'Pending'),
-(9, 3, 'Awarded', 'University', '2025-05-15', 'Grant for educational research', '2025-09-15', 140000, 'Inactive'),
-(3, 1, 'Submitted', 'Federal', '2025-01-20', 'Grant for tech advancement', '2025-06-20', 105000, 'Active'),
-(5, 2, 'Under Review', 'State', '2025-03-20', 'Grant for state projects', '2025-07-20', 75000, 'Pending'),
-(1, 3, 'Awarded', 'Business', '2025-06-20', 'Grant for business ventures', '2025-11-20', 195000, 'Inactive');
+(1, 1,  'Federal', '2025-01-01', 'Grant for tech development', '2025-05-01', 100000, 'Active'),
+(2, 2,  'State', '2025-03-01', 'Grant for educational programs', '2025-07-01', 50000, 'Pending'),
+(3, 3, 'Business', '2025-06-01', 'Grant for health initiatives', '2025-11-01', 200000, 'Inactive'),
+(4, 1,  'University', '2025-02-01', 'Grant for research', '2025-06-01', 150000, 'Active'),
+(5, 2, 'Federal', '2025-04-01', 'Grant for tech infrastructure', '2025-08-01', 80000, 'Pending'),
+(6, 3, 'State', '2025-05-01', 'Grant for educational tools', '2025-09-01', 120000, 'Inactive'),
+(7, 1, 'Business', '2025-01-15', 'Grant for business development', '2025-06-15', 95000, 'Active'),
+(8, 2,  'University', '2025-03-15', 'Grant for academic research', '2025-07-15', 50000, 'Pending'),
+(9, 3, 'Federal', '2025-06-15', 'Grant for health research', '2025-11-15', 220000, 'Inactive'),
+(10, 1,  'State', '2025-02-15', 'Grant for public health', '2025-06-15', 130000, 'Active'),
+(4, 2, 'Business', '2025-04-15', 'Grant for business innovation', '2025-08-15', 85000, 'Pending'),
+(9, 3,  'University', '2025-05-15', 'Grant for educational research', '2025-09-15', 140000, 'Inactive'),
+(3, 1,  'Federal', '2025-01-20', 'Grant for tech advancement', '2025-06-20', 105000, 'Active'),
+(5, 2,  'State', '2025-03-20', 'Grant for state projects', '2025-07-20', 75000, 'Pending'),
+(1, 3, 'Business', '2025-06-20', 'Grant for business ventures', '2025-11-20', 195000, 'Inactive');
 
 
 

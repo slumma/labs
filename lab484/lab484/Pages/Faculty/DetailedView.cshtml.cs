@@ -7,9 +7,12 @@ namespace lab484.Pages.Faculty
 {
     public class DetailedViewModel : PageModel
     {
+        // empty grant object to populate it
         public GrantSimple grant { get; set; }
         public void OnGet(int grantID)
         {
+
+            // fills the grant object with the info in the db so the user can see and edit it 
             grant = new GrantSimple(); // Initialize the grant object
             SqlDataReader grantReader = DBClass.SingleGrantReader(grantID);
 
