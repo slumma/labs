@@ -10,15 +10,16 @@
 <h2>@Model.project.ProjectName</h2>
 <br />
 
-<!-- Project Staff Section -->
-<div class="container mt-4 p-4 border rounded shadow">
+<!-- Used AI for some formatting-->
+<div class="container mt-4 p-4 border rounded bg-light">
 	<h3>Project Staff</h3>
-	<table class="table table-bordered table-responsive table-hover">
+	<table class="table table-bordered table-responsive table-hover bg-white">
 		<thead>
 			<tr>
 				<th>Name</th>
 				<th>Email</th>
 				<th>Phone</th>
+				<th>Drop from Project</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,6 +29,9 @@
 					<td>@projectStaff.FirstName @projectStaff.LastName</td>
 					<td>@projectStaff.Email</td>
 					<td>@projectStaff.Phone</td>
+					<td>
+						<a class="btn btn-outline-primary">Remove from Project</a>
+					</td>
 				</tr>
 			}
 		</tbody>
@@ -39,10 +43,10 @@
 
 <br />
 
-<!-- Tasks Section -->
-<div class="container mt-4 p-4 border rounded shadow">
+<!-- Used AI for some formatting-->
+<div class="container mt-4 p-4 border rounded bg-light">
 	<h3>Tasks</h3>
-	<table class="table table-bordered table-responsive table-hover">
+	<table class="table table-bordered table-responsive table-hover bg-white">
 		<thead>
 			<tr>
 				<th>Objective</th>
@@ -56,7 +60,7 @@
 			{
 				<tr>
 					<td>@task.Objective</td>
-					<td>@task.DueDate.ToString("MM/dd/yyyy")</td> <!-- Formats as date, no time -->
+					<td>@task.DueDate.ToString("MM/dd/yyyy")</td>
 					<td>
 						<select class="form-select">
 							<option value="x" selected disabled>View Staff</option>
@@ -80,7 +84,8 @@
 
 <br />
 
-<!-- Return Button -->
 <div class="container text-center mt-4">
 	<a class="btn btn-outline-primary" asp-page="AdminLanding">Return to Projects</a>
 </div>
+<br />
+<br />

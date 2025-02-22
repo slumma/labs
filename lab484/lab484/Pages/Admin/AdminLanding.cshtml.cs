@@ -18,9 +18,25 @@ namespace lab484.Pages.Admin
                 {
                     ProjectID = Int32.Parse(projectReader["ProjectID"].ToString()),
                     ProjectName = projectReader["ProjectName"].ToString(),
-                    Amount = float.Parse(projectReader["Amount"].ToString()),  
-                    DueDate = DateTime.Parse(projectReader["DueDate"].ToString())
+                    DueDate = DateTime.Parse(projectReader["DueDate"].ToString()),
+                    Amount = 0f
                 });
+                if (projectReader["Amount"] != DBNull.Value)
+                {
+                    if (projectReader["Amount"].ToString() != "")
+                    {
+                        projectList.Last().Amount = float.Parse(projectReader["Amount"].ToString());
+                    }
+                    else
+                    {
+                        projectList.Last().Amount = 0f;
+                    }
+                }
+                else
+                {
+                    projectList.Last().Amount = 0f;
+                }
+                
             }
 
             // Close your connection in DBClass

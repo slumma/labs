@@ -204,6 +204,7 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+
         public static SqlDataReader singleProjectReader(int ProjectID)
         {
             SqlCommand cmdProjectRead = new SqlCommand();
@@ -223,7 +224,7 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdProjectRead = new SqlCommand();
             cmdProjectRead.Connection = DBConnection;
             cmdProjectRead.Connection.ConnectionString = DBConnString;
-            cmdProjectRead.CommandText = "SELECT project.ProjectID, project.ProjectName, project.DueDate, sum(grants.amount) AS Amount\r\nfrom project\r\nJOIN grants on project.ProjectID = grants.ProjectID\r\ngroup by project.ProjectID, project.ProjectName, project.duedate;";
+            cmdProjectRead.CommandText = "SELECT project.ProjectID, project.ProjectName, project.DueDate, sum(grants.amount) AS Amount\r\nfrom project\r\nLEFT JOIN grants on project.ProjectID = grants.ProjectID\r\ngroup by project.ProjectID, project.ProjectName, project.duedate;";
             cmdProjectRead.Connection.Open();
             SqlDataReader tempReader = cmdProjectRead.ExecuteReader();
             return tempReader;
@@ -264,6 +265,38 @@ namespace InventoryManagement.Pages.DB
             cmdProductRead.Connection.Open();
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
+        }
+
+        public static void AddProject(ProjectSimple project, List<int> assignedFacultyList)
+        {
+            string insertProjectQuery = "INSERT INTO dbo.project (ProjectName, DueDate) VALUES (@ProjectName, @DueDate); SELECT SCOPE_IDENTITY();";
+            string insertProjectStaffQuery = "INSERT INTO dbo.projectStaff (ProjectID, UserID, Leader, Active) VALUES (@ProjectID, @UserID, @Leader, @Active)";
+
+            using (SqlConnection connection = new SqlConnection(DBClass.DBConnString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmdProjectInsert = new SqlCommand(insertProjectQuery, connection))
+                {
+                    cmdProjectInsert.Parameters.AddWithValue("@ProjectName", project.ProjectName);
+                    cmdProjectInsert.Parameters.AddWithValue("@DueDate", project.DueDate);
+
+                    project.ProjectID = Convert.ToInt32(cmdProjectInsert.ExecuteScalar()); 
+                }
+
+                foreach (var userID in assignedFacultyList)
+                {
+                    using (SqlCommand cmdProjectStaffInsert = new SqlCommand(insertProjectStaffQuery, connection))
+                    {
+                        cmdProjectStaffInsert.Parameters.AddWithValue("@ProjectID", project.ProjectID); 
+                        cmdProjectStaffInsert.Parameters.AddWithValue("@UserID", userID);
+                        cmdProjectStaffInsert.Parameters.AddWithValue("@Leader", 0);
+                        cmdProjectStaffInsert.Parameters.AddWithValue("@Active", 1);
+
+                        cmdProjectStaffInsert.ExecuteNonQuery();
+                    }
+                }
+            }
         }
         public static void UpdateGrant(GrantSimple grant)
         {
@@ -345,24 +378,6 @@ namespace InventoryManagement.Pages.DB
             SqlDataReader tempReader = cmdMessageReader.ExecuteReader();
             return tempReader;
         }
-
-
-        // insert user into ProjectStaff 
-            /*public static void InsertProjectStaff(int UserID, int projectID)
-            {
-                String sqlQuery = "INSERT INTO projectStaff (UserID, ProjectID, Leader, Active) VALUES(@UserID, @ProjectID, 0, 1);";
-
-                SqlConnection connection = new SqlConnection(DBConnString);
-                SqlCommand cmdInsertProduct = new SqlCommand(sqlQuery, connection);
-
-                // Add parameters to the command
-                cmdInsertProduct.Parameters.AddWithValue("@UserID", UserID);
-                cmdInsertProduct.Parameters.AddWithValue("@ProjectID", projectID);
-
-                connection.Open();
-                cmdInsertProduct.ExecuteNonQuery();
-                connection.Close();
-            }*/
 
         public static void InsertProjectStaff(User u, int projectID)
         {
