@@ -6,7 +6,12 @@ CREATE TABLE users(
     LastName nvarchar(200),
     Email nvarchar(200),
     Phone nvarchar(200),
-    HomeAddress nvarchar(200));
+    HomeAddress nvarchar(200),
+	AdminStatus bit default 0,
+	EmployeeStatus bit default 0,
+	BPRepStatus bit default 0,
+	FacultyStatus bit default 0,
+	NonFacultyStatus bit default 0);
 
 CREATE TABLE grantSupplier(
     SupplierID int Identity(1,1) PRIMARY KEY,
@@ -19,26 +24,6 @@ CREATE TABLE project(
     ProjectID int Identity(1,1) PRIMARY KEY,
     ProjectName nvarchar(200), 
     DueDate datetime);
-
-CREATE TABLE BPrep (
-    UserID INT PRIMARY KEY,
-    CommunicationStatus nvarchar(200),
-    SupplierID int,
-    FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID),
-    FOREIGN KEY (UserID) REFERENCES users(UserID));
-
-CREATE TABLE employee (
-    UserID INT PRIMARY KEY,
-    AdminStatus bit default 0,
-    FOREIGN KEY (UserID) REFERENCES users(UserID));
-
-CREATE TABLE faculty (
-    UserID INT PRIMARY KEY,
-    FOREIGN KEY (UserID) REFERENCES users(UserID));
-
-CREATE TABLE nonfaculty (
-    UserID INT PRIMARY KEY,
-    FOREIGN KEY (UserID) REFERENCES users(UserID));
 
 CREATE TABLE projectStaff(
     ProjectStaffID int Identity(1,1) PRIMARY KEY, 
@@ -109,7 +94,7 @@ CREATE TABLE grants(
     FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID),
     FOREIGN KEY (ProjectID) REFERENCES project(ProjectID));
 
-CREATE TABLE grantStatus(
+/* CREATE TABLE grantStatus(
     StatusID int Identity(1,1) PRIMARY KEY,
     GrantID int,
     StatusName nvarchar(200),
@@ -121,7 +106,7 @@ CREATE TABLE supplierStatus(
     SupplierID int, 
     StatusName nvarchar(200),
     ChangeDate datetime DEFAULT GETDATE(),
-    FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID));
+    FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID)); */
 
 CREATE TABLE userMessage(
     MessageID int Identity(1,1) PRIMARY KEY,
