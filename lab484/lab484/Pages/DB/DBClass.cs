@@ -538,6 +538,22 @@ namespace InventoryManagement.Pages.DB
         }
 
 
+        public static int LoginQuery(string loginQuery)
+        {
+            // This method expects to receive an SQL SELECT
+            // query that uses the COUNT command.
+            SqlCommand cmdLogin = new SqlCommand();
+            cmdLogin.Connection = DBConnection;
+            cmdLogin.Connection.ConnectionString = DBConnString;
+            cmdLogin.CommandText = loginQuery;
+            cmdLogin.Connection.Open();
+            // ExecuteScalar() returns back data type Object
+            // Use a typecast to convert this to an int.
+            // Method returns first column of first row.
+            int rowCount = (int)cmdLogin.ExecuteScalar();
+            return rowCount;
+        }
+
 
 
 

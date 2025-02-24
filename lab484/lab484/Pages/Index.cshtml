@@ -1,32 +1,46 @@
 ﻿@page
-@model IndexModel
+@model lab484.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home Page";
 }
 
-<!-- Nick Clement and Sam Ogden -->
-
 <h2 class="text-center">Grant Management System</h2>
-<p class="text-center">created by: Nick Clement and Sam Ogden</p>
+<p class="text-center">Created by: Nick Clement and Sam Ogden</p>
 <br />
-<form>
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingUsername" placeholder="Username" />
-        <label for="floatingUsername">Username</label>
-    </div>
-    <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
-        <label for="floatingPassword">Password</label>
-    </div>
 
-    <a class="btn btn-link" asp-page="addUser">Add New User</a>
+@{
+    if (ViewData["LoginMessage"] != null)
+    {
+        <p class="text-danger">@ViewData["LoginMessage"]</p>
+    }
+}
 
-    <div class="text-center">
-       
-        <button type="submit" class="btn btn-primary" asp-page="/faculty/facultyLanding">FacultyLogin</button>
-        <br />
-        <br />
-        <button type="submit" class="btn btn-primary" asp-page="/admin/adminLanding">AdminLogin</button>
-    </div>
+@{
+    if (HttpContext.Session.GetString("username") != null)
+    {
+        <p>@HttpContext.Session.GetString("username") logged in</p>
 
-</form>
+        <form asp-page="Index" asp-page-handler="LogoutHandler">
+            <input type="submit" class="btn btn-danger" value="Logout">
+        </form>
+    }
+    else
+    {
+        <form method="post" asp-page="Index">
+            <div class="form-floating mb-3">
+                <input asp-for="Username" class="form-control" id="floatingUsername" placeholder="Username" />
+                <label for="floatingUsername">Username</label>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Password" class="form-control" id="floatingPassword" type="password" placeholder="Password" />
+                <label for="floatingPassword">Password</label>
+            </div>
+
+            <a class="btn btn-link" asp-page="addUser">Add New User</a>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    }
+}
