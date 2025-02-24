@@ -20,3 +20,30 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+.btn {
+    border-radius: 20px; /* Rounded buttons */
+    padding: 10px 20px; /* More padding for buttons */
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #258cfb;
+    border-color: #258cfb;
+}
+.btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.btn-danger:hover {
+        background-color: #c0392b;
+        border-color: #c0392b;
+}
+
