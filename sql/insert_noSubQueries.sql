@@ -1,18 +1,16 @@
-INSERT INTO users (Username, Password, FirstName, LastName, Email, Phone, HomeAddress)
+INSERT INTO users (Username, Password, FirstName, LastName, Email, Phone, HomeAddress, AdminStatus, EmployeeStatus, FacultyStatus, NonFacultyStatus)
 VALUES
-('samogden', 'password123', 'sam', 'ogden', 'sam@example.com', '555-1234', '123 Elm St'),
-('nickclement', 'password456', 'nick', 'clement', 'nickclement@example.com', '555-5678', '456 Oak St'),
-('nadeemhudson', 'password789', 'nadeem', 'hudson', 'nadeemhudson@example.com', '555-9876', '789 Pine St'),
-('joshwhite', 'password234', 'josh', 'White', 'joshwhite@example.com', '555-2234', '321 Birch St'),
-('sharons', 'password567', 'sharon', 'sanchez', 'shrnsnchz@example.com', '555-6789', '654 Cedar St'),
-('theGoat', 'password890', 'the', 'goat', 'thegoat17@example.com', '555-7890', '987 Spruce St'),
-('haileyWelch', 'password101', 'hailey', 'welch', 'haileyWelch238@example.com', '555-1010', '109 Maple St'),
-('hawkTuah', 'password112', 'hawk', 'tuah', 'hawktuah838@example.com', '555-1212', '210 Oak St'),
-('yourBoy', 'password213', 'your', 'boy', 'yourboy87392@example.com', '555-1414', '312 Pine St'),
-('BabikDmx', 'password314', 'dmytro', 'babik', 'dmytrobabik43@example.com', '555-1515', '413 Elm St'),
-('samO', 'password314', 'sam', 'o', 'samoGden@example.com', '555-1515', '413 Elm St');
-
-
+('samogden', 'password123', 'sam', 'ogden', 'sam@example.com', '555-1234', '123 Elm St', 1, 1, 1, 1),
+('nickclement', 'password456', 'nick', 'clement', 'nickclement@example.com', '555-5678', '456 Oak St', 1, 1, 1, 1),
+('nadeemhudson', 'password789', 'nadeem', 'hudson', 'nadeemhudson@example.com', '555-9876', '789 Pine St', 1, 1, 1, 1),
+('joshwhite', 'password234', 'josh', 'White', 'joshwhite@example.com', '555-2234', '321 Birch St', 1, 1, 1, 1),
+('sharons', 'password567', 'sharon', 'sanchez', 'shrnsnchz@example.com', '555-6789', '654 Cedar St', 1, 1, 1, 1),
+('theGoat', 'password890', 'the', 'goat', 'thegoat17@example.com', '555-7890', '987 Spruce St', 1, 1, 1, 1),
+('haileyWelch', 'password101', 'hailey', 'welch', 'haileyWelch238@example.com', '555-1010', '109 Maple St', 1, 1, 1, 1),
+('hawkTuah', 'password112', 'hawk', 'tuah', 'hawktuah838@example.com', '555-1212', '210 Oak St', 1, 1, 1, 1),
+('yourBoy', 'password213', 'your', 'boy', 'yourboy87392@example.com', '555-1414', '312 Pine St', 1, 1, 1, 1),
+('BabikDmx', 'password314', 'dmytro', 'babik', 'dmytrobabik43@example.com', '555-1515', '413 Elm St', 1, 1, 1, 1),
+('samO', 'password314', 'sam', 'o', 'samoGden@example.com', '555-1515', '413 Elm St', 1, 1, 1, 1);
 
 INSERT INTO grantSupplier (SupplierName, OrgType, SupplierStatus, BusinessAddress)
 VALUES
@@ -56,39 +54,6 @@ VALUES
 (8, 'Inactive', 8),
 (9, 'Pending', 9),
 (10, 'Active', 10);
-
-
-INSERT INTO employee (UserID, AdminStatus)
-VALUES
-(1, 1),
-(2, 0),
-(3, 0),
-(4, 0),
-(5, 0),
-(6, 0),
-(7, 0),
-(8, 0),
-(9, 0),
-(10, 0);
-
-
-INSERT INTO faculty (UserID)
-VALUES
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9),
-(10);
-
-
-INSERT INTO nonfaculty (UserID)
-VALUES
-(11);
 
 INSERT INTO projectStaff (ProjectID, UserID, Leader, Active)
 VALUES
@@ -209,7 +174,7 @@ VALUES
 
 
 
-INSERT INTO grantStatus (GrantID, StatusName, ChangeDate)
+/*INSERT INTO grantStatus (GrantID, StatusName, ChangeDate)
 VALUES
 (1, 'Approved', '2025-02-01'),
 (2, 'Pending', '2025-04-01'),
@@ -235,7 +200,7 @@ VALUES
 (7, 'Active', '2025-01-15'),
 (8, 'Inactive', '2025-03-15'),
 (9, 'Pending', '2025-06-15'),
-(10, 'Active', '2025-02-15');
+(10, 'Active', '2025-02-15');*/
 
 
 

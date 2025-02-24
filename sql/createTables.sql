@@ -9,7 +9,6 @@ CREATE TABLE users(
     HomeAddress nvarchar(200),
 	AdminStatus bit default 0,
 	EmployeeStatus bit default 0,
-	BPRepStatus bit default 0,
 	FacultyStatus bit default 0,
 	NonFacultyStatus bit default 0);
 
@@ -19,6 +18,13 @@ CREATE TABLE grantSupplier(
     OrgType nvarchar(200),
 	SupplierStatus nvarchar(200), --temporary
     BusinessAddress nvarchar(200));
+
+CREATE TABLE BPrep (
+    UserID INT PRIMARY KEY,
+    CommunicationStatus nvarchar(200),
+    SupplierID int,
+    FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID),
+    FOREIGN KEY (UserID) REFERENCES users(UserID));
 
 CREATE TABLE project(
     ProjectID int Identity(1,1) PRIMARY KEY,
@@ -32,7 +38,7 @@ CREATE TABLE projectStaff(
     Leader bit,
     Active bit,
     FOREIGN KEY (ProjectID) REFERENCES project(ProjectID),
-    FOREIGN KEY (UserID) REFERENCES faculty(UserID));
+    FOREIGN KEY (UserID) REFERENCES users(UserID));
 
 CREATE TABLE task(
     TaskID int Identity(1,1) PRIMARY KEY,
@@ -48,8 +54,8 @@ CREATE TABLE TaskStaff(
 	AssignerID int,
     DueDate date,
     FOREIGN KEY (TaskID) REFERENCES task(TaskID),
-    FOREIGN KEY (AssigneeID) REFERENCES employee(UserID),
-	FOREIGN KEY (AssignerID) REFERENCES employee(UserID));
+    FOREIGN KEY (AssigneeID) REFERENCES users(UserID),
+	FOREIGN KEY (AssignerID) REFERENCES users(UserID));
 
 CREATE TABLE meeting(
     MeetingID int Identity(1,1) PRIMARY KEY,
@@ -71,7 +77,7 @@ CREATE TABLE meetingMinutes(
     UserID int, 
     MinutesDate date,
     FOREIGN KEY (MeetingID) REFERENCES meeting(MeetingID),
-    FOREIGN KEY (UserID) REFERENCES employee(UserID));
+    FOREIGN KEY (UserID) REFERENCES users(UserID));
 
 CREATE TABLE notes(
     NotesID int Identity(1,1) PRIMARY KEY,
