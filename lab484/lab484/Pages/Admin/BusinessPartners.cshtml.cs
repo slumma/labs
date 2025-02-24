@@ -10,8 +10,14 @@ namespace lab484.Pages.Admin
     public class BusinessPartnersModel : PageModel
     {
         public required List<BusinessPartner> bpList { get; set; } = new List<BusinessPartner>();
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+
             // populate BusinessPartners to be shown in view 
             SqlDataReader bpReader = DBClass.BPReader();
             while (bpReader.Read())
@@ -32,6 +38,7 @@ namespace lab484.Pages.Admin
                 });
             }
             DBClass.DBConnection.Close();
+            return Page();
         }
     }
 }

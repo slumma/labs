@@ -16,8 +16,14 @@ namespace lab484.Pages.Admin
         [BindProperty] public List<int> assignedFacultyList { get; set; } = new List<int>();
 
         // creates new project object and adds faculty to list
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+
             newProject = new ProjectSimple()
             {
                 ProjectName = null,
@@ -38,6 +44,7 @@ namespace lab484.Pages.Admin
                 });
             }
             DBClass.DBConnection.Close();
+            return Page();
         }
 
         public void OnPost()

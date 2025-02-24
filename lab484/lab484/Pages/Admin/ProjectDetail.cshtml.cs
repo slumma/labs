@@ -14,8 +14,14 @@ namespace lab484.Pages.Admin
         public List<User> userTaskList { get; set; } = new List<User>();
         public List<TaskStaff> taskStaffList { get; set; } = new List<TaskStaff>();
         public List<Tasks> taskList { get; set; } = new List<Tasks>();
-        public void OnGet(int projectID)
+        public IActionResult OnGet(int projectID)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+
             project = new ProjectSimple();
 
             // populates the project object with details 
@@ -74,7 +80,7 @@ namespace lab484.Pages.Admin
             }
             DBClass.DBConnection.Close();
 
-            
+            return Page();
         }
     }
 }

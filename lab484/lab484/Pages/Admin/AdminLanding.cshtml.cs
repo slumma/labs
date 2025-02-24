@@ -9,8 +9,14 @@ namespace lab484.Pages.Admin
     public class AdminLandingModel : PageModel
     {
         public required List<ProjectSimple> projectList { get; set; } = new List<ProjectSimple>();
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+
             SqlDataReader projectReader = DBClass.ProjectReader();
             while (projectReader.Read())
             {
@@ -43,6 +49,7 @@ namespace lab484.Pages.Admin
 
             // Close your connection in DBClass
             DBClass.DBConnection.Close();
+            return Page();
         }
     }
 }

@@ -13,8 +13,14 @@ namespace lab484.Pages
         public required List<Message> sentList { get; set; } = new List<Message>();
         public required List<Message> receivedList { get; set; } = new List<Message>();
 
-        public void OnGet(int userID)
+        public IActionResult OnGet(int userID)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("Index"); // Redirect to login page
+            }
+
             this.userID = userID;
 
             // Retrieve sent messages
@@ -54,6 +60,7 @@ namespace lab484.Pages
 
             // Close your connection in DBClass
             DBClass.DBConnection.Close();
+            return Page();
         }
     }
 }

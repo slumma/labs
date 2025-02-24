@@ -14,8 +14,14 @@ namespace lab484.Pages
         public string SelectedUsername { get; set; }
         public List<SelectListItem> Usernames { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("Index"); // Redirect to login page
+            }
+
             Usernames = new List<SelectListItem>();
 
             // execute the userReader method from dbclass to load the usernames 
@@ -32,6 +38,8 @@ namespace lab484.Pages
                 reader.Close();
                 DBClass.DBConnection.Close();
             }
+
+            return Page();
         }
 
         public IActionResult OnPost()
