@@ -28,7 +28,7 @@
             foreach (var grant in Model.grantList)
             {
                 <tr>
-                    <td class="text-danger">@grant.GrantID</td>
+                    <td>@grant.GrantName</td>
                     <td>@string.Format("{0:C}", grant.Amount)</td> <!-- formats as dollar value -->
                     <td>@grant.Supplier</td>
                     <td>@grant.AwardDate.ToString("MM/dd/yyyy")</td> <!-- formats as date, no time -->

@@ -35,6 +35,7 @@ namespace lab484.Pages.Faculty
                 grantList.Add(new GrantSimple
                 {
                     GrantID = Convert.ToInt32(grantReader["GrantID"]),
+                    GrantName = grantReader["GrantName"].ToString(),
                     ProjectID = grantReader["ProjectID"] != DBNull.Value ? Convert.ToInt32(grantReader["ProjectID"]) : (int?)null, // Handle NULL ProjectID
                     Supplier = grantReader["Supplier"].ToString(),
                     Project = grantReader["Project"].ToString(), // Handle NULL Project

@@ -149,7 +149,8 @@ namespace InventoryManagement.Pages.DB
             cmdSingleGrantRead.Connection.ConnectionString = DBConnString;
 
             cmdSingleGrantRead.CommandText = @"SELECT 
-                                            g.GrantID, 
+                                            g.GrantID,
+                                            g.GrantName,
                                             p.ProjectID,
                                             s.SupplierName AS Supplier, 
                                             p.ProjectName AS Project, 
@@ -180,6 +181,7 @@ namespace InventoryManagement.Pages.DB
             cmdGrantReader.Connection.ConnectionString = DBConnString;
             cmdGrantReader.CommandText = @"SELECT 
                                             g.GrantID, 
+                                            g.GrantName,
                                             p.ProjectID,
                                             s.SupplierName AS Supplier, 
                                             p.ProjectName AS Project, 
