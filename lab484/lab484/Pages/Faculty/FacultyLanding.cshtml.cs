@@ -40,7 +40,7 @@ namespace lab484.Pages.Faculty
                     Project = grantReader["Project"].ToString(), // Handle NULL Project
                     Amount = Convert.ToSingle(grantReader["Amount"]),
                     Category = grantReader["Category"].ToString(),
-                    Status = grantReader["StatusName"].ToString(),
+                    Status = grantReader["GrantStatus"].ToString(),
                     Description = grantReader["descriptions"].ToString(),
                     SubmissionDate = Convert.ToDateTime(grantReader["SubmissionDate"]),
                     AwardDate = Convert.ToDateTime(grantReader["AwardDate"])

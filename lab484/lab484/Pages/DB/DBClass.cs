@@ -14,7 +14,7 @@ namespace InventoryManagement.Pages.DB
 
         // Connection String - How to find and connect to DB
         private static readonly String? DBConnString = 
-            "Server=Localhost;Database=Lab1;Trusted_Connection=True";
+            "Server=Localhost;Database=Lab2;Trusted_Connection=True";
 
         //Connection Methods:
 
@@ -37,7 +37,7 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdFacReader = new SqlCommand();
             cmdFacReader.Connection = DBConnection;
             cmdFacReader.Connection.ConnectionString = DBConnString;
-            cmdFacReader.CommandText = "SELECT u.* FROM users u INNER JOIN  faculty f ON u.UserID = f.UserID;";
+            cmdFacReader.CommandText = "SELECT u.* FROM users u WHERE FacultyStatus = 1;";
             cmdFacReader.Connection.Open(); // Open connection here, close in Model!
 
             SqlDataReader tempReader = cmdFacReader.ExecuteReader();
@@ -65,12 +65,10 @@ namespace InventoryManagement.Pages.DB
                                         FROM 
                                             projectStaff ps
                                         JOIN 
-                                            faculty f ON ps.UserID = f.UserID
-                                        JOIN 
                                             users u ON ps.UserID = u.UserID
                                         JOIN 
                                             project p ON ps.ProjectID = p.ProjectID
-                                        WHERE ps.ProjectID = @ProjectID;";
+                                        WHERE ps.ProjectID = @ProjectID AND u.FacultyStatus = 1;";
 
             cmdFacultyReader.Parameters.AddWithValue("@ProjectID", ProjectID);
 
@@ -101,12 +99,10 @@ namespace InventoryManagement.Pages.DB
                                         FROM 
                                             projectStaff ps
                                         JOIN 
-                                            faculty f ON ps.UserID = f.UserID
-                                        JOIN 
                                             users u ON ps.UserID = u.UserID
                                         JOIN 
                                             project p ON ps.ProjectID = p.ProjectID
-                                        WHERE ps.ProjectID = @ProjectID;";
+                                        WHERE ps.ProjectID = @ProjectID AND FacultyStatus = 1;";
 
             cmdProjectStaffReader.Parameters.AddWithValue("@ProjectID", ProjectID);
 
@@ -189,14 +185,13 @@ namespace InventoryManagement.Pages.DB
                                             p.ProjectName AS Project, 
                                             g.Amount,
                                             g.Category,
-                                            gs.StatusName, 
+                                            g.GrantStatus, 
                                             g.descriptions,
                                             g.SubmissionDate, 
                                             g.AwardDate
                                         FROM grants g
                                         JOIN grantSupplier s ON g.SupplierID = s.SupplierID
-                                        LEFT JOIN project p ON g.ProjectID = p.ProjectID
-                                        LEFT JOIN grantStatus gs ON g.GrantID = gs.GrantID";
+                                        LEFT JOIN project p ON g.ProjectID = p.ProjectID";
 
 
             cmdGrantReader.Connection.Open();
