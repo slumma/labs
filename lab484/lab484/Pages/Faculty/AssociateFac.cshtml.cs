@@ -19,8 +19,14 @@ namespace lab484.Pages.Faculty
         public required List<ProjectStaff> StaffList { get; set; } = new List<ProjectStaff>();
         public List<User> UserList { get; set; } = new List<User>();
 
-        public void OnGet(int ProjectID, int GrantID)
+        public IActionResult OnGet(int ProjectID, int GrantID)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+
             this.ProjectID = ProjectID;  // sets the ProjectID
             this.GrantID = GrantID;      // sets the GrantID
 
@@ -70,6 +76,7 @@ namespace lab484.Pages.Faculty
 
             // Close your connection in DBClass
             DBClass.DBConnection.Close();
+            return Page();
         }
 
         public IActionResult OnPostAddFaculty(int UserID)

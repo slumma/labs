@@ -9,9 +9,13 @@ namespace lab484.Pages.Faculty
     {
         // empty grant object to populate it
         public GrantSimple grant { get; set; }
-        public void OnGet(int grantID)
+        public IActionResult OnGet(int grantID)
         {
-
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
             // fills the grant object with the info in the db so the user can see and edit it 
             grant = new GrantSimple(); // Initialize the grant object
             SqlDataReader grantReader = DBClass.SingleGrantReader(grantID);
@@ -30,6 +34,7 @@ namespace lab484.Pages.Faculty
                 grant.AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString());
             }
             DBClass.DBConnection.Close();
+            return Page();
         }
         public IActionResult OnPost()
         {

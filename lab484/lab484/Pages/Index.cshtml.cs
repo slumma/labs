@@ -22,6 +22,13 @@ namespace lab484.Pages
                 ViewData["LoginMessage"] = "Successfully Logged Out!";
             }
 
+            string loginError = HttpContext.Session.GetString("LoginError");
+            if (!string.IsNullOrEmpty(loginError))
+            {
+                ViewData["LoginMessage"] = loginError;
+                HttpContext.Session.Remove("LoginError"); // Clear after displaying
+            }
+
             return Page();
         }
 
@@ -35,7 +42,7 @@ namespace lab484.Pages
                 HttpContext.Session.SetString("username", Username);
                 DBClass.DBConnection.Close();
 
-                return RedirectToPage("Index");
+                return RedirectToPage("/Faculty/FacultyLanding");
             }
             else
             {

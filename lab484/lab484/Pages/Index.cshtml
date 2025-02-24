@@ -1,7 +1,7 @@
 ﻿@page
 @model lab484.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home Page";
+
 }
 
 <h2 class="text-center">Grant Management System</h2>
@@ -11,7 +11,9 @@
 @{
     if (ViewData["LoginMessage"] != null)
     {
-        <p class="text-danger">@ViewData["LoginMessage"]</p>
+        <div class="text-center">
+            <p class="text-danger fw-bold">@ViewData["LoginMessage"]</p>
+        </div>
     }
 }
 

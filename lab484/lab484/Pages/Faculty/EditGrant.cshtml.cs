@@ -12,8 +12,13 @@ namespace lab484.Pages.Faculty
         public GrantSimple GrantToUpdate { get; set; }
 
         // takes the grantID as an argument to load the info from the DB to let the user edit it 
-        public void OnGet(int grantID)
+        public IActionResult OnGet(int grantID)
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
             // Fetch grant details using the grantID and populate GrantToUpdate
             SqlDataReader grantReader = DBClass.SingleGrantReader(grantID);
 
@@ -39,6 +44,7 @@ namespace lab484.Pages.Faculty
 
             grantReader.Close();
             DBClass.DBConnection.Close();
+            return Page();
         }
 
         // when user presses save OnPost is executed 

@@ -13,10 +13,18 @@ namespace lab484.Pages.Faculty
         public GrantSimple newGrant { get; set; }
         public List<GrantSupplier> SupplierList { get; set; } = new List<GrantSupplier>();
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+
             // made a method at the bottom of the file so i dont have to copy and paste it a bunch of times 
             SupplierList = LoadSuppliers();
+
+            return Page();
         }
 
         // executes when AddGrant is added, iinserts it into the db

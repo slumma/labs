@@ -21,8 +21,13 @@ namespace lab484.Pages.Faculty
 
         public string CurrentSortOrder { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("username") == null)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
             // reads the db for grants 
             SqlDataReader grantReader = DBClass.GrantReader();
             while (grantReader.Read())
@@ -70,6 +75,7 @@ namespace lab484.Pages.Faculty
             }
 
             CurrentSortOrder = SortOrder;
+            return Page();
         }
 
 
