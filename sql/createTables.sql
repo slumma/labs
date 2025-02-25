@@ -88,6 +88,7 @@ CREATE TABLE notes(
 
 CREATE TABLE grants(
     GrantID int Identity(1,1) PRIMARY KEY,
+	GrantName nvarchar(200),
     SupplierID int, 
     ProjectID int,
     StatusName nvarchar(200),

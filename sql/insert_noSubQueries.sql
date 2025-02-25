@@ -154,23 +154,23 @@ VALUES
 
 
 
-INSERT INTO grants (SupplierID, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount, GrantStatus)
+INSERT INTO grants (SupplierID, GrantName, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount, GrantStatus)
 VALUES
-(1, 1, 'Submitted', 'Federal', '2025-01-01', 'Grant for tech development', '2025-05-01', 100000, 'Active'),
-(2, 2, 'Under Review', 'State', '2025-03-01', 'Grant for educational programs', '2025-07-01', 50000, 'Pending'),
-(3, 3, 'Awarded', 'Business', '2025-06-01', 'Grant for health initiatives', '2025-11-01', 200000, 'Inactive'),
-(4, 1, 'Submitted', 'University', '2025-02-01', 'Grant for research', '2025-06-01', 150000, 'Active'),
-(5, 2, 'Under Review', 'Federal', '2025-04-01', 'Grant for tech infrastructure', '2025-08-01', 80000, 'Pending'),
-(6, 3, 'Awarded', 'State', '2025-05-01', 'Grant for educational tools', '2025-09-01', 120000, 'Inactive'),
-(7, 1, 'Submitted', 'Business', '2025-01-15', 'Grant for business development', '2025-06-15', 95000, 'Active'),
-(8, 2, 'Under Review', 'University', '2025-03-15', 'Grant for academic research', '2025-07-15', 50000, 'Pending'),
-(9, 3, 'Awarded', 'Federal', '2025-06-15', 'Grant for health research', '2025-11-15', 220000, 'Inactive'),
-(10, 1, 'Submitted', 'State', '2025-02-15', 'Grant for public health', '2025-06-15', 130000, 'Active'),
-(4, 2, 'Under Review', 'Business', '2025-04-15', 'Grant for business innovation', '2025-08-15', 85000, 'Pending'),
-(9, 3, 'Awarded', 'University', '2025-05-15', 'Grant for educational research', '2025-09-15', 140000, 'Inactive'),
-(3, 1, 'Submitted', 'Federal', '2025-01-20', 'Grant for tech advancement', '2025-06-20', 105000, 'Active'),
-(5, 2, 'Under Review', 'State', '2025-03-20', 'Grant for state projects', '2025-07-20', 75000, 'Pending'),
-(1, 3, 'Awarded', 'Business', '2025-06-20', 'Grant for business ventures', '2025-11-20', 195000, 'Inactive');
+(1, 'Tree Fund', 1, 'Submitted', 'Federal', '2025-01-01', 'Grant for tech development', '2025-05-01', 100000, 'Active'),
+(2, 'Timeless Treasure', 2, 'Under Review', 'State', '2025-03-01', 'Grant for educational programs', '2025-07-01', 50000, 'Pending'),
+(3, 'K-12 Hospital Grant', 3, 'Awarded', 'Business', '2025-06-01', 'Grant for health initiatives', '2025-11-01', 200000, 'Inactive'),
+(4, 'Dog Park 5000', 1, 'Submitted', 'University', '2025-02-01', 'Grant for research', '2025-06-01', 150000, 'Active'),
+(5, '75 Dalmations', 2, 'Under Review', 'Federal', '2025-04-01', 'Grant for tech infrastructure', '2025-08-01', 80000, 'Pending'),
+(6, 'The other 26 Dalmations', 3, 'Awarded', 'State', '2025-05-01', 'Grant for educational tools', '2025-09-01', 120000, 'Inactive'),
+(7, 'Egg', 1, 'Submitted', 'Business', '2025-01-15', 'Grant for business development', '2025-06-15', 95000, 'Active'),
+(8, 'Peanut Butter', 2, 'Under Review', 'University', '2025-03-15', 'Grant for academic research', '2025-07-15', 50000, 'Pending'),
+(9, 'Firetruck!', 3, 'Awarded', 'Federal', '2025-06-15', 'Grant for health research', '2025-11-15', 220000, 'Inactive'),
+(10, 'Eggs Benedict', 1, 'Submitted', 'State', '2025-02-15', 'Grant for public health', '2025-06-15', 130000, 'Active'),
+(4, 'Benedict Cumberbatch', 2, 'Under Review', 'Business', '2025-04-15', 'Grant for business innovation', '2025-08-15', 85000, 'Pending'),
+(9, 'Cabbage Patch Kids', 3, 'Awarded', 'University', '2025-05-15', 'Grant for educational research', '2025-09-15', 140000, 'Inactive'),
+(3, 'Kids on the Bus', 1, 'Submitted', 'Federal', '2025-01-20', 'Grant for tech advancement', '2025-06-20', 105000, 'Active'),
+(5, 'Bus from Speed', 2, 'Under Review', 'State', '2025-03-20', 'Grant for state projects', '2025-07-20', 75000, 'Pending'),
+(1, 'Tom Cruise', 3, 'Awarded', 'Business', '2025-06-20', 'Grant for business ventures', '2025-11-20', 195000, 'Inactive');
 
 
 
