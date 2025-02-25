@@ -47,4 +47,6 @@ namespace lab484.Pages.Data_Classes
     public class NonFaculty : User
     {
     }
+
+    
 }

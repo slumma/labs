@@ -456,6 +456,8 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+
+
         public static SqlDataReader singleRecipientReader(int UserID)
         {
             SqlCommand cmdsingleSenderReader = new SqlCommand();
@@ -475,6 +477,22 @@ namespace InventoryManagement.Pages.DB
                                                     userMessage.RecipientID = @UserID;";
 
             cmdsingleSenderReader.Parameters.AddWithValue("@UserID", UserID);
+
+            cmdsingleSenderReader.Connection.Open(); // Open connection here, close in Model!
+
+            SqlDataReader tempReader = cmdsingleSenderReader.ExecuteReader();
+
+            return tempReader;
+        }
+
+        public static SqlDataReader SingleUserReader(String username)
+        {
+            SqlCommand cmdsingleSenderReader = new SqlCommand();
+            cmdsingleSenderReader.Connection = DBConnection;
+            cmdsingleSenderReader.Connection.ConnectionString = DBConnString;
+            cmdsingleSenderReader.CommandText = @"select * from users where username = @username;";
+
+            cmdsingleSenderReader.Parameters.AddWithValue("@username", username);
 
             cmdsingleSenderReader.Connection.Open(); // Open connection here, close in Model!
 
