@@ -4,47 +4,86 @@
 }
 
 <h2>Available Grants</h2>
+
+<p>@Model.DisplayAll</p>
+<p>@Model.testerCurrent</p>
+<p>@Model.testerOpposite</p>
+
 <div class="container mt-4 p-4 border rounded shadow">
-<table class="table table-bordered table-responsive table-hover">
-    <thead>
-        <tr>
-            <th>
-                <!-- looked this up and used Copilot to help implement, but essentially this allows the user to click on the header of the table to sort by it -->
-                <a asp-page="./FacultyLanding" class="text-primary font-weight-bold text-decoration-none"  asp-route-sortOrder="@(Model.CurrentSortOrder == "name_asc" ? "name_desc" : "name_asc")">Grant Name</a>
-            </th>
-            <th>
-                <a asp-page="./FacultyLanding" class="text-primary font-weight-bold text-decoration-none" asp-route-sortOrder="@(Model.CurrentSortOrder == "amount_asc" ? "amount_desc" : "amount_asc")">Amount</a>
-            </th>
-            <th>Supplier</th>
-            <th>
-                <a asp-page="./FacultyLanding" class="text-primary font-weight-bold text-decoration-none" asp-route-sortOrder="@(Model.CurrentSortOrder == "date_asc" ? "date_desc" : "date_asc")">Award Date</a>
-            </th>
-            <th>Project</th>
-            <th>Detailed View</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            foreach (var grant in Model.grantList)
-            {
-                <tr>
-                    <td>@grant.GrantName</td>
-                    <td>@string.Format("{0:C}", grant.Amount)</td> <!-- formats as dollar value -->
-                    <td>@grant.Supplier</td>
-                    <td>@grant.AwardDate.ToString("MM/dd/yyyy")</td> <!-- formats as date, no time -->
-                    <td>@grant.Project</td>
-                    <td>
-                        <div class="text-center">
-                            <a class="btn btn-outline-primary" asp-page="/Faculty/DetailedView" asp-route-grantID="@grant.GrantID">Detailed View</a>
-                        </div>
-                    </td>
-                </tr>
-            }
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <!-- looked this up and used Copilot to help implement, but essentially this allows the user to click on the header of the table to sort by it -->
+                    <a asp-page="./FacultyLanding" class="text-primary font-weight-bold text-decoration-none"  asp-route-sortOrder="@(Model.CurrentSortOrder == "name_asc" ? "name_desc" : "name_asc")">Grant Name</a>
+                </th>
+                <th>
+                    <a asp-page="./FacultyLanding" class="text-primary font-weight-bold text-decoration-none" asp-route-sortOrder="@(Model.CurrentSortOrder == "amount_asc" ? "amount_desc" : "amount_asc")">Amount</a>
+                </th>
+                <th>Supplier</th>
+                <th>
+                    <a asp-page="./FacultyLanding" class="text-primary font-weight-bold text-decoration-none" asp-route-sortOrder="@(Model.CurrentSortOrder == "date_asc" ? "date_desc" : "date_asc")">Award Date</a>
+                </th>
+                <th>Project</th>
+                <th>Detailed View</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int iteration = 0;
+                if (Model.DisplayAll)
+                {
+                    foreach (var grant in Model.grantList)
+                    {
+                        <tr>
+                            <td>@grant.GrantName</td>
+                            <td>@string.Format("{0:C}", grant.Amount)</td> <!-- formats as dollar value -->
+                            <td>@grant.Supplier</td>
+                            <td>@grant.AwardDate.ToString("MM/dd/yyyy")</td> <!-- formats as date, no time -->
+                            <td>@grant.Project</td>
+                            <td>
+                                <div class="text-center">
+                                    <a class="btn btn-outline-primary" asp-page="/Faculty/DetailedView" asp-route-grantID="@grant.GrantID">Detailed View</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else 
+                {
+
+                    foreach (var grant in Model.grantList)
+                    {
+                        if (iteration < 5)
+                        {
+                            <tr>
+                                <td>@grant.GrantName</td>
+                                <td>@string.Format("{0:C}", grant.Amount)</td> <!-- formats as dollar value -->
+                                <td>@grant.Supplier</td>
+                                <td>@grant.AwardDate.ToString("MM/dd/yyyy")</td> <!-- formats as date, no time -->
+                                <td>@grant.Project</td>
+                                <td>
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-primary" asp-page="/Faculty/DetailedView" asp-route-grantID="@grant.GrantID">Detailed View</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            iteration++;
+                        }
+                        else { break; }
+                    }
+                }
+                
         }
     </tbody>
 </table>
     <br />
     <div class="text-center">
+        <form method="post">
+            <div class="text-center">
+                <button type="submit" class="btn btn-outline-secondary" asp-page-handler="ToggleTable">@Model.TableButton</button>
+            </div>
+        </form>
         <a asp-page="AddGrant" class="btn btn-primary">Add Grant</a>
     </div>
 </div>
