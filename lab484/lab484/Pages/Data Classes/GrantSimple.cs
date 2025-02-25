@@ -6,6 +6,8 @@ namespace lab484.Pages.Data_Classes
     public class GrantSimple
     {
         public int GrantID { get; set; }
+
+        [Required(ErrorMessage = "Grant Name is required")]
         public String? GrantName { get; set; }
         public int? ProjectID { get; set; }
 

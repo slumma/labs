@@ -484,16 +484,18 @@ namespace InventoryManagement.Pages.DB
         }
 
 
-        public static void InsertGrant(GrantSimple g, int supplierID)
+        public static void InsertGrant(GrantSimple g, int supplierID, int projectID)
         {
-            String sqlQuery = "INSERT INTO grants (SupplierID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount) " +
-                              "VALUES (@SupplierID, @StatusName, @Category, @SubmissionDate, @Descriptions, @AwardDate, @Amount)";
+            String sqlQuery = "INSERT INTO grants (SupplierID, GrantName, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount) " +
+                              "VALUES (@SupplierID, @GrantName, @ProjectID, @StatusName, @Category, @SubmissionDate, @Descriptions, @AwardDate, @Amount)";
 
             using (SqlCommand cmdInsertGrant = new SqlCommand(sqlQuery, DBConnection))
             {
                 cmdInsertGrant.Connection.ConnectionString = DBConnString;
 
-                cmdInsertGrant.Parameters.AddWithValue("@SupplierID", supplierID);;
+                cmdInsertGrant.Parameters.AddWithValue("@SupplierID", supplierID);
+                cmdInsertGrant.Parameters.AddWithValue("@GrantName", g.GrantName);
+                cmdInsertGrant.Parameters.AddWithValue("@ProjectID", projectID);
                 cmdInsertGrant.Parameters.AddWithValue("@StatusName", g.Status);
                 cmdInsertGrant.Parameters.AddWithValue("@Category", g.Category);
                 cmdInsertGrant.Parameters.AddWithValue("@SubmissionDate", g.SubmissionDate);
@@ -501,8 +503,7 @@ namespace InventoryManagement.Pages.DB
                 cmdInsertGrant.Parameters.AddWithValue("@AwardDate", g.AwardDate);
                 cmdInsertGrant.Parameters.AddWithValue("@Amount", g.Amount);
 
-                Trace.WriteLine(supplierID);
-
+                
                 cmdInsertGrant.Connection.Open();
                 cmdInsertGrant.ExecuteNonQuery();
                 cmdInsertGrant.Connection.Close();

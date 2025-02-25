@@ -13,6 +13,8 @@ namespace lab484.Pages.Faculty
         public GrantSimple newGrant { get; set; }
         public List<GrantSupplier> SupplierList { get; set; } = new List<GrantSupplier>();
 
+        public List<ProjectSimple> ProjectList { get; set; } = new List<ProjectSimple>();
+
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetString("username") == null)
@@ -23,6 +25,7 @@ namespace lab484.Pages.Faculty
 
             // made a method at the bottom of the file so i dont have to copy and paste it a bunch of times 
             SupplierList = LoadSuppliers();
+            ProjectList = LoadProjects();
 
             return Page();
         }
@@ -31,15 +34,18 @@ namespace lab484.Pages.Faculty
         public IActionResult OnPostAddGrant()
         {
             SupplierList = LoadSuppliers();
+            ProjectList = LoadProjects();
 
             // if everything is valid in the form, add to db with the supplierID selected 
             if (ModelState.IsValid)
             {
                 // used AI for help with this, it associates the SupplierName in the list with the SupplierID
                 GrantSupplier selectedSupplier = SupplierList.FirstOrDefault(s => s.SupplierName == newGrant.Supplier);
+                ProjectSimple selectedProject = ProjectList.FirstOrDefault(p => p.ProjectName == newGrant.Project);
                 int supplierID = selectedSupplier.SupplierID;
+                int projectID = selectedProject.ProjectID;
 
-                DBClass.InsertGrant(newGrant, supplierID);
+                DBClass.InsertGrant(newGrant, supplierID, projectID);
                 return RedirectToPage("FacultyLanding");
             }
 
@@ -77,6 +83,7 @@ namespace lab484.Pages.Faculty
             ModelState.Clear();
             newGrant = new GrantSimple
             {
+                GrantName = "Hello My Name is Carmen Winstead",
                 Supplier = "TechCorp",
                 Project = "Education",
                 Amount = 1000000,
@@ -87,9 +94,8 @@ namespace lab484.Pages.Faculty
                 AwardDate = DateTime.Now
             };
 
-            Trace.WriteLine("Populated");
-
-            SupplierList = LoadSuppliers(); // Reload supplier list
+            SupplierList = LoadSuppliers();// Reload supplier list
+            ProjectList = LoadProjects();
 
             return Page();
         }
@@ -117,6 +123,27 @@ namespace lab484.Pages.Faculty
             DBClass.DBConnection.Close();
 
             return suppliers;
+        }
+
+        // make the same method for projects:
+        private List<ProjectSimple> LoadProjects()
+        {
+            var projects = new List<ProjectSimple>();
+            using (SqlDataReader reader = DBClass.ProjectReader())
+            {
+                while (reader.Read())
+                {
+                    projects.Add(new ProjectSimple
+                    {
+                        ProjectID = int.Parse(reader["ProjectID"].ToString()),
+                        ProjectName = reader["ProjectName"].ToString()
+                    });
+                }
+            }
+
+            DBClass.DBConnection.Close();
+
+            return projects;
         }
     }
 }
