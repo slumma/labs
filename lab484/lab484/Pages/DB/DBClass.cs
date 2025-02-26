@@ -587,6 +587,7 @@ namespace InventoryManagement.Pages.DB
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         public static void InsertUserMessage(int? senderID, int recipientID, string subjectTitle, string contents)
         {
             String sqlQuery = "INSERT INTO UserMessage (SenderID, RecipientID, SubjectTitle, Contents, SentTime) " +
@@ -619,6 +620,20 @@ namespace InventoryManagement.Pages.DB
 >>>>>>> Stashed changes
         }
 
+=======
+        public static int employeeCheck(int userID)
+        {
+            SqlCommand cmdCheck = new SqlCommand();
+            cmdCheck.Connection = DBConnection;
+            cmdCheck.Connection.ConnectionString = DBConnString;
+            cmdCheck.CommandText = "SELECT EmployeeStatus FROM users WHERE UserID = @UserID;";
+            cmdCheck.Parameters.AddWithValue("@UserID", userID);
+            cmdCheck.Connection.Open();
+            int status = Convert.ToInt32(cmdCheck.ExecuteScalar());
+            return status;
+        }
+
+>>>>>>> Stashed changes
 =======
         public static int employeeCheck(int userID)
         {
