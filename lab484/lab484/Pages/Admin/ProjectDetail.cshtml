@@ -63,7 +63,7 @@
 					<td>@task.DueDate.ToString("MM/dd/yyyy")</td>
 					<td>
 						<select class="form-select">
-							<option value="x" selected disabled>View Staff</option>
+							<option value="x">View Staff</option>
 							@foreach (var staffer in Model.userTaskList)
 							{
 								<option value="x">@staffer.FirstName @staffer.LastName</option>

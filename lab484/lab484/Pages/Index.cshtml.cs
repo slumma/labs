@@ -42,8 +42,9 @@ namespace lab484.Pages
 
             if (DBClass.LoginQuery(loginQuery) > 0)
             {
-                DBClass.DBConnection.Close();
+                HttpContext.Session.SetInt32("loggedIn", 1);
 
+                DBClass.DBConnection.Close();
                 HttpContext.Session.SetString("username", Username);
                 
                 //get userID into session state
@@ -57,6 +58,7 @@ namespace lab484.Pages
 
                 if (adminStatus == 1)
                 {
+                    HttpContext.Session.SetInt32("adminStatus", 1);
                     return RedirectToPage("/Admin/AdminLanding");
                 }
                 else
@@ -66,6 +68,7 @@ namespace lab484.Pages
 
                     if (facultyStatus == 1)
                     {
+                        HttpContext.Session.SetInt32("facultyStatus", 1);
                         return RedirectToPage("/Faculty/FacultyLanding");
                     }
                     else

@@ -16,9 +16,14 @@ namespace lab484.Pages.Admin
         public List<Tasks> taskList { get; set; } = new List<Tasks>();
         public IActionResult OnGet(int projectID)
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+            else if (HttpContext.Session.GetInt32("adminStatus") != 1)
+            {
+                HttpContext.Session.SetString("LoginError", "You do not have permission to access that page!");
                 return RedirectToPage("../Index"); // Redirect to login page
             }
 

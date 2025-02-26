@@ -17,14 +17,19 @@ namespace lab484.Pages.Faculty
 
         public IActionResult OnGet()
         {
-            if (HttpContext.Session.GetString("username") == null)
+            if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");
                 return RedirectToPage("../Index"); // Redirect to login page
             }
+            else if (HttpContext.Session.GetInt32("facultyStatus") != 1 && HttpContext.Session.GetInt32("adminStatus") != 1)
+            {
+                HttpContext.Session.SetString("LoginError", "You do not have permission to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
 
-            // made a method at the bottom of the file so i dont have to copy and paste it a bunch of times 
-            SupplierList = LoadSuppliers();
+                // made a method at the bottom of the file so i dont have to copy and paste it a bunch of times 
+                SupplierList = LoadSuppliers();
             ProjectList = LoadProjects();
 
             return Page();
