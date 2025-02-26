@@ -29,6 +29,7 @@ namespace lab484.Pages
         public string usr { get; set; } // Declare usr as a property of the class
 
         public required List<Message> receivedList { get; set; } = new List<Message>();
+        public string SuccessMessage { get; set; }
 
         public IActionResult OnGet()
         {
@@ -90,26 +91,7 @@ namespace lab484.Pages
             if (activeUser != null)
             {
                 // Retrieve received messages
-                using (SqlDataReader receivedReader = DBClass.singleRecipientReader(activeUser.UserID))
-                {
-                    while (receivedReader.Read())
-                    {
-                        receivedList.Add(new Message
-                        {
-                            SenderID = int.Parse(receivedReader["SenderID"].ToString()),
-                            SenderUsername = receivedReader["SenderUsername"].ToString(),
-                            RecipientID = int.Parse(receivedReader["RecipientID"].ToString()),
-                            RecipientUsername = receivedReader["RecipientUsername"].ToString(),
-                            SubjectTitle = receivedReader["SubjectTitle"].ToString(),
-                            Contents = receivedReader["Contents"].ToString(),
-                            MessageID = int.Parse(receivedReader["MessageID"].ToString()),
-                            SentTime = DateTime.Parse(receivedReader["SentTime"].ToString())
-                        });
-                    }
-                    receivedReader.Close();
-                }
-
-                DBClass.DBConnection.Close();
+                LoadReceivedMessages(activeUser.UserID);
             }
 
             return Page();
@@ -119,6 +101,11 @@ namespace lab484.Pages
         {
 
             int? activeUserID = HttpContext.Session.GetInt32("ActiveUserID");
+
+            if (activeUserID.HasValue)
+            {
+                LoadReceivedMessages(activeUserID.Value);
+            }
 
             using (SqlDataReader reader = DBClass.UserReader())
             {
@@ -138,6 +125,7 @@ namespace lab484.Pages
             {
                 Trace.WriteLine("Its not null!");
                 DBClass.InsertUserMessage(activeUserID, SelectedUsername, MessageSubject, MessageContent);
+                SuccessMessage = "Message sent successfully!";
                 return Page();
             }
             else
@@ -159,5 +147,32 @@ namespace lab484.Pages
                 return Page();
             }
         }
+
+        // method specifically for loading the messages 
+        private void LoadReceivedMessages(int userId)
+        {
+            receivedList = new List<Message>();
+
+            using (SqlDataReader receivedReader = DBClass.singleRecipientReader(userId))
+            {
+                while (receivedReader.Read())
+                {
+                    receivedList.Add(new Message
+                    {
+                        SenderID = int.Parse(receivedReader["SenderID"].ToString()),
+                        SenderUsername = receivedReader["SenderUsername"].ToString(),
+                        RecipientID = int.Parse(receivedReader["RecipientID"].ToString()),
+                        RecipientUsername = receivedReader["RecipientUsername"].ToString(),
+                        SubjectTitle = receivedReader["SubjectTitle"].ToString(),
+                        Contents = receivedReader["Contents"].ToString(),
+                        MessageID = int.Parse(receivedReader["MessageID"].ToString()),
+                        SentTime = DateTime.Parse(receivedReader["SentTime"].ToString())
+                    });
+                }
+                receivedReader.Close();
+            }
+            DBClass.DBConnection.Close();
+        }
+
     }
 }

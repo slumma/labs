@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model.activeUser != null)
+        @if (Model.receivedList != null && Model.receivedList.Count > 0)
         {
             @foreach (var message in Model.receivedList)
             {
@@ -26,10 +26,22 @@
                 </tr>
             }
         }
+        else
+        {
+            <tr>
+                <td colspan="4">No messages found.</td>
+            </tr>
+        }
 </table>
 
 <h2>Send Message</h2>
 <form method="post">
+    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+    {
+        <div class="alert alert-success">
+            @Model.SuccessMessage
+        </div>
+    }
 <div class="form-group row justify-content-center">
     <select class="form-control username-select" asp-for="SelectedUsername">
         <option value="" disabled selected>Select Recipient</option>
@@ -56,5 +68,3 @@
 </div>
 </form>
 
-
-<p>@Model.SelectedUsername</p>
