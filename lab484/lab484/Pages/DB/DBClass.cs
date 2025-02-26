@@ -572,6 +572,25 @@ namespace InventoryManagement.Pages.DB
         }
 
 
+        public static void InsertUserMessage(int? senderID, int recipientID, string subjectTitle, string contents)
+        {
+            String sqlQuery = "INSERT INTO UserMessage (SenderID, RecipientID, SubjectTitle, Contents, SentTime) " +
+                              "VALUES (@SenderID, @RecipientID, @SubjectTitle, @Contents, GETDATE())";
+
+            using (SqlCommand cmdInsertUserMessage = new SqlCommand(sqlQuery, DBConnection))
+            {
+                cmdInsertUserMessage.Connection.ConnectionString = DBConnString;
+
+                cmdInsertUserMessage.Parameters.AddWithValue("@SenderID", senderID);
+                cmdInsertUserMessage.Parameters.AddWithValue("@RecipientID", recipientID);
+                cmdInsertUserMessage.Parameters.AddWithValue("@SubjectTitle", subjectTitle);
+                cmdInsertUserMessage.Parameters.AddWithValue("@Contents", contents);
+
+                cmdInsertUserMessage.Connection.Open();
+                cmdInsertUserMessage.ExecuteNonQuery();
+                cmdInsertUserMessage.Connection.Close();
+            }
+        }
 
 
 

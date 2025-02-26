@@ -136,16 +136,8 @@ namespace lab484.Pages
 
             if (ModelState.IsValid)
             {
-                if (activeUser != null)
-                {
-                    DBClass.InsertUserMessage(activeUserID, SelectedUsername, MessageSubject, MessageContent);
-                    return Page();
-                }
-                else
-                {
-                    return Page();
-                }
-
+                Trace.WriteLine("Its not null!");
+                DBClass.InsertUserMessage(activeUserID, SelectedUsername, MessageSubject, MessageContent);
                 return Page();
             }
             else
