@@ -126,6 +126,13 @@ namespace lab484.Pages
                 Trace.WriteLine("Its not null!");
                 DBClass.InsertUserMessage(activeUserID, SelectedUsername, MessageSubject, MessageContent);
                 SuccessMessage = "Message sent successfully!";
+
+                MessageContent = string.Empty;
+                MessageSubject = string.Empty;
+                SelectedUsername = 0; // Reset dropdown selection
+
+                ModelState.Clear();
+
                 return Page();
             }
             else
