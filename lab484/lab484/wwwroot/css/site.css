@@ -47,3 +47,6 @@ body {
         border-color: #c0392b;
 }
 
+.username-select {
+    width: 200px;
+}

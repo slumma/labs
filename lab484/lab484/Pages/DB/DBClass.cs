@@ -24,7 +24,7 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdUserReader = new SqlCommand();
             cmdUserReader.Connection = DBConnection;
             cmdUserReader.Connection.ConnectionString = DBConnString;
-            cmdUserReader.CommandText = "SELECT * FROM users";
+            cmdUserReader.CommandText = "SELECT * FROM users ORDER BY Username";
             cmdUserReader.Connection.Open(); // Open connection here, close in Model!
 
             SqlDataReader tempReader = cmdUserReader.ExecuteReader();
@@ -193,7 +193,8 @@ namespace InventoryManagement.Pages.DB
                                             g.AwardDate
                                         FROM grants g
                                         JOIN grantSupplier s ON g.SupplierID = s.SupplierID
-                                        LEFT JOIN project p ON g.ProjectID = p.ProjectID";
+                                        LEFT JOIN project p ON g.ProjectID = p.ProjectID
+                                        ORDER BY g.AwardDate";
 
 
             cmdGrantReader.Connection.Open();

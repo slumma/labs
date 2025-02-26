@@ -5,10 +5,6 @@
 
 <h2>Available Grants</h2>
 
-<p>@Model.DisplayAll</p>
-<p>@Model.testerCurrent</p>
-<p>@Model.testerOpposite</p>
-
 <div class="container mt-4 p-4 border rounded shadow">
     <table class="table table-bordered table-responsive table-hover">
         <thead>
@@ -84,6 +80,7 @@
                 <button type="submit" class="btn btn-outline-secondary" asp-page-handler="ToggleTable">@Model.TableButton</button>
             </div>
         </form>
+        <br />
         <a asp-page="AddGrant" class="btn btn-primary">Add Grant</a>
     </div>
 </div>

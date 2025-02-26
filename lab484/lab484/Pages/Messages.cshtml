@@ -3,14 +3,6 @@
 
 @{
 }
-
-
-<p>@Model.activeUser.UserName</p>
-<p>@Model.activeUser.FirstName</p>
-<p>@Model.activeUser.LastName</p>
-
-
-
 <h1>Received Messages</h1>
 <table class="table">
     <thead>
@@ -33,3 +25,30 @@
         }
     </tbody>
 </table>
+
+<h2>Send Message</h2>
+<div class="form-group row justify-content-center">
+    <select class="form-control username-select">
+        <option value="" disabled selected>Select Recipient</option>
+        @foreach (var item in Model.Usernames)
+        {
+            <option value="@item.Value">@item.Text</option>
+        }
+    </select>
+    <span class="text-danger"></span>
+</div>
+<br />
+<div class="form-group row justify-content-center">
+    <input type="text" class="form-control subject-input" placeholder="Enter Subject">
+    <span class="text-danger"></span>
+</div>
+<br />
+<div class="form-group row justify-content-center">
+    <textarea class="form-control message-textarea" rows="5" placeholder="Enter Message"></textarea>
+    <span class="text-danger"></span>
+</div>
+<br />
+<div class="form-group row justify-content-center">
+    <button type="submit" class="btn btn-primary">Send</button>
+</div>
+

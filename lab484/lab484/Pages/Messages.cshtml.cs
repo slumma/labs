@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.SqlClient;
-using System.Diagnostics;
 
 namespace lab484.Pages
 {
@@ -16,7 +15,7 @@ namespace lab484.Pages
 
         public User activeUser { get; set; }
 
-        public String usr { get; set; } // Declare usr as a property of the class
+        public string usr { get; set; } // Declare usr as a property of the class
 
         public required List<Message> receivedList { get; set; } = new List<Message>();
 
@@ -31,10 +30,9 @@ namespace lab484.Pages
                 return RedirectToPage("Index"); // Redirect to login page
             }
 
-
             Usernames = new List<SelectListItem>();
 
-            // execute the userReader method from dbclass to load the usernames 
+            // Execute the userReader method from DBClass to load the usernames 
             using (SqlDataReader reader = DBClass.UserReader())
             {
                 while (reader.Read())
@@ -47,9 +45,8 @@ namespace lab484.Pages
                 }
                 reader.Close();
                 DBClass.DBConnection.Close();
-            } 
+            }
 
-            
             using (SqlDataReader singleUserReader = DBClass.SingleUserReader(usr))
             {
                 if (singleUserReader != null)
@@ -58,7 +55,7 @@ namespace lab484.Pages
                     {
                         activeUser = new User
                         {
-                            UserID = Int32.Parse(singleUserReader["UserID"].ToString()),
+                            UserID = int.Parse(singleUserReader["UserID"].ToString()),
                             UserName = singleUserReader["Username"].ToString(),
                             FirstName = singleUserReader["FirstName"].ToString(),
                             LastName = singleUserReader["Lastname"].ToString(),
@@ -71,25 +68,26 @@ namespace lab484.Pages
 
             DBClass.DBConnection.Close();
 
-
             // Retrieve received messages
-            SqlDataReader receivedReader = DBClass.singleRecipientReader(activeUser.UserID);
-            while (receivedReader.Read())
+            using (SqlDataReader receivedReader = DBClass.singleRecipientReader(activeUser.UserID))
             {
-                receivedList.Add(new Message
+                while (receivedReader.Read())
                 {
-                    SenderID = Int32.Parse(receivedReader["SenderID"].ToString()),
-                    SenderUsername = receivedReader["SenderUsername"].ToString(),
-                    RecipientID = Int32.Parse(receivedReader["RecipientID"].ToString()),
-                    RecipientUsername = receivedReader["RecipientUsername"].ToString(),
-                    SubjectTitle = receivedReader["SubjectTitle"].ToString(),
-                    Contents = receivedReader["Contents"].ToString(),
-                    MessageID = Int32.Parse(receivedReader["MessageID"].ToString()),
-                    SentTime = DateTime.Parse(receivedReader["SentTime"].ToString())
-                });
+                    receivedList.Add(new Message
+                    {
+                        SenderID = int.Parse(receivedReader["SenderID"].ToString()),
+                        SenderUsername = receivedReader["SenderUsername"].ToString(),
+                        RecipientID = int.Parse(receivedReader["RecipientID"].ToString()),
+                        RecipientUsername = receivedReader["RecipientUsername"].ToString(),
+                        SubjectTitle = receivedReader["SubjectTitle"].ToString(),
+                        Contents = receivedReader["Contents"].ToString(),
+                        MessageID = int.Parse(receivedReader["MessageID"].ToString()),
+                        SentTime = DateTime.Parse(receivedReader["SentTime"].ToString())
+                    });
+                }
+                receivedReader.Close();
             }
 
-            // Close your connection in DBClass
             DBClass.DBConnection.Close();
 
             return Page();
@@ -97,7 +95,7 @@ namespace lab484.Pages
 
         public IActionResult OnPost()
         {
-            // sends the userID to the ViewMessages page in order to see the sent/received messages 
+            // Sends the userID to the ViewMessages page in order to see the sent/received messages 
             int userID = Convert.ToInt32(SelectedUsername);
             return RedirectToPage("ViewMessages", new { userID });
         }
