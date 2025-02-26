@@ -3,15 +3,26 @@ using lab484.Pages.Data_Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace lab484.Pages
 {
     public class MessagesModel : PageModel
     {
         [BindProperty]
-        public string SelectedUsername { get; set; }
-        public List<SelectListItem> Usernames { get; set; }
+        [Required(ErrorMessage = "Must select a user to send message to.")]
+        public int SelectedUsername { get; set; }
+
+        [BindProperty]
+        [Required(ErrorMessage = "Must include a subject title.")]
+        public string MessageSubject { get; set; }
+
+        [BindProperty]
+        [Required(ErrorMessage = "Must include message content.")]
+        public string MessageContent { get; set; }
+        public List<SelectListItem> Usernames { get; set; } = new List<SelectListItem>();
 
         public User activeUser { get; set; }
 
@@ -47,57 +58,114 @@ namespace lab484.Pages
                 DBClass.DBConnection.Close();
             }
 
+            // Initialize activeUser to avoid NullReferenceException
+            activeUser = new User();
+            Trace.WriteLine("Initialized activeUser object");
+
             using (SqlDataReader singleUserReader = DBClass.SingleUserReader(usr))
             {
-                if (singleUserReader != null)
+                if (singleUserReader != null && singleUserReader.HasRows)
                 {
                     while (singleUserReader.Read())
                     {
-                        activeUser = new User
-                        {
-                            UserID = int.Parse(singleUserReader["UserID"].ToString()),
-                            UserName = singleUserReader["Username"].ToString(),
-                            FirstName = singleUserReader["FirstName"].ToString(),
-                            LastName = singleUserReader["Lastname"].ToString(),
-                            Email = singleUserReader["Email"].ToString()
-                        };
+                        Trace.WriteLine("Reading singleUserReader data");
+                        activeUser.UserID = int.Parse(singleUserReader["UserID"].ToString());
+                        activeUser.UserName = singleUserReader["Username"].ToString();
+                        activeUser.FirstName = singleUserReader["FirstName"].ToString();
+                        activeUser.LastName = singleUserReader["Lastname"].ToString();
+                        activeUser.Email = singleUserReader["Email"].ToString();
+                        Trace.WriteLine($"Active user details: {activeUser.UserID} {activeUser.UserName}, {activeUser.Email}");
                     }
                     singleUserReader.Close();
+
+                    HttpContext.Session.SetInt32("ActiveUserID", activeUser.UserID);
                 }
             }
 
             DBClass.DBConnection.Close();
 
-            // Retrieve received messages
-            using (SqlDataReader receivedReader = DBClass.singleRecipientReader(activeUser.UserID))
+            // Ensure receivedList is not null
+            receivedList = new List<Message>();
+
+            if (activeUser != null)
             {
-                while (receivedReader.Read())
+                // Retrieve received messages
+                using (SqlDataReader receivedReader = DBClass.singleRecipientReader(activeUser.UserID))
                 {
-                    receivedList.Add(new Message
+                    while (receivedReader.Read())
                     {
-                        SenderID = int.Parse(receivedReader["SenderID"].ToString()),
-                        SenderUsername = receivedReader["SenderUsername"].ToString(),
-                        RecipientID = int.Parse(receivedReader["RecipientID"].ToString()),
-                        RecipientUsername = receivedReader["RecipientUsername"].ToString(),
-                        SubjectTitle = receivedReader["SubjectTitle"].ToString(),
-                        Contents = receivedReader["Contents"].ToString(),
-                        MessageID = int.Parse(receivedReader["MessageID"].ToString()),
-                        SentTime = DateTime.Parse(receivedReader["SentTime"].ToString())
-                    });
+                        receivedList.Add(new Message
+                        {
+                            SenderID = int.Parse(receivedReader["SenderID"].ToString()),
+                            SenderUsername = receivedReader["SenderUsername"].ToString(),
+                            RecipientID = int.Parse(receivedReader["RecipientID"].ToString()),
+                            RecipientUsername = receivedReader["RecipientUsername"].ToString(),
+                            SubjectTitle = receivedReader["SubjectTitle"].ToString(),
+                            Contents = receivedReader["Contents"].ToString(),
+                            MessageID = int.Parse(receivedReader["MessageID"].ToString()),
+                            SentTime = DateTime.Parse(receivedReader["SentTime"].ToString())
+                        });
+                    }
+                    receivedReader.Close();
                 }
-                receivedReader.Close();
-            }
 
-            DBClass.DBConnection.Close();
+                DBClass.DBConnection.Close();
+            }
 
             return Page();
         }
 
         public IActionResult OnPost()
         {
-            // Sends the userID to the ViewMessages page in order to see the sent/received messages 
-            int userID = Convert.ToInt32(SelectedUsername);
-            return RedirectToPage("ViewMessages", new { userID });
+
+            int? activeUserID = HttpContext.Session.GetInt32("ActiveUserID");
+
+            using (SqlDataReader reader = DBClass.UserReader())
+            {
+                while (reader.Read())
+                {
+                    Usernames.Add(new SelectListItem
+                    {
+                        Value = reader["UserID"].ToString(),
+                        Text = reader["Username"].ToString()
+                    });
+                }
+                reader.Close();
+                DBClass.DBConnection.Close();
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (activeUser != null)
+                {
+                    DBClass.InsertUserMessage(activeUserID, SelectedUsername, MessageSubject, MessageContent);
+                    return Page();
+                }
+                else
+                {
+                    return Page();
+                }
+
+                return Page();
+            }
+            else
+            {
+                using (SqlDataReader reader = DBClass.UserReader())
+                {
+                    while (reader.Read())
+                    {
+                        Usernames.Add(new SelectListItem
+                        {
+                            Value = reader["UserID"].ToString(),
+                            Text = reader["Username"].ToString()
+                        });
+                    }
+                    reader.Close();
+                    DBClass.DBConnection.Close();
+                }
+
+                return Page();
+            }
         }
     }
 }

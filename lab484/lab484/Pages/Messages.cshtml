@@ -14,41 +14,47 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var message in Model.receivedList)
+        @if (Model.activeUser != null)
         {
-            <tr>
-                <td>@message.SubjectTitle</td>
-                <td>@message.SenderUsername</td>
-                <td>@message.Contents</td>
-                <td>@message.SentTime</td>
-            </tr>
+            @foreach (var message in Model.receivedList)
+            {
+                <tr>
+                    <td>@message.SubjectTitle</td>
+                    <td>@message.SenderUsername</td>
+                    <td>@message.Contents</td>
+                    <td>@message.SentTime</td>
+                </tr>
+            }
         }
-    </tbody>
 </table>
 
 <h2>Send Message</h2>
+<form method="post">
 <div class="form-group row justify-content-center">
-    <select class="form-control username-select">
+    <select class="form-control username-select" asp-for="SelectedUsername">
         <option value="" disabled selected>Select Recipient</option>
         @foreach (var item in Model.Usernames)
         {
             <option value="@item.Value">@item.Text</option>
         }
     </select>
-    <span class="text-danger"></span>
+    <span asp-validation-for="@Model.SelectedUsername" class="text-danger"></span>
 </div>
 <br />
 <div class="form-group row justify-content-center">
-    <input type="text" class="form-control subject-input" placeholder="Enter Subject">
-    <span class="text-danger"></span>
+    <input type="text" class="form-control subject-input" asp-for="MessageSubject"  placeholder="Enter Subject">
+    <span asp-validation-for="@Model.MessageSubject" class="text-danger"></span>
 </div>
 <br />
 <div class="form-group row justify-content-center">
-    <textarea class="form-control message-textarea" rows="5" placeholder="Enter Message"></textarea>
-    <span class="text-danger"></span>
+    <textarea class="form-control message-textarea" rows="5" asp-for="MessageContent"  placeholder="Enter Message"></textarea>
+    <span asp-validation-for="@Model.MessageContent" class="text-danger"></span>
 </div>
 <br />
 <div class="form-group row justify-content-center">
     <button type="submit" class="btn btn-primary">Send</button>
 </div>
+</form>
 
+
+<p>@Model.SelectedUsername</p>
