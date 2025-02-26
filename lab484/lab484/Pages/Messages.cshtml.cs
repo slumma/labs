@@ -18,11 +18,12 @@ namespace lab484.Pages
 
         public String usr { get; set; } // Declare usr as a property of the class
 
+        public required List<Message> receivedList { get; set; } = new List<Message>();
+
         public IActionResult OnGet()
         {
-            usr = HttpContext.Session.GetString("username"); // Retrieve the username from the session here
-
-            Trace.WriteLine(usr);
+            // Retrieve the username from the session here
+            usr = HttpContext.Session.GetString("username");
 
             if (usr == null)
             {
@@ -30,7 +31,7 @@ namespace lab484.Pages
                 return RedirectToPage("Index"); // Redirect to login page
             }
 
-            
+
             Usernames = new List<SelectListItem>();
 
             // execute the userReader method from dbclass to load the usernames 
@@ -70,6 +71,26 @@ namespace lab484.Pages
 
             DBClass.DBConnection.Close();
 
+
+            // Retrieve received messages
+            SqlDataReader receivedReader = DBClass.singleRecipientReader(activeUser.UserID);
+            while (receivedReader.Read())
+            {
+                receivedList.Add(new Message
+                {
+                    SenderID = Int32.Parse(receivedReader["SenderID"].ToString()),
+                    SenderUsername = receivedReader["SenderUsername"].ToString(),
+                    RecipientID = Int32.Parse(receivedReader["RecipientID"].ToString()),
+                    RecipientUsername = receivedReader["RecipientUsername"].ToString(),
+                    SubjectTitle = receivedReader["SubjectTitle"].ToString(),
+                    Contents = receivedReader["Contents"].ToString(),
+                    MessageID = Int32.Parse(receivedReader["MessageID"].ToString()),
+                    SentTime = DateTime.Parse(receivedReader["SentTime"].ToString())
+                });
+            }
+
+            // Close your connection in DBClass
+            DBClass.DBConnection.Close();
 
             return Page();
         }
