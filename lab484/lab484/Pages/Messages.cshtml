@@ -1,20 +1,35 @@
-﻿@page "{userID:int?}"
+﻿@page 
 @model lab484.Pages.MessagesModel
 
 @{
 }
 
-<h2>Select User to View Messages</h2>
 
-<form method="post">
-    <div class="form-group">
-        <label for="UserID">Select Username:</label>
-        <select id="UserID" asp-for="SelectedUsername" asp-items="Model.Usernames" class="form-control">
-            <option value="">Select a user</option>
-        </select>
-    </div>
-    <br />
-    <div class="text-center">
-        <button type="submit" class="btn btn-primary">Enter Messages</button>
-    </div>
-</form>
+<p>@Model.activeUser.UserName</p>
+<p>@Model.activeUser.FirstName</p>
+<p>@Model.activeUser.LastName</p>
+
+
+
+<h1>Received Messages</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Sender</th>
+            <th>Contents</th>
+            <th>Received Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in Model.receivedList)
+        {
+            <tr>
+                <td>@message.SubjectTitle</td>
+                <td>@message.SenderUsername</td>
+                <td>@message.Contents</td>
+                <td>@message.SentTime</td>
+            </tr>
+        }
+    </tbody>
+</table>
