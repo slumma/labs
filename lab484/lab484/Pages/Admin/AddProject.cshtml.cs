@@ -18,6 +18,7 @@ namespace lab484.Pages.Admin
         // creates new project object and adds faculty to list
         public IActionResult OnGet()
         {
+
             if (HttpContext.Session.GetString("username") == null)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");

@@ -571,7 +571,21 @@ namespace InventoryManagement.Pages.DB
             return rowCount;
         }
 
+        public static int loggedInUser(string findUserID)
+        {
+            SqlCommand cmdUserID = new SqlCommand();
+            cmdUserID.Connection = DBConnection;
+            cmdUserID.Connection.ConnectionString = DBConnString;
+            cmdUserID.CommandText = findUserID;
+            cmdUserID.Connection.Open();
+            // ExecuteScalar() returns back data type Object
+            // Use a typecast to convert this to an int.
+            // Method returns first column of first row.
+            int userID = Convert.ToInt32(cmdUserID.ExecuteScalar());
+            return userID;
+        }
 
+<<<<<<< Updated upstream
         public static void InsertUserMessage(int? senderID, int recipientID, string subjectTitle, string contents)
         {
             String sqlQuery = "INSERT INTO UserMessage (SenderID, RecipientID, SubjectTitle, Contents, SentTime) " +
@@ -590,8 +604,55 @@ namespace InventoryManagement.Pages.DB
                 cmdInsertUserMessage.ExecuteNonQuery();
                 cmdInsertUserMessage.Connection.Close();
             }
+=======
+        public static int employeeCheck(int userID)
+        {
+            SqlCommand cmdCheck = new SqlCommand();
+            cmdCheck.Connection = DBConnection;
+            cmdCheck.Connection.ConnectionString = DBConnString;
+            cmdCheck.CommandText = "SELECT EmployeeStatus FROM users WHERE UserID = @UserID;";
+            cmdCheck.Parameters.AddWithValue("@UserID", userID);
+            cmdCheck.Connection.Open();
+            int status = Convert.ToInt32(cmdCheck.ExecuteScalar());
+            return status;
+>>>>>>> Stashed changes
         }
 
+        public static int adminCheck(int userID)
+        {
+            SqlCommand cmdCheck = new SqlCommand();
+            cmdCheck.Connection = DBConnection;
+            cmdCheck.Connection.ConnectionString = DBConnString;
+            cmdCheck.CommandText = "SELECT AdminStatus FROM users WHERE UserID = @UserID;";
+            cmdCheck.Parameters.AddWithValue("@UserID", userID);
+            cmdCheck.Connection.Open();
+            int status = Convert.ToInt32(cmdCheck.ExecuteScalar());
+            return status;
+        }
+
+        public static int facultyCheck(int userID)
+        {
+            SqlCommand cmdCheck = new SqlCommand();
+            cmdCheck.Connection = DBConnection;
+            cmdCheck.Connection.ConnectionString = DBConnString;
+            cmdCheck.CommandText = "SELECT FacultyStatus FROM users WHERE UserID = @UserID;";
+            cmdCheck.Parameters.AddWithValue("@UserID", userID);
+            cmdCheck.Connection.Open();
+            int status = Convert.ToInt32(cmdCheck.ExecuteScalar());
+            return status;
+        }
+
+        public static int nonFacultyCheck(int userID)
+        {
+            SqlCommand cmdCheck = new SqlCommand();
+            cmdCheck.Connection = DBConnection;
+            cmdCheck.Connection.ConnectionString = DBConnString;
+            cmdCheck.CommandText = "SELECT NonFacultyStatus FROM users WHERE UserID = @UserID;";
+            cmdCheck.Parameters.AddWithValue("@UserID", userID);
+            cmdCheck.Connection.Open();
+            int status = Convert.ToInt32(cmdCheck.ExecuteScalar());
+            return status;
+        }
 
 
     }

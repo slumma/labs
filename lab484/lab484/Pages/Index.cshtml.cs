@@ -37,12 +37,44 @@ namespace lab484.Pages
             string loginQuery = "SELECT COUNT(*) FROM users WHERE Username = '";
             loginQuery += Username + "' AND Password='" + Password + "'";
 
+            string findUserID = "SELECT UserID FROM users WHERE Username = '";
+            findUserID += Username + "' AND Password='" + Password + "'";
+
             if (DBClass.LoginQuery(loginQuery) > 0)
             {
-                HttpContext.Session.SetString("username", Username);
                 DBClass.DBConnection.Close();
 
-                return RedirectToPage("/Faculty/FacultyLanding");
+                HttpContext.Session.SetString("username", Username);
+                
+                //get userID into session state
+                int userID = DBClass.loggedInUser(findUserID);
+                DBClass.DBConnection.Close();
+                HttpContext.Session.SetInt32("userID", userID);
+
+                //check user permissions
+                int adminStatus = DBClass.adminCheck(userID);
+                DBClass.DBConnection.Close();
+
+                if (adminStatus == 1)
+                {
+                    return RedirectToPage("/Admin/AdminLanding");
+                }
+                else
+                {
+                    int facultyStatus = DBClass.facultyCheck(userID);
+                    DBClass.DBConnection.Close();
+
+                    if (facultyStatus == 1)
+                    {
+                        return RedirectToPage("/Faculty/FacultyLanding");
+                    }
+                    else
+                    {
+                        return RedirectToPage("/NoPermissions");
+                    }
+                }
+                
+
             }
             else
             {
