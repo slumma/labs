@@ -27,7 +27,7 @@
         <tbody>
             @{
                 int iteration = 0;
-                if (Model.DisplayAll)
+                if (Model.HttpContext.Session.GetInt32("DisplayAll") == 1)
                 {
                     foreach (var grant in Model.grantList)
                     {
