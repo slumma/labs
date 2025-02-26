@@ -3,7 +3,7 @@
 
 @{
 }
-<h1>Received Messages</h1>
+<h2>Received Messages</h2>
 <table class="table">
     <thead>
         <tr>
@@ -36,7 +36,7 @@
 
 <h2>Send Message</h2>
 <form method="post">
-    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+    @if (Model.SuccessMessage != null)
     {
         <div class="alert alert-success">
             @Model.SuccessMessage

@@ -369,7 +369,8 @@ namespace InventoryManagement.Pages.DB
                 JOIN 
                     users u ON m.SenderID = u.UserID
                 WHERE 
-                    m.RecipientID = @UserID";
+                    m.RecipientID = @UserID
+                ORDER BY m.SentTime DESC;";
             cmdMessageReader.Parameters.AddWithValue("@UserID", UserID);
 
             cmdMessageReader.Connection.Open();
@@ -475,7 +476,8 @@ namespace InventoryManagement.Pages.DB
                                                 JOIN 
                                                     Users AS recipient ON userMessage.RecipientID = recipient.UserID
                                                 WHERE 
-                                                    userMessage.RecipientID = @UserID;";
+                                                    userMessage.RecipientID = @UserID
+                                                ORDER BY SentTime DESC;";
 
             cmdsingleSenderReader.Parameters.AddWithValue("@UserID", UserID);
 
@@ -585,9 +587,6 @@ namespace InventoryManagement.Pages.DB
             return userID;
         }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         public static void InsertUserMessage(int? senderID, int recipientID, string subjectTitle, string contents)
         {
             String sqlQuery = "INSERT INTO UserMessage (SenderID, RecipientID, SubjectTitle, Contents, SentTime) " +
@@ -606,7 +605,7 @@ namespace InventoryManagement.Pages.DB
                 cmdInsertUserMessage.ExecuteNonQuery();
                 cmdInsertUserMessage.Connection.Close();
             }
-=======
+        }
         public static int employeeCheck(int userID)
         {
             SqlCommand cmdCheck = new SqlCommand();
@@ -617,37 +616,9 @@ namespace InventoryManagement.Pages.DB
             cmdCheck.Connection.Open();
             int status = Convert.ToInt32(cmdCheck.ExecuteScalar());
             return status;
->>>>>>> Stashed changes
+
         }
 
-=======
-        public static int employeeCheck(int userID)
-        {
-            SqlCommand cmdCheck = new SqlCommand();
-            cmdCheck.Connection = DBConnection;
-            cmdCheck.Connection.ConnectionString = DBConnString;
-            cmdCheck.CommandText = "SELECT EmployeeStatus FROM users WHERE UserID = @UserID;";
-            cmdCheck.Parameters.AddWithValue("@UserID", userID);
-            cmdCheck.Connection.Open();
-            int status = Convert.ToInt32(cmdCheck.ExecuteScalar());
-            return status;
-        }
-
->>>>>>> Stashed changes
-=======
-        public static int employeeCheck(int userID)
-        {
-            SqlCommand cmdCheck = new SqlCommand();
-            cmdCheck.Connection = DBConnection;
-            cmdCheck.Connection.ConnectionString = DBConnString;
-            cmdCheck.CommandText = "SELECT EmployeeStatus FROM users WHERE UserID = @UserID;";
-            cmdCheck.Parameters.AddWithValue("@UserID", userID);
-            cmdCheck.Connection.Open();
-            int status = Convert.ToInt32(cmdCheck.ExecuteScalar());
-            return status;
-        }
-
->>>>>>> Stashed changes
         public static int adminCheck(int userID)
         {
             SqlCommand cmdCheck = new SqlCommand();
