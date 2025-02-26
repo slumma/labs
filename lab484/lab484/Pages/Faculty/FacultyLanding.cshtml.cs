@@ -31,8 +31,10 @@ namespace lab484.Pages.Faculty
         public bool DisplayAll { get; set; }
         [BindProperty]
         public String TableButton { get; set; } = "Expand";
+        
         public IActionResult OnGet()
         {
+            HttpContext.Session.SetInt32("DisplayAll", 0);
             if (HttpContext.Session.GetString("username") == null)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");
@@ -98,16 +100,18 @@ namespace lab484.Pages.Faculty
 
         public IActionResult OnPostToggleTable()
         {
-            testerOpposite = !DisplayAll;
-            DisplayAll = testerOpposite;
+            bool DisplayAll = (HttpContext.Session.GetInt32("DisplayAll") == 1);
+            
 
             if (DisplayAll)
             {
-                TableButton = "Collapse";
+                TableButton = "Expand";
+                HttpContext.Session.SetInt32("DisplayAll", 0);
             }
             else
             {
-                TableButton = "Expand";
+                TableButton = "Collapse";
+                HttpContext.Session.SetInt32("DisplayAll", 1);
             }
 
             if (HttpContext.Session.GetString("username") == null)
