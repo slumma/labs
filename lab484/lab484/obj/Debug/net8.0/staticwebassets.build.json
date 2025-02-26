@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "j0cjfHhIFcZc1XcUHnHBZIDv1/W1tu2ezjqL7Chi5es=",
+  "Hash": "11jTVHhibJhbTwqIXwKhYYh/yvOmXr0e/jmjuAyzgdU=",
   "Source": "lab484",
   "BasePath": "_content/lab484",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "je1itpd2ew",
-      "Integrity": "ZZfjQO34QlbFGxShMIKUcF5OpburKvBnsFCa3pQWXuo=",
+      "Fingerprint": "28c6h8ihz9",
+      "Integrity": "nktaBOucHDbndtGWijN9h1PgN7abM7t7w2LU3pYkMBw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -1321,6 +1321,51 @@
   ],
   "Endpoints": [
     {
+      "Route": "css/site.28c6h8ihz9.css",
+      "AssetFile": "C:\\CIS 484\\labs\\lab484\\lab484\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "897"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nktaBOucHDbndtGWijN9h1PgN7abM7t7w2LU3pYkMBw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 26 Feb 2025 19:06:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "28c6h8ihz9"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nktaBOucHDbndtGWijN9h1PgN7abM7t7w2LU3pYkMBw="
+        }
+      ]
+    },
+    {
       "Route": "css/site.css",
       "AssetFile": "C:\\CIS 484\\labs\\lab484\\lab484\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -1331,7 +1376,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "857"
+          "Value": "897"
         },
         {
           "Name": "Content-Type",
@@ -1339,11 +1384,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZZfjQO34QlbFGxShMIKUcF5OpburKvBnsFCa3pQWXuo=\""
+          "Value": "\"nktaBOucHDbndtGWijN9h1PgN7abM7t7w2LU3pYkMBw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 24 Feb 2025 20:49:25 GMT"
+          "Value": "Wed, 26 Feb 2025 19:06:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1353,52 +1398,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ZZfjQO34QlbFGxShMIKUcF5OpburKvBnsFCa3pQWXuo="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.je1itpd2ew.css",
-      "AssetFile": "C:\\CIS 484\\labs\\lab484\\lab484\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "857"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZZfjQO34QlbFGxShMIKUcF5OpburKvBnsFCa3pQWXuo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 24 Feb 2025 20:49:25 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "je1itpd2ew"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-ZZfjQO34QlbFGxShMIKUcF5OpburKvBnsFCa3pQWXuo="
+          "Value": "sha256-nktaBOucHDbndtGWijN9h1PgN7abM7t7w2LU3pYkMBw="
         }
       ]
     },
