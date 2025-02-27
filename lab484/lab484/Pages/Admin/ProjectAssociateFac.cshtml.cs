@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
-namespace lab484.Pages.Faculty
+namespace lab484.Pages.Admin
 {
-    public class AssociateFacModel : PageModel
+    public class ProjectAssociateFacModel : PageModel
     {
         [BindProperty]
         public int GrantID { get; set; }
@@ -19,8 +19,10 @@ namespace lab484.Pages.Faculty
         public required List<ProjectStaff> StaffList { get; set; } = new List<ProjectStaff>();
         public List<User> UserList { get; set; } = new List<User>();
 
-        public IActionResult OnGet(int ProjectID, int GrantID)
+        public IActionResult OnGet(int ProjectID )
         {
+            
+
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");
@@ -33,16 +35,13 @@ namespace lab484.Pages.Faculty
             }
 
             this.ProjectID = ProjectID;  // sets the ProjectID
-            this.GrantID = GrantID;      // sets the GrantID
-
-
 
             // populates the ProjectName variable so it can be used
             // checks if there are any staff in list first
-            SqlDataReader projectReader = DBClass.singleProjectReader(ProjectID);
+            SqlDataReader projectReader = DBClass.singleProjectReader(this.ProjectID);
             if (projectReader.Read())
             {
-                ProjectName = projectReader["ProjectName"].ToString();
+                this.ProjectName = projectReader["ProjectName"].ToString();
             }
             DBClass.DBConnection.Close();
 
@@ -89,6 +88,13 @@ namespace lab484.Pages.Faculty
             // Retrieve the User object based on UserID
             User user = DBClass.GetUserByID(UserID);
 
+            SqlDataReader projectReader = DBClass.singleProjectReader(this.ProjectID);
+            if (projectReader.Read())
+            {
+                this.ProjectName = projectReader["ProjectName"].ToString();
+            }
+            DBClass.DBConnection.Close();
+
             if (user != null)
             {
                 // why does ProjectID keep showing as 0 omg 
@@ -100,7 +106,6 @@ namespace lab484.Pages.Faculty
             return RedirectToPage(new
             {
                 ProjectID = this.ProjectID,
-                GrantID = this.GrantID
             });
 
         }

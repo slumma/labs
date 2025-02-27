@@ -9,6 +9,7 @@ namespace lab484.Pages.Admin
 {
     public class ProjectDetailModel : PageModel
     {
+        public int projectID { get; set; }
         public ProjectSimple project { get; set; }
         public List<User> userProjectList { get; set; } = new List<User>();
         public List<User> userTaskList { get; set; } = new List<User>();
@@ -26,6 +27,8 @@ namespace lab484.Pages.Admin
                 HttpContext.Session.SetString("LoginError", "You do not have permission to access that page!");
                 return RedirectToPage("../Index"); // Redirect to login page
             }
+
+            this.projectID = projectID;
 
             project = new ProjectSimple();
 
