@@ -139,7 +139,7 @@ CREATE TABLE userMessage(
     MessageID int Identity(1,1) PRIMARY KEY,
     SenderID int,
     RecipientID int,
-    SubjectTitle text,
-    Contents text,
+    SubjectTitle nvarchar(MAX),
+    Contents nvarchar(MAX),
     SentTime datetime DEFAULT GETDATE(),
     FOREIGN KEY (SenderID) REFERENCES users(UserID));
