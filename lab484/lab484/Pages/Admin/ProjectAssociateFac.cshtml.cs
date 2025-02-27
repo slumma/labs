@@ -45,7 +45,7 @@ namespace lab484.Pages.Admin
             }
             DBClass.DBConnection.Close();
 
-            SqlDataReader facultyReader = DBClass.singleFacultyReader(ProjectID);
+            SqlDataReader facultyReader = DBClass.singleProjectFacultyReader(ProjectID);
             while (facultyReader.Read())
             {
                 StaffList.Add(new ProjectStaff
@@ -103,10 +103,7 @@ namespace lab484.Pages.Admin
 
 
             // reloads the page 
-            return RedirectToPage(new
-            {
-                ProjectID = this.ProjectID,
-            });
+            return RedirectToPage(new {ProjectID = this.ProjectID});
 
         }
     }

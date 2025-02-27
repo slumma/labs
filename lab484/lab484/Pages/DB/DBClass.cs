@@ -76,6 +76,41 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+        public static SqlDataReader singleProjectFacultyReader(int ProjectID)
+        {
+            SqlCommand cmdFacultyReader = new SqlCommand();
+            cmdFacultyReader.Connection = DBConnection;
+            cmdFacultyReader.Connection.ConnectionString = DBConnString;
+            cmdFacultyReader.CommandText = @"SELECT DISTINCT
+                                                u.UserID,
+                                                u.Username,
+                                                u.FirstName,
+                                                u.LastName,
+                                                u.Email,
+                                                u.Phone,
+                                                u.HomeAddress,
+                                                ps.ProjectID,
+                                                p.ProjectName,
+                                                ps.Leader,
+                                                ps.Active
+                                            FROM 
+                                                projectStaff ps
+                                            JOIN 
+                                                users u ON ps.UserID = u.UserID
+                                            JOIN 
+                                                project p ON ps.ProjectID = p.ProjectID
+                                            WHERE 
+                                                ps.ProjectID = @ProjectID;";
+
+            cmdFacultyReader.Parameters.AddWithValue("@ProjectID", ProjectID);
+
+            cmdFacultyReader.Connection.Open(); // Open connection here, close in Model!
+
+            SqlDataReader tempReader = cmdFacultyReader.ExecuteReader();
+
+            return tempReader;
+        }
+
         public static SqlDataReader projectStaffReader(int ProjectID)
         {
             SqlCommand cmdProjectStaffReader = new SqlCommand();
