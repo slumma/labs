@@ -1,3 +1,7 @@
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using InventoryManagement.Pages.DB;
 using lab484.Pages.Data_Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,9 +10,50 @@ namespace lab484.Pages.Faculty
 {
     public class AddGrantNoteModel : PageModel
     {
-        public GrantNote GrantNote { get; set; } = new GrantNote();
-        public void OnGet()
+        [BindProperty]
+        public GrantNote newGrantNote { get; set; } = new GrantNote();
+        public GrantSimple grant {  get; set; } = new GrantSimple();
+        public User user { get; set; } = new User();
+        public IActionResult OnGet(int GrantID)
         {
+            if (HttpContext.Session.GetInt32("loggedIn") != 1)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+            else if (HttpContext.Session.GetInt32("facultyStatus") != 1 && HttpContext.Session.GetInt32("adminStatus") != 1)
+            {
+                HttpContext.Session.SetString("LoginError", "You do not have permission to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+
+            SqlDataReader grantReader = DBClass.SingleGrantReader(GrantID);
+            while (grantReader.Read())
+            {
+                grant.GrantName = grantReader["GrantName"].ToString();
+            }
+            DBClass.DBConnection.Close();
+
+            user = DBClass.GetUserByID(Convert.ToInt32(HttpContext.Session.GetInt32("userID")));
+            DBClass.DBConnection.Close();
+
+            newGrantNote.GrantID = GrantID;
+            newGrantNote.AuthorFirst = user.FirstName;
+            newGrantNote.AuthorLast = user.LastName;
+            newGrantNote.AuthorID = user.UserID;
+            newGrantNote.TimeAdded = DateTime.Now;
+
+            return Page();
+        }
+
+        public IActionResult OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                DBClass.InsertGrantNote(newGrantNote);
+                return RedirectToPage("DetailedView", new { GrantID = newGrantNote.GrantID });
+            }
+            return Page();
         }
     }
 }

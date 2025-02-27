@@ -29,7 +29,7 @@ namespace lab484.Pages.Faculty
             }
 
                 // made a method at the bottom of the file so i dont have to copy and paste it a bunch of times 
-                SupplierList = LoadSuppliers();
+            SupplierList = LoadSuppliers();
             ProjectList = LoadProjects();
 
             return Page();

@@ -6,7 +6,7 @@
         public string Content { get; set; }
         public DateTime TimeAdded { get; set; }
         public int AuthorID { get; set; }
-        public int AuthorLast { get; set; }
-        public int AuthorFirst { get; set; }
+        public string AuthorLast { get; set; }
+        public string AuthorFirst { get; set; }
     }
 }

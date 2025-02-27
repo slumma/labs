@@ -479,6 +479,22 @@ namespace InventoryManagement.Pages.DB
             connection.Close();
         }
 
+        public static void InsertGrantNote(GrantNote newNote)
+        {
+            SqlConnection connection = new SqlConnection(DBConnString);
+
+            String sqlQuery = "INSERT INTO grantNotes(GrantID, Content, AuthorID) VALUES (@GrantID, @Content, @AuthorID);";
+            SqlCommand cmdInsertGrantNote = new SqlCommand(sqlQuery, connection);
+
+            cmdInsertGrantNote.Parameters.AddWithValue("@GrantID", newNote.GrantID);
+            cmdInsertGrantNote.Parameters.AddWithValue("@Content", newNote.Content);
+            cmdInsertGrantNote.Parameters.AddWithValue("@AuthorID", newNote.AuthorID);
+
+            connection.Open();
+            cmdInsertGrantNote.ExecuteNonQuery();
+            connection.Close();
+        }
+
 
         public static User GetUserByID(int userID)
         {
