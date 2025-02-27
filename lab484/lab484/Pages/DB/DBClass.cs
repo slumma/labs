@@ -318,11 +318,12 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdProductRead = new SqlCommand();
             cmdProductRead.Connection = DBConnection;
             cmdProductRead.Connection.ConnectionString = DBConnString;
-            cmdProductRead.CommandText = "SELECT grantSupplier.SupplierID, grantSupplier.SupplierName, OrgType, " +
-                "  grantSupplier.BusinessAddress, bprep.UserID, CommunicationStatus, FirstName,\r\nLastName, email, " +
-                "phone, homeaddress, statusname\r\nfrom grantSupplier\r\nJOIN bprep on grantSupplier.SupplierID = bprep.supplierid" +
-                "\r\nJOIN users on users.userid = bprep.userid " +
-                "\r\nJOIN supplierStatus on grantsupplier.SupplierID = supplierStatus.SupplierID;";
+            cmdProductRead.CommandText = "SELECT grantSupplier.SupplierID, grantSupplier.SupplierName, grantSupplier.SupplierStatus, " +
+            "OrgType, grantSupplier.BusinessAddress, bprep.UserID, CommunicationStatus, users.FirstName, " +
+            "users.LastName, users.Email, users.Phone, users.HomeAddress " +
+            "FROM grantSupplier " +
+            "JOIN bprep ON grantSupplier.SupplierID = bprep.SupplierID " +
+            "JOIN users ON users.UserID = bprep.UserID;";
             cmdProductRead.Connection.Open();
             SqlDataReader tempReader = cmdProductRead.ExecuteReader();
             return tempReader;
