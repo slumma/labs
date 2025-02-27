@@ -49,3 +49,18 @@
     <a class="btn btn-outline-primary" asp-page="AssociateFac" asp-route-GrantID="@Model.grant.GrantID">Associate Member</a>
     <a class="btn btn-outline-primary" asp-page="FacultyLanding">Return to Grant List</a>
 </div>
+<div>
+    <br />
+    <table>
+        <thead>
+            <tr>
+                <td>Note</td>
+                <td>Author</td>
+                <td>Date Added</td>
+            </tr>
+        </thead>
+    </table>
+</div>
+<div>
+    <a class="btn btn-outline-primary" asp-page="AddGrantNote" asp-route-grantID="@Model.grant.GrantID">Add Note</a>
+</div>

@@ -11,15 +11,13 @@ namespace lab484.Pages.Faculty
     {
         [BindProperty]
         public int GrantID { get; set; }
-        [BindProperty]
-        public int ProjectID { get; set; }
 
         // make variable so we can access it w/o reading list 
-        public string ProjectName { get; set; }
-        public required List<ProjectStaff> StaffList { get; set; } = new List<ProjectStaff>();
+        public string GrantName { get; set; }
+        public required List<GrantStaff> StaffList { get; set; } = new List<GrantStaff>();
         public List<User> UserList { get; set; } = new List<User>();
 
-        public IActionResult OnGet(int ProjectID, int GrantID)
+        public IActionResult OnGet(int GrantID)
         {
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
@@ -32,24 +30,23 @@ namespace lab484.Pages.Faculty
                 return RedirectToPage("../Index"); // Redirect to login page
             }
 
-            this.ProjectID = ProjectID;  // sets the ProjectID
             this.GrantID = GrantID;      // sets the GrantID
 
 
 
             // populates the ProjectName variable so it can be used
             // checks if there are any staff in list first
-            SqlDataReader projectReader = DBClass.singleProjectReader(ProjectID);
-            if (projectReader.Read())
+            SqlDataReader grantReader = DBClass.SingleGrantReader(GrantID);
+            if (grantReader.Read())
             {
-                ProjectName = projectReader["ProjectName"].ToString();
+                GrantName = grantReader["GrantName"].ToString();
             }
             DBClass.DBConnection.Close();
 
-            SqlDataReader facultyReader = DBClass.singleFacultyReader(ProjectID);
+            SqlDataReader facultyReader = DBClass.singleFacultyReader(GrantID);
             while (facultyReader.Read())
             {
-                StaffList.Add(new ProjectStaff
+                StaffList.Add(new GrantStaff
                 {
                     UserID = Int32.Parse(facultyReader["UserID"].ToString()),
                     Username = facultyReader["Username"].ToString(),
@@ -58,10 +55,7 @@ namespace lab484.Pages.Faculty
                     Email = facultyReader["Email"].ToString(),
                     Phone = facultyReader["Phone"].ToString(),
                     HomeAddress = facultyReader["HomeAddress"].ToString(),
-                    ProjectID = Int32.Parse(facultyReader["ProjectID"].ToString()),
-                    ProjectName = facultyReader["ProjectName"].ToString(),
-                    Leader = bool.Parse(facultyReader["Leader"].ToString()),
-                    Active = bool.Parse(facultyReader["Active"].ToString())
+                    GrantName = facultyReader["GrantName"].ToString()
                 });
             }
             DBClass.DBConnection.Close();
@@ -89,17 +83,19 @@ namespace lab484.Pages.Faculty
             // Retrieve the User object based on UserID
             User user = DBClass.GetUserByID(UserID);
 
+            Trace.WriteLine($"ProjectID: {this.GrantID}");
+            Trace.WriteLine($"UserID: {UserID}");
+
             if (user != null)
             {
                 // why does ProjectID keep showing as 0 omg 
-                DBClass.InsertProjectStaff(user, this.ProjectID);
+                DBClass.InsertGrantStaff(user, this.GrantID);
             }
 
 
             // reloads the page 
             return RedirectToPage(new
             {
-                ProjectID = this.ProjectID,
                 GrantID = this.GrantID
             });
 
