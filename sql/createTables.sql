@@ -79,7 +79,7 @@ CREATE TABLE meetingMinutes(
     FOREIGN KEY (MeetingID) REFERENCES meeting(MeetingID),
     FOREIGN KEY (UserID) REFERENCES users(UserID));
 
-CREATE TABLE notes(
+CREATE TABLE projectNotes(
     NotesID int Identity(1,1) PRIMARY KEY,
     ProjectID int, 
     Content text, 
@@ -100,6 +100,22 @@ CREATE TABLE grants(
 	GrantStatus nvarchar(200), --temporary
     FOREIGN KEY (SupplierID) REFERENCES grantSupplier(SupplierID),
     FOREIGN KEY (ProjectID) REFERENCES project(ProjectID));
+
+CREATE TABLE grantStaff(
+	grantStaffID int Identity(1,1) PRIMARY KEY,
+	GrantID int,
+	UserID int
+	FOREIGN KEY (UserID) REFERENCES users(UserID),
+    FOREIGN KEY (GrantID) REFERENCES grants(GrantID));
+
+
+CREATE TABLE grantNotes(
+    NotesID int Identity(1,1) PRIMARY KEY,
+    GrantID int, 
+    Content text, 
+    noteDate datetime DEFAULT GETDATE(),
+    FOREIGN KEY (GrantID) REFERENCES grants(GrantID));
+
 
 /* CREATE TABLE grantStatus(
     StatusID int Identity(1,1) PRIMARY KEY,

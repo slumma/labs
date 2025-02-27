@@ -12,6 +12,7 @@
     var loggedIn = Context.Session.GetInt32("loggedIn");
     var adminStatus = Context.Session.GetInt32("adminStatus");
     var facultyStatus = Context.Session.GetInt32("facultyStatus");
+    var username = Context.Session.GetString("username");
 }
 <body>
     @{
@@ -41,12 +42,11 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-page="/Faculty/FacultyLanding">Faculty</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <form method="post" asp-page="/Logout">
-                                            <button type="submit" class="nav-link bg-dark text-light border-0">Logout</button>
-                                        </form>
-                                    </li>
                                 </ul>
+                                <span class="fw-semibold text-dark fs-5">@username</span>
+                                <form asp-page="/Index" asp-page-handler="LogoutHandler" class="ms-3">
+                                    <input type="submit" class="nav-link bg-dark text-light border-0" value="Logout">
+                                </form>
                             </div>
                         </div>
                     </nav>
@@ -73,12 +73,11 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-page="/Faculty/FacultyLanding">Faculty</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <form method="post" asp-page="/Logout">
-                                            <button type="submit" class="nav-link bg-dark text-light border-0">Logout</button>
-                                        </form>
-                                    </li>
                                 </ul>
+                                <span class="fw-semibold text-dark fs-5">@username</span>
+                                <form asp-page="/Index" asp-page-handler="LogoutHandler" class="ms-3">
+                                    <input type="submit" class="nav-link bg-dark text-light border-0" value="Logout">
+                                </form>
                             </div>
                         </div>
                     </nav>
@@ -102,12 +101,11 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-page="/Messages">Messages</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <form method="post" asp-page="/Logout">
-                                            <button type="submit" class="nav-link bg-dark text-light border-0">Logout</button>
-                                        </form>
-                                    </li>
                                 </ul>
+                                <span class="fw-semibold text-dark fs-5">@username</span>
+                                <form asp-page="/Index" asp-page-handler="LogoutHandler" class="ms-3">
+                                    <input type="submit" class="nav-link bg-dark text-light border-0" value="Logout">
+                                </form>
                             </div>
                         </div>
                     </nav>
@@ -127,12 +125,11 @@
                         </button>
                         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                             <ul class="navbar-nav flex-grow-1">
-                                <li class="nav-item">
-                                    <form method="post" asp-page="/Logout">
-                                        <button type="submit" class="nav-link bg-dark text-light border-0">Logout</button>
-                                    </form>
-                                </li>
                             </ul>
+                            <span class="fw-semibold text-dark fs-5">@username</span>
+                            <form asp-page="/Index" asp-page-handler="LogoutHandler" class="ms-3">
+                                <input type="submit" class="nav-link bg-dark text-light border-0" value="Logout">
+                            </form>
                         </div>
                     </div>
                 </nav>

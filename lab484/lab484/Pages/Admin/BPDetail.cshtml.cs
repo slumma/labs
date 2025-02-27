@@ -1,11 +1,16 @@
+using InventoryManagement.Pages.DB;
+using lab484.Pages.Data_Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data.SqlClient;
 
 namespace lab484.Pages.Admin
 {
     public class BPDetailModel : PageModel
     {
-        // not done
+        public BusinessPartner BP {  get; set; }
+
+
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
@@ -18,6 +23,26 @@ namespace lab484.Pages.Admin
                 HttpContext.Session.SetString("LoginError", "You do not have permission to access that page!");
                 return RedirectToPage("../Index"); // Redirect to login page
             }
+
+            SqlDataReader BPReader = DBClass.BPReader();
+            BP = new BusinessPartner();
+
+            while (BPReader.Read())
+            {
+                BP.SupplierID = Convert.ToInt32(BPReader["SupplierID"].ToString());
+            } 
+        
+           /* public int SupplierID { get; set; }
+        public String SupplierName { get; set; }
+        public String OrgType { get; set; }
+        public String? CommunicationStatus { get; set; }
+        public int UserID { get; set; }
+        public String? FirstName { get; set; }
+        public String? LastName { get; set; }
+        public String? Email { get; set; }
+        public String? Phone { get; set; }
+        public String? HomeAddress { get; set; }
+        public String? StatusName { get; set; }*/
 
             return Page();
         }

@@ -174,7 +174,39 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
-        public static SqlDataReader GrantReader()
+        public static SqlDataReader facGrantReader(int currentUserID)
+        {
+            SqlCommand cmdGrantReader = new SqlCommand();
+            cmdGrantReader.Connection = DBConnection;
+            cmdGrantReader.Connection.ConnectionString = DBConnString;
+            cmdGrantReader.CommandText = @"SELECT 
+                                            g.GrantID, 
+                                            g.GrantName,
+                                            p.ProjectID,
+                                            s.SupplierName AS Supplier, 
+                                            p.ProjectName AS Project, 
+                                            g.Amount,
+                                            g.Category,
+                                            g.GrantStatus, 
+                                            g.descriptions,
+                                            g.SubmissionDate, 
+                                            g.AwardDate
+                                        FROM grants g
+                                        JOIN grantStaff ON g.grantID = grantstaff.grantID
+                                        JOIN users ON grantstaff.userID = users.userID
+                                        JOIN grantSupplier s ON g.SupplierID = s.SupplierID
+                                        LEFT JOIN project p ON g.ProjectID = p.ProjectID
+                                        WHERE users.userID = @UserID
+                                        ORDER BY g.AwardDate";
+
+
+            cmdGrantReader.Connection.Open();
+            cmdGrantReader.Parameters.AddWithValue("@UserID", currentUserID);
+            SqlDataReader tempReader = cmdGrantReader.ExecuteReader();
+            return tempReader;
+        }
+
+        public static SqlDataReader adminGrantReader()
         {
             SqlCommand cmdGrantReader = new SqlCommand();
             cmdGrantReader.Connection = DBConnection;
@@ -201,7 +233,6 @@ namespace InventoryManagement.Pages.DB
             SqlDataReader tempReader = cmdGrantReader.ExecuteReader();
             return tempReader;
         }
-
 
         public static SqlDataReader singleProjectReader(int ProjectID)
         {
@@ -306,6 +337,7 @@ namespace InventoryManagement.Pages.DB
             string insertSupplierQuery = "INSERT INTO grantSupplier (SupplierName) OUTPUT INSERTED.SupplierID VALUES (@Supplier)";
             string updateGrantQuery = "UPDATE grants SET " +
                                       "SupplierID = @SupplierID, " +
+                                      "GrantName = @GrantName," +
                                       "Amount = @Amount, " +
                                       "Category = @Category, " +
                                       "StatusName = @StatusName, " +
@@ -337,6 +369,7 @@ namespace InventoryManagement.Pages.DB
                 using (SqlCommand cmdGrantUpdate = new SqlCommand(updateGrantQuery, connection))
                 {
                     cmdGrantUpdate.Parameters.AddWithValue("@SupplierID", supplierId);
+                    cmdGrantUpdate.Parameters.AddWithValue("@GrantName", grant.GrantName);
                     cmdGrantUpdate.Parameters.AddWithValue("@Amount", grant.Amount);
                     cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Category);
                     cmdGrantUpdate.Parameters.AddWithValue("@StatusName", grant.Status);

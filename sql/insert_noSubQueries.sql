@@ -2,12 +2,12 @@ INSERT INTO users (Username, Password, FirstName, LastName, Email, Phone, HomeAd
 VALUES
 ('samogden', 'password123', 'sam', 'ogden', 'sam@example.com', '555-1234', '123 Elm St', 1, 1, 1, 1),
 ('nickclement', 'password456', 'nick', 'clement', 'nickclement@example.com', '555-5678', '456 Oak St', 1, 1, 1, 1),
-('nadeemhudson', 'password789', 'nadeem', 'hudson', 'nadeemhudson@example.com', '555-9876', '789 Pine St', 1, 1, 1, 1),
-('joshwhite', 'password234', 'josh', 'White', 'joshwhite@example.com', '555-2234', '321 Birch St', 1, 1, 1, 1),
-('sharons', 'password567', 'sharon', 'sanchez', 'shrnsnchz@example.com', '555-6789', '654 Cedar St', 1, 1, 1, 1),
+('nadeemhudson', 'password789', 'nadeem', 'hudson', 'nadeemhudson@example.com', '555-9876', '789 Pine St', 0, 1, 1, 1),
+('joshwhite', 'password234', 'josh', 'White', 'joshwhite@example.com', '555-2234', '321 Birch St', 0, 1, 0, 1),
+('sharons', 'password567', 'sharon', 'sanchez', 'shrnsnchz@example.com', '555-6789', '654 Cedar St', 0, 0, 0, 1),
 ('theGoat', 'password890', 'the', 'goat', 'thegoat17@example.com', '555-7890', '987 Spruce St', 1, 1, 1, 1),
 ('haileyWelch', 'password101', 'hailey', 'welch', 'haileyWelch238@example.com', '555-1010', '109 Maple St', 1, 1, 1, 1),
-('hawkTuah', 'password112', 'hawk', 'tuah', 'hawktuah838@example.com', '555-1212', '210 Oak St', 1, 1, 1, 1),
+('hawkTuah', 'password112', 'hawk', 'tuah', 'hawktuah838@example.com', '555-1212', '210 Oak St', 0, 0, 0, 0),
 ('yourBoy', 'password213', 'your', 'boy', 'yourboy87392@example.com', '555-1414', '312 Pine St', 1, 1, 1, 1),
 ('BabikDmx', 'password314', 'dmytro', 'babik', 'dmytrobabik43@example.com', '555-1515', '413 Elm St', 1, 1, 1, 1),
 ('samO', 'password314', 'sam', 'o', 'samoGden@example.com', '555-1515', '413 Elm St', 1, 1, 1, 1);
@@ -139,7 +139,7 @@ VALUES
 
 
 
-INSERT INTO notes (ProjectID, Content, noteDate)
+INSERT INTO projectNotes (ProjectID, Content, noteDate)
 VALUES
 (1, 'Initial notes for Project Alpha', '2025-02-20'),
 (2, 'Development notes for Project Beta', '2025-04-15'),
@@ -151,8 +151,6 @@ VALUES
 (8, 'Launch notes for Project Theta', '2025-11-01'),
 (9, 'Requirement notes for Project Iota', '2025-02-15'),
 (10, 'Assessment notes for Project Kappa', '2025-10-01');
-
-
 
 INSERT INTO grants (SupplierID, GrantName, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount, GrantStatus)
 VALUES
@@ -172,7 +170,33 @@ VALUES
 (5, 'Bus from Speed', 2, 'Under Review', 'State', '2025-03-20', 'Grant for state projects', '2025-07-20', 75000, 'Pending'),
 (1, 'Tom Cruise', 3, 'Awarded', 'Business', '2025-06-20', 'Grant for business ventures', '2025-11-20', 195000, 'Inactive');
 
+INSERT INTO grantStaff(GrantID, UserID)
+VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10);
 
+INSERT INTO grantNotes (GrantID, Content, noteDate)
+VALUES
+(1, 'Took out trash', '2025-02-20'),
+(2, 'Emptied Dishwasher', '2025-04-15'),
+(3, 'Eggs are my favorite food', '2025-08-01'),
+(4, 'Dogs > Cats', '2025-03-20'),
+(5, 'Money money money money!', '2025-05-15'),
+(6, 'Elephant Ellipses', '2025-07-01'),
+(7, 'Eta more like beta', '2025-09-01'),
+(8, 'icloud.com/checkthispage', '2025-11-01'),
+(9, 'im running out of notes to write', '2025-02-15'),
+(10, 'thank god this is the last one', '2025-10-01');
 
 /*INSERT INTO grantStatus (GrantID, StatusName, ChangeDate)
 VALUES

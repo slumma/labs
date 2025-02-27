@@ -3,10 +3,28 @@
 @{
 }
 
+<div class="alert alert-danger">
+    <ul>
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <li>@error.ErrorMessage</li>
+        }
+    </ul>
+</div>
+
 <h2>Editing Grant:</h2>
 <form method="post" class="form-horizontal">
     <input type="hidden" asp-for="GrantToUpdate.GrantID" />
 
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" asp-for="GrantToUpdate.GrantName">Grant Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" asp-for="GrantToUpdate.GrantName" required />
+            <span asp-validation-for="GrantToUpdate.GrantName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <br />
     <div class="form-group row">
         <label class="col-sm-2 col-form-label" asp-for="GrantToUpdate.Supplier"></label>
         <div class="col-sm-10">

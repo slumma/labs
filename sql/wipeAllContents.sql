@@ -8,8 +8,10 @@ DELETE FROM userMessage;
 /*DELETE FROM grantStatus;
 DELETE FROM supplierStatus;*/
 DELETE FROM grants;
-DELETE FROM notes;
+DELETE FROM projectNotes;
+DELETE FROM grantNotes;
 DELETE FROM taskStaff;
+DELETE FROM grantStaff;
 DELETE FROM task;
 DELETE FROM projectStaff;
 DELETE FROM meeting;

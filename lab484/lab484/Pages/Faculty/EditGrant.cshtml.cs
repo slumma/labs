@@ -34,6 +34,7 @@ namespace lab484.Pages.Faculty
                     GrantToUpdate = new GrantSimple
                     {
                         GrantID = Int32.Parse(grantReader["GrantID"].ToString()),
+                        GrantName = grantReader["GrantName"].ToString(),
                         ProjectID = grantReader["ProjectID"] != DBNull.Value ? (int?)Int32.Parse(grantReader["ProjectID"].ToString()) : null,
                         Supplier = grantReader["Supplier"].ToString(),
                         Project = grantReader["Project"] != DBNull.Value ? grantReader["Project"].ToString() : null,
@@ -61,7 +62,13 @@ namespace lab484.Pages.Faculty
                 DBClass.UpdateGrant(GrantToUpdate);
                 return RedirectToPage("FacultyLanding");
             }
-
+            else
+            {
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine($"Error: {error.ErrorMessage}");
+                }
+            }
             return Page();
         }
 
