@@ -45,7 +45,7 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
-        public static SqlDataReader singleFacultyReader(int ProjectID)
+        public static SqlDataReader singleFacultyReader(int GrantID)
         {
             SqlCommand cmdFacultyReader = new SqlCommand();
             cmdFacultyReader.Connection = DBConnection;
@@ -58,19 +58,16 @@ namespace InventoryManagement.Pages.DB
                                             u.Email,
                                             u.Phone,
                                             u.HomeAddress,
-                                            ps.ProjectID,
-                                            p.ProjectName,
-                                            ps.Leader,
-                                            ps.Active
+                                            g.GrantName
                                         FROM 
-                                            projectStaff ps
+                                            grantStaff gs
                                         JOIN 
-                                            users u ON ps.UserID = u.UserID
+                                            users u ON gs.UserID = u.UserID
                                         JOIN 
-                                            project p ON ps.ProjectID = p.ProjectID
-                                        WHERE ps.ProjectID = @ProjectID AND u.FacultyStatus = 1;";
+                                            grants g ON gs.GrantID = g.GrantID
+                                        WHERE gs.GrantID = @GrantID;";
 
-            cmdFacultyReader.Parameters.AddWithValue("@ProjectID", ProjectID);
+            cmdFacultyReader.Parameters.AddWithValue("@GrantID", GrantID);
 
             cmdFacultyReader.Connection.Open(); // Open connection here, close in Model!
 
@@ -417,18 +414,35 @@ namespace InventoryManagement.Pages.DB
             SqlConnection connection = new SqlConnection(DBConnString);
 
             String sqlQuery = "INSERT INTO projectStaff (UserID, ProjectID, Leader, Active) VALUES(@UserID, @ProjectID, 0, 1);";
-            SqlCommand cmdInsertProduct = new SqlCommand(sqlQuery, connection);
+            SqlCommand cmdInsertProjectStaff = new SqlCommand(sqlQuery, connection);
 
             // Add parameters to the command
-            cmdInsertProduct.Parameters.AddWithValue("@UserID", u.UserID);
-            cmdInsertProduct.Parameters.AddWithValue("@ProjectID", projectID);
+            cmdInsertProjectStaff.Parameters.AddWithValue("@UserID", u.UserID);
+            cmdInsertProjectStaff.Parameters.AddWithValue("@ProjectID", projectID);
 
             connection.Open();
-            int rowsAffected = cmdInsertProduct.ExecuteNonQuery();
+            int rowsAffected = cmdInsertProjectStaff.ExecuteNonQuery();
 
             connection.Close();
         }
 
+        public static void InsertGrantStaff(User u, int grantID)
+        {
+
+            SqlConnection connection = new SqlConnection(DBConnString);
+
+            String sqlQuery = "INSERT INTO grantStaff (UserID, grantID) VALUES (@UserID, @ProjectID);";
+            SqlCommand cmdInsertGrantStaff = new SqlCommand(sqlQuery, connection);
+
+            // Add parameters to the command
+            cmdInsertGrantStaff.Parameters.AddWithValue("@UserID", u.UserID);
+            cmdInsertGrantStaff.Parameters.AddWithValue("@ProjectID", grantID);
+
+            connection.Open();
+            int rowsAffected = cmdInsertGrantStaff.ExecuteNonQuery();
+
+            connection.Close();
+        }
 
 
         public static User GetUserByID(int userID)
