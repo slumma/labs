@@ -70,7 +70,7 @@ CREATE TABLE attendance(
     UserID int,
     FOREIGN KEY (MeetingID) REFERENCES meeting(MeetingID),
     FOREIGN KEY (UserID) REFERENCES users(UserID));
-
+	--test
 CREATE TABLE meetingMinutes(
     MinutesID int Identity(1,1) PRIMARY KEY,
     MeetingID int,
@@ -82,9 +82,11 @@ CREATE TABLE meetingMinutes(
 CREATE TABLE projectNotes(
     NotesID int Identity(1,1) PRIMARY KEY,
     ProjectID int, 
+	AuthorID int,
     Content text, 
     noteDate datetime DEFAULT GETDATE(),
-    FOREIGN KEY (ProjectID) REFERENCES project(ProjectID));
+    FOREIGN KEY (ProjectID) REFERENCES project(ProjectID),
+	FOREIGN KEY (AuthorID) REFERENCES users(UserID));
 
 CREATE TABLE grants(
     GrantID int Identity(1,1) PRIMARY KEY,
@@ -112,9 +114,11 @@ CREATE TABLE grantStaff(
 CREATE TABLE grantNotes(
     NotesID int Identity(1,1) PRIMARY KEY,
     GrantID int, 
+	AuthorID int,
     Content text, 
     noteDate datetime DEFAULT GETDATE(),
-    FOREIGN KEY (GrantID) REFERENCES grants(GrantID));
+    FOREIGN KEY (GrantID) REFERENCES grants(GrantID),
+	FOREIGN KEY (AuthorID) REFERENCES users(UserID));
 
 
 /* CREATE TABLE grantStatus(

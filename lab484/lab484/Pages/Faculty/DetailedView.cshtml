@@ -2,65 +2,67 @@
 @model lab484.Pages.Faculty.DetailedViewModel
 @{
 }
-
-<h2>Grant Details</h2>
-<table class="table table-bordered">
-    <tbody>
-        <tr>
-            <th>Grant Name</th>
-            <td>@Model.grant.GrantName</td>
-        </tr>
-        <tr>
-            <th>Supplier</th>
-            <td>@Model.grant.Supplier</td>
-        </tr>
-        <tr>
-            <th>Project</th>
-            <td>@Model.grant.Project</td>
-        </tr>
-        <tr>
-            <th>Amount</th>
-            <td>@Model.grant.Amount.ToString("C")</td>
-        </tr>
-        <tr>
-            <th>Category</th>
-            <td>@Model.grant.Category</td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>@Model.grant.Status</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>@Model.grant.Description</td>
-        </tr>
-        <tr>
-            <th>Submission Date</th>
-            <td>@Model.grant.SubmissionDate.ToString("MM/dd/yyyy")</td>
-        </tr>
-        <tr>
-            <th>Award Date</th>
-            <td>@Model.grant.AwardDate.ToString("MM/dd/yyyy")</td>
-        </tr>
-    </tbody>
-</table>
+<div class="container mt-4 p-4 border rounded bg-light">
+    <h3>Project Staff</h3>
+    <table class="table table-bordered table-responsive table-hover bg-white">
+        <tbody>
+            <tr>
+                <th>Grant Name</th>
+                <td>@Model.grant.GrantName</td>
+            </tr>
+            <tr>
+                <th>Supplier</th>
+                <td>@Model.grant.Supplier</td>
+            </tr>
+            <tr>
+                <th>Project</th>
+                <td>@Model.grant.Project</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>@Model.grant.Amount.ToString("C")</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>@Model.grant.Category</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>@Model.grant.Status</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>@Model.grant.Description</td>
+            </tr>
+            <tr>
+                <th>Submission Date</th>
+                <td>@Model.grant.SubmissionDate.ToString("MM/dd/yyyy")</td>
+            </tr>
+            <tr>
+                <th>Award Date</th>
+                <td>@Model.grant.AwardDate.ToString("MM/dd/yyyy")</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <div class="text-center">
     <a class="btn btn-outline-primary" asp-page="EditGrant" asp-route-grantID="@Model.grant.GrantID">Edit Grant</a>
     <a class="btn btn-outline-primary" asp-page="AssociateFac" asp-route-GrantID="@Model.grant.GrantID">Associate Member</a>
     <a class="btn btn-outline-primary" asp-page="FacultyLanding">Return to Grant List</a>
 </div>
-<div>
-    <br />
-    <table>
+<div class="container mt-4 p-4 border rounded bg-light">
+    <h3>Project Staff</h3>
+    <table class="table table-bordered table-responsive table-hover bg-white">
         <thead>
             <tr>
-                <td>Note</td>
-                <td>Author</td>
-                <td>Date Added</td>
+                <th>Note</th>
+                <th>Author</th>
+                <th>Date Added</th>
             </tr>
         </thead>
     </table>
 </div>
-<div>
+<div class="text-center">
+    <br />
     <a class="btn btn-outline-primary" asp-page="AddGrantNote" asp-route-grantID="@Model.grant.GrantID">Add Note</a>
 </div>
