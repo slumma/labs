@@ -39,7 +39,7 @@ namespace lab484.Pages.Admin
                     SupplierID = Int32.Parse(bpReader["SupplierID"].ToString()),
                     SupplierName = bpReader["SupplierName"].ToString(),
                     OrgType = bpReader["OrgType"].ToString(),
-                    StatusName = bpReader["SupplierStatus"].ToString()
+                    SupplierStatus = bpReader["SupplierStatus"].ToString()
                 });
             }
             DBClass.DBConnection.Close();
