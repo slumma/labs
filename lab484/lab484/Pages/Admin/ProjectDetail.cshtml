@@ -84,6 +84,37 @@
 
 <br />
 
+<div class="container mt-4 p-4 border rounded bg-light">
+	<h3>Project Notes</h3>
+	<table class="table table-bordered table-responsive table-hover bg-white">
+		<thead>
+			<tr>
+				<th>Note</th>
+				<th>Author</th>
+				<th>Date Added</th>
+			</tr>
+		</thead>
+		<tbody>
+			@{
+				foreach (var note in Model.noteList)
+				{
+					<tr>
+						<td>@note.Content</td>
+						<td>@note.AuthorFirst @note.AuthorLast</td>
+						<td>@note.TimeAdded</td>
+					</tr>
+				}
+			}
+		</tbody>
+	</table>
+</div>
+<div class="text-center">
+	<br />
+	<a class="btn btn-outline-primary" asp-page="AddProjectNote" asp-route-projectID="@Model.projectID">Add Note</a>
+</div>
+
+<br />
+
 <div class="container text-center mt-4">
 	<a class="btn btn-outline-primary" asp-page="AdminLanding">Return to Projects</a>
 </div>

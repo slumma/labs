@@ -503,7 +503,7 @@ namespace InventoryManagement.Pages.DB
             SqlCommand cmdViewNotes = new SqlCommand(DBConnString);
             cmdViewNotes.Connection = DBConnection;
             cmdViewNotes.Connection.ConnectionString = DBConnString;
-            cmdViewNotes.CommandText = @"SELECT * FROM grantNotes JOIN users ON grantNotes.AuthorID = users.UserID WHERE GrantID = @GrantID";
+            cmdViewNotes.CommandText = @"SELECT * FROM grantNotes JOIN users ON grantNotes.AuthorID = users.UserID WHERE GrantID = @GrantID;";
 
             cmdViewNotes.Parameters.AddWithValue("@GrantID", GrantID);
 
@@ -512,6 +512,38 @@ namespace InventoryManagement.Pages.DB
             SqlDataReader tempReader = cmdViewNotes.ExecuteReader();
 
             return tempReader;
+        }
+
+        public static SqlDataReader ProjectNoteReader(int ProjectID)
+        {
+            SqlCommand cmdViewNotes = new SqlCommand(DBConnString);
+            cmdViewNotes.Connection = DBConnection;
+            cmdViewNotes.Connection.ConnectionString = DBConnString;
+            cmdViewNotes.CommandText = @"SELECT * FROM projectNotes JOIN users ON projectNotes.AuthorID = users.UserID WHERE projectID = @ProjectID;";
+
+            cmdViewNotes.Parameters.AddWithValue("@ProjectID", ProjectID);
+
+            cmdViewNotes.Connection.Open();
+
+            SqlDataReader tempReader = cmdViewNotes.ExecuteReader();
+
+            return tempReader;
+        }
+
+        public static void InsertProjectNote(ProjectNote newNote)
+        {
+            SqlConnection connection = new SqlConnection(DBConnString);
+
+            String sqlQuery = "INSERT INTO projectNotes(ProjectID, Content, AuthorID) VALUES (@GrantID, @Content, @AuthorID);";
+            SqlCommand cmdInsertGrantNote = new SqlCommand(sqlQuery, connection);
+
+            cmdInsertGrantNote.Parameters.AddWithValue("@GrantID", newNote.ProjectID);
+            cmdInsertGrantNote.Parameters.AddWithValue("@Content", newNote.Content);
+            cmdInsertGrantNote.Parameters.AddWithValue("@AuthorID", newNote.AuthorID);
+
+            connection.Open();
+            cmdInsertGrantNote.ExecuteNonQuery();
+            connection.Close();
         }
 
         public static User GetUserByID(int userID)

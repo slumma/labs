@@ -1,21 +1,19 @@
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Diagnostics;
 using InventoryManagement.Pages.DB;
 using lab484.Pages.Data_Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data.SqlClient;
 
-namespace lab484.Pages.Faculty
+namespace lab484.Pages.Admin
 {
-    public class AddGrantNoteModel : PageModel
+    public class AddProjectNoteModel : PageModel
     {
         [BindProperty]
-        public GrantNote newGrantNote { get; set; } = new GrantNote();
-        public GrantSimple grant {  get; set; } = new GrantSimple();
+        public ProjectNote newProjectNote { get; set; } = new ProjectNote();
+        public ProjectSimple project { get; set; } = new ProjectSimple();
         public User user { get; set; } = new User();
-        public int GrantID { get; set; }
-        public IActionResult OnGet(int GrantID)
+        public int ProjectID { get; set; }
+        public IActionResult OnGet(int ProjectID)
         {
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
@@ -28,23 +26,23 @@ namespace lab484.Pages.Faculty
                 return RedirectToPage("../Index"); // Redirect to login page
             }
 
-            this.GrantID = GrantID;
+            this.ProjectID = ProjectID;
 
-            SqlDataReader grantReader = DBClass.SingleGrantReader(GrantID);
-            while (grantReader.Read())
+            SqlDataReader projectReader = DBClass.singleProjectReader(ProjectID);
+            while (projectReader.Read())
             {
-                grant.GrantName = grantReader["GrantName"].ToString();
+                project.ProjectName = projectReader["ProjectName"].ToString();
             }
             DBClass.DBConnection.Close();
 
             user = DBClass.GetUserByID(Convert.ToInt32(HttpContext.Session.GetInt32("userID")));
             DBClass.DBConnection.Close();
 
-            newGrantNote.GrantID = GrantID;
-            newGrantNote.AuthorFirst = user.FirstName;
-            newGrantNote.AuthorLast = user.LastName;
-            newGrantNote.AuthorID = user.UserID;
-            newGrantNote.TimeAdded = DateTime.Now;
+            newProjectNote.ProjectID = ProjectID;
+            newProjectNote.AuthorFirst = user.FirstName;
+            newProjectNote.AuthorLast = user.LastName;
+            newProjectNote.AuthorID = user.UserID;
+            newProjectNote.TimeAdded = DateTime.Now;
 
             return Page();
         }
@@ -53,8 +51,8 @@ namespace lab484.Pages.Faculty
         {
             if (ModelState.IsValid)
             {
-                DBClass.InsertGrantNote(newGrantNote);
-                return RedirectToPage("DetailedView", new { GrantID = newGrantNote.GrantID });
+                DBClass.InsertProjectNote(newProjectNote);
+                return RedirectToPage("ProjectDetail", new { ProjectID = newProjectNote.ProjectID });
             }
             return Page();
         }
@@ -62,7 +60,7 @@ namespace lab484.Pages.Faculty
         public IActionResult OnPostClear()
         {
             ModelState.Clear();
-            newGrantNote = new GrantNote();
+            newProjectNote = new ProjectNote();
             return Page();
         }
     }

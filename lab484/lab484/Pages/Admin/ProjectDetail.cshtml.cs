@@ -15,6 +15,7 @@ namespace lab484.Pages.Admin
         public List<User> userTaskList { get; set; } = new List<User>();
         public List<TaskStaff> taskStaffList { get; set; } = new List<TaskStaff>();
         public List<Tasks> taskList { get; set; } = new List<Tasks>();
+        public List<ProjectNote> noteList { get; set; } = new List<ProjectNote>();
         public IActionResult OnGet(int projectID)
         {
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
@@ -88,7 +89,23 @@ namespace lab484.Pages.Admin
             }
             DBClass.DBConnection.Close();
 
+            SqlDataReader noteReader = DBClass.ProjectNoteReader(projectID);
+            while (noteReader.Read())
+            {
+                noteList.Add(new ProjectNote
+                {
+                    ProjectID = Convert.ToInt32(noteReader["ProjectID"]),
+                    Content = noteReader["Content"].ToString(),
+                    AuthorFirst = noteReader["FirstName"].ToString(),
+                    AuthorLast = noteReader["LastName"].ToString(),
+                    TimeAdded = Convert.ToDateTime(noteReader["NoteDate"].ToString())
+                });
+            }
+            DBClass.DBConnection.Close();
+
             return Page();
+
+
         }
     }
 }
