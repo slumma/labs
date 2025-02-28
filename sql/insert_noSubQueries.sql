@@ -139,18 +139,18 @@ VALUES
 
 
 
-INSERT INTO projectNotes (ProjectID, Content, noteDate)
+INSERT INTO projectNotes (ProjectID, AuthorID, Content, noteDate)
 VALUES
-(1, 'Initial notes for Project Alpha', '2025-02-20'),
-(2, 'Development notes for Project Beta', '2025-04-15'),
-(3, 'Review notes for Project Gamma', '2025-08-01'),
-(4, 'Concept notes for Project Delta', '2025-03-20'),
-(5, 'Planning notes for Project Epsilon', '2025-05-15'),
-(6, 'Design notes for Project Zeta', '2025-07-01'),
-(7, 'Prototype notes for Project Eta', '2025-09-01'),
-(8, 'Launch notes for Project Theta', '2025-11-01'),
-(9, 'Requirement notes for Project Iota', '2025-02-15'),
-(10, 'Assessment notes for Project Kappa', '2025-10-01');
+(1, 1, 'Initial notes for Project Alpha', '2025-02-20'),
+(2, 2, 'Development notes for Project Beta', '2025-04-15'),
+(3, 3, 'Review notes for Project Gamma', '2025-08-01'),
+(4, 4, 'Concept notes for Project Delta', '2025-03-20'),
+(5, 5, 'Planning notes for Project Epsilon', '2025-05-15'),
+(6, 6, 'Design notes for Project Zeta', '2025-07-01'),
+(7, 7, 'Prototype notes for Project Eta', '2025-09-01'),
+(8, 8, 'Launch notes for Project Theta', '2025-11-01'),
+(9, 9, 'Requirement notes for Project Iota', '2025-02-15'),
+(10, 10, 'Assessment notes for Project Kappa', '2025-10-01');
 
 INSERT INTO grants (SupplierID, GrantName, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount, GrantStatus)
 VALUES
@@ -185,18 +185,18 @@ VALUES
 (9, 9),
 (10, 10);
 
-INSERT INTO grantNotes (GrantID, Content, noteDate)
+INSERT INTO grantNotes (GrantID, AuthorID, Content, noteDate)
 VALUES
-(1, 'Took out trash', '2025-02-20'),
-(2, 'Emptied Dishwasher', '2025-04-15'),
-(3, 'Eggs are my favorite food', '2025-08-01'),
-(4, 'Dogs > Cats', '2025-03-20'),
-(5, 'Money money money money!', '2025-05-15'),
-(6, 'Elephant Ellipses', '2025-07-01'),
-(7, 'Eta more like beta', '2025-09-01'),
-(8, 'icloud.com/checkthispage', '2025-11-01'),
-(9, 'im running out of notes to write', '2025-02-15'),
-(10, 'thank god this is the last one', '2025-10-01');
+(1, 1, 'Took out trash', '2025-02-20'),
+(2, 2, 'Emptied Dishwasher', '2025-04-15'),
+(3, 3, 'Eggs are my favorite food', '2025-08-01'),
+(4, 4, 'Dogs > Cats', '2025-03-20'),
+(5, 5, 'Money money money money!', '2025-05-15'),
+(6, 6, 'Elephant Ellipses', '2025-07-01'),
+(7, 7, 'Eta more like beta', '2025-09-01'),
+(8, 8, 'icloud.com/checkthispage', '2025-11-01'),
+(9, 9, 'im running out of notes to write', '2025-02-15'),
+(10, 10, 'thank god this is the last one', '2025-10-01');
 
 /*INSERT INTO grantStatus (GrantID, StatusName, ChangeDate)
 VALUES

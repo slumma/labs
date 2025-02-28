@@ -84,7 +84,7 @@ CREATE TABLE projectNotes(
     ProjectID int, 
 	AuthorID int,
     Content text, 
-    noteDate datetime DEFAULT GETDATE(),
+    NoteDate datetime DEFAULT GETDATE(),
     FOREIGN KEY (ProjectID) REFERENCES project(ProjectID),
 	FOREIGN KEY (AuthorID) REFERENCES users(UserID));
 
@@ -116,7 +116,7 @@ CREATE TABLE grantNotes(
     GrantID int, 
 	AuthorID int,
     Content text, 
-    noteDate datetime DEFAULT GETDATE(),
+    NoteDate datetime DEFAULT GETDATE(),
     FOREIGN KEY (GrantID) REFERENCES grants(GrantID),
 	FOREIGN KEY (AuthorID) REFERENCES users(UserID));
 
