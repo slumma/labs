@@ -1,4 +1,5 @@
 ﻿using lab484.Pages.Data_Classes;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -496,6 +497,22 @@ namespace InventoryManagement.Pages.DB
             connection.Close();
         }
 
+        
+        public static SqlDataReader GrantNoteReader(int GrantID)
+        {
+            SqlCommand cmdViewNotes = new SqlCommand(DBConnString);
+            cmdViewNotes.Connection = DBConnection;
+            cmdViewNotes.Connection.ConnectionString = DBConnString;
+            cmdViewNotes.CommandText = @"SELECT * FROM grantNotes JOIN users ON grantNotes.AuthorID = users.UserID WHERE GrantID = @GrantID";
+
+            cmdViewNotes.Parameters.AddWithValue("@GrantID", GrantID);
+
+            cmdViewNotes.Connection.Open();
+
+            SqlDataReader tempReader = cmdViewNotes.ExecuteReader();
+
+            return tempReader;
+        }
 
         public static User GetUserByID(int userID)
         {
@@ -603,13 +620,29 @@ namespace InventoryManagement.Pages.DB
             return tempReader;
         }
 
+       /* string insertProjectQuery = "INSERT INTO dbo.project (ProjectName, DueDate) VALUES (@ProjectName, @DueDate); SELECT SCOPE_IDENTITY();";
+        string insertProjectStaffQuery = "INSERT INTO dbo.projectStaff (ProjectID, UserID, Leader, Active) VALUES (@ProjectID, @UserID, @Leader, @Active)";
 
-        public static void InsertGrant(GrantSimple g, int supplierID, int projectID)
+            using (SqlConnection connection = new SqlConnection(DBClass.DBConnString))
+            {
+                connection.Open();
+
+                using (SqlCommand cmdProjectInsert = new SqlCommand(insertProjectQuery, connection))
+                {
+                    cmdProjectInsert.Parameters.AddWithValue("@ProjectName", project.ProjectName);
+                    cmdProjectInsert.Parameters.AddWithValue("@DueDate", project.DueDate);
+
+                    project.ProjectID = Convert.ToInt32(cmdProjectInsert.ExecuteScalar()); 
+                }*/
+public static void InsertGrant(GrantSimple g, int supplierID, int projectID, int userID)
         {
-            String sqlQuery = "INSERT INTO grants (SupplierID, GrantName, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount) " +
-                              "VALUES (@SupplierID, @GrantName, @ProjectID, @StatusName, @Category, @SubmissionDate, @Descriptions, @AwardDate, @Amount)";
+            String insertGrantQuery = "INSERT INTO grants (SupplierID, GrantName, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount) " +
+                              "VALUES (@SupplierID, @GrantName, @ProjectID, @StatusName, @Category, @SubmissionDate, @Descriptions, @AwardDate, @Amount); SELECT SCOPE_IDENTITY();";
+            String insertGrantStaffQuery = "INSERT INTO grantStaff (GrantID, UserID) VALUES (@GrantID, @UserID);";
 
-            using (SqlCommand cmdInsertGrant = new SqlCommand(sqlQuery, DBConnection))
+            int GrantID;
+
+            using (SqlCommand cmdInsertGrant = new SqlCommand(insertGrantQuery, DBConnection))
             {
                 cmdInsertGrant.Connection.ConnectionString = DBConnString;
 
@@ -625,8 +658,17 @@ namespace InventoryManagement.Pages.DB
 
                 
                 cmdInsertGrant.Connection.Open();
-                cmdInsertGrant.ExecuteNonQuery();
+                GrantID = Convert.ToInt32(cmdInsertGrant.ExecuteScalar());
                 cmdInsertGrant.Connection.Close();
+            }
+            using (SqlCommand cmdInsertGrantStaff = new SqlCommand(insertGrantStaffQuery, DBConnection))
+            {
+                cmdInsertGrantStaff.Parameters.AddWithValue("@GrantID", GrantID);
+                cmdInsertGrantStaff.Parameters.AddWithValue("@UserID", userID);
+
+                cmdInsertGrantStaff.Connection.Open();
+                cmdInsertGrantStaff.ExecuteNonQuery();
+                cmdInsertGrantStaff.Connection.Close();
             }
         }
 

@@ -45,6 +45,7 @@
         </tbody>
     </table>
 </div>
+<br />
 <div class="text-center">
     <a class="btn btn-outline-primary" asp-page="EditGrant" asp-route-grantID="@Model.grant.GrantID">Edit Grant</a>
     <a class="btn btn-outline-primary" asp-page="AssociateFac" asp-route-GrantID="@Model.grant.GrantID">Associate Member</a>
@@ -60,6 +61,18 @@
                 <th>Date Added</th>
             </tr>
         </thead>
+        <tbody>
+            @{
+                foreach (var note in Model.noteList) 
+                {
+                    <tr>
+                        <td>@note.Content</td>
+                        <td>@note.AuthorFirst @note.AuthorLast</td>
+                        <td>@note.TimeAdded</td>
+                    </tr>
+                }
+            }
+        </tbody>
     </table>
 </div>
 <div class="text-center">

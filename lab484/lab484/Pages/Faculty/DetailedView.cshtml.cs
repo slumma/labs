@@ -9,6 +9,7 @@ namespace lab484.Pages.Faculty
     {
         // empty grant object to populate it
         public GrantSimple grant { get; set; }
+        public List<GrantNote> noteList { get; set; } = new List<GrantNote>();
         public IActionResult OnGet(int grantID)
         {
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
@@ -40,6 +41,22 @@ namespace lab484.Pages.Faculty
                 grant.AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString());
             }
             DBClass.DBConnection.Close();
+
+            SqlDataReader noteReader = DBClass.GrantNoteReader(grantID);
+            while (noteReader.Read())
+            {
+                noteList.Add(new GrantNote
+                {
+                    GrantID = Convert.ToInt32(noteReader["GrantID"]),
+                    Content = noteReader["Content"].ToString(),
+                    AuthorFirst = noteReader["FirstName"].ToString(),
+                    AuthorLast = noteReader["LastName"].ToString(),
+                    TimeAdded = Convert.ToDateTime(noteReader["NoteDate"].ToString())
+                });
+            }
+            DBClass.DBConnection.Close();
+
+
             return Page();
         }
         public IActionResult OnPost()

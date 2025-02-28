@@ -15,6 +15,7 @@ namespace lab484.Pages.Data_Classes
         public string Supplier { get; set; }
 
         public int SupplierID { get; set; }
+        [Required(ErrorMessage = "Project is required")]
         public String? Project { get; set; }
 
         [Required(ErrorMessage = "Amount is required")]

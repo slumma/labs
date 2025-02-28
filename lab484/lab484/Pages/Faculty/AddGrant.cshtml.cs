@@ -15,6 +15,8 @@ namespace lab484.Pages.Faculty
 
         public List<ProjectSimple> ProjectList { get; set; } = new List<ProjectSimple>();
 
+        public int? CurrentUserID { get; set; } = new int?();
+
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
@@ -27,7 +29,6 @@ namespace lab484.Pages.Faculty
                 HttpContext.Session.SetString("LoginError", "You do not have permission to access that page!");
                 return RedirectToPage("../Index"); // Redirect to login page
             }
-
                 // made a method at the bottom of the file so i dont have to copy and paste it a bunch of times 
             SupplierList = LoadSuppliers();
             ProjectList = LoadProjects();
@@ -50,7 +51,7 @@ namespace lab484.Pages.Faculty
                 int supplierID = selectedSupplier.SupplierID;
                 int projectID = selectedProject.ProjectID;
 
-                DBClass.InsertGrant(newGrant, supplierID, projectID);
+                DBClass.InsertGrant(newGrant, supplierID, projectID, Convert.ToInt32(HttpContext.Session.GetInt32("userID")));
                 return RedirectToPage("FacultyLanding");
             }
 
@@ -90,7 +91,7 @@ namespace lab484.Pages.Faculty
             {
                 GrantName = "Hello My Name is Carmen Winstead",
                 Supplier = "TechCorp",
-                Project = "Education",
+                Project = "Project Alpha",
                 Amount = 1000000,
                 Category = "Federal",
                 Status = "Pending",
@@ -98,6 +99,7 @@ namespace lab484.Pages.Faculty
                 SubmissionDate = DateTime.Now,
                 AwardDate = DateTime.Now
             };
+
 
             SupplierList = LoadSuppliers();// Reload supplier list
             ProjectList = LoadProjects();
