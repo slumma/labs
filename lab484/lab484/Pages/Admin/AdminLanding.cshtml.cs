@@ -9,6 +9,10 @@ namespace lab484.Pages.Admin
     public class AdminLandingModel : PageModel
     {
         public required List<ProjectSimple> projectList { get; set; } = new List<ProjectSimple>();
+        [BindProperty]
+        public bool DisplayAll { get; set; }
+        [BindProperty]
+        public String TableButton { get; set; } = "Expand";
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
@@ -49,10 +53,69 @@ namespace lab484.Pages.Admin
                 {
                     projectList.Last().Amount = 0f;
                 }
-                
+
             }
 
             // Close your connection in DBClass
+            DBClass.DBConnection.Close();
+            return Page();
+        }
+
+        public IActionResult OnPostToggleTable()
+        {
+            bool DisplayAll = (HttpContext.Session.GetInt32("DisplayAll") == 1);
+
+
+            if (DisplayAll)
+            {
+                TableButton = "Expand";
+                HttpContext.Session.SetInt32("DisplayAll", 0);
+            }
+            else
+            {
+                TableButton = "Collapse";
+                HttpContext.Session.SetInt32("DisplayAll", 1);
+            }
+
+            if (HttpContext.Session.GetInt32("loggedIn") != 1)
+            {
+                HttpContext.Session.SetString("LoginError", "You must login to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+            else if (HttpContext.Session.GetInt32("adminStatus") != 1)
+            {
+                HttpContext.Session.SetString("LoginError", "You do not have permission to access that page!");
+                return RedirectToPage("../Index"); // Redirect to login page
+            }
+
+            SqlDataReader projectReader = DBClass.ProjectReader();
+            while (projectReader.Read())
+            {
+                // populate the projectList 
+                projectList.Add(new ProjectSimple
+                {
+                    ProjectID = Int32.Parse(projectReader["ProjectID"].ToString()),
+                    ProjectName = projectReader["ProjectName"].ToString(),
+                    DueDate = DateTime.Parse(projectReader["DueDate"].ToString()),
+                    Amount = 0f
+                });
+                // if the amount isnt a value, try converting it to a string then parsing a float from it 
+                if (projectReader["Amount"] != DBNull.Value)
+                {
+                    if (projectReader["Amount"].ToString() != "")
+                    {
+                        projectList.Last().Amount = float.Parse(projectReader["Amount"].ToString());
+                    }
+                    else
+                    {
+                        projectList.Last().Amount = 0f;
+                    }
+                }
+                else
+                {
+                    projectList.Last().Amount = 0f;
+                }
+            }
             DBClass.DBConnection.Close();
             return Page();
         }
