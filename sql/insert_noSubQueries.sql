@@ -1,4 +1,4 @@
-﻿INSERT INTO users (Username, Password, FirstName, LastName, Email, Phone, HomeAddress, AdminStatus, EmployeeStatus, FacultyStatus, NonFacultyStatus)
+INSERT INTO users (Username, Password, FirstName, LastName, Email, Phone, HomeAddress, AdminStatus, EmployeeStatus, FacultyStatus, NonFacultyStatus)
 VALUES
 ('samogden', 'password123', 'sam', 'ogden', 'sam@example.com', '555-1234', '123 Elm St', 1, 1, 1, 1),
 ('nickclement', 'password456', 'nick', 'clement', 'nickclement@example.com', '555-5678', '456 Oak St', 1, 1, 1, 1),
@@ -141,16 +141,16 @@ VALUES
 
 INSERT INTO projectNotes (ProjectID, AuthorID, Content, noteDate)
 VALUES
-(1, 2, 'Initial notes for Project Alpha', '2025-02-20'),
-(2, 1, 'Development notes for Project Beta', '2025-04-15'),
-(3, 1, 'Review notes for Project Gamma', '2025-08-01'),
-(4,  1,'Concept notes for Project Delta', '2025-03-20'),
-(5,  1,'Planning notes for Project Epsilon', '2025-05-15'),
-(6, 1, 'Design notes for Project Zeta', '2025-07-01'),
-(7,  1,'Prototype notes for Project Eta', '2025-09-01'),
-(8, 1, 'Launch notes for Project Theta', '2025-11-01'),
-(9,  1,'Requirement notes for Project Iota', '2025-02-15'),
-(10, 1, 'Assessment notes for Project Kappa', '2025-10-01');
+(1, 1, 'Initial notes for Project Alpha', '2025-02-20'),
+(2, 2, 'Development notes for Project Beta', '2025-04-15'),
+(3, 3, 'Review notes for Project Gamma', '2025-08-01'),
+(4, 4, 'Concept notes for Project Delta', '2025-03-20'),
+(5, 5, 'Planning notes for Project Epsilon', '2025-05-15'),
+(6, 6, 'Design notes for Project Zeta', '2025-07-01'),
+(7, 7, 'Prototype notes for Project Eta', '2025-09-01'),
+(8, 8, 'Launch notes for Project Theta', '2025-11-01'),
+(9, 9, 'Requirement notes for Project Iota', '2025-02-15'),
+(10, 10, 'Assessment notes for Project Kappa', '2025-10-01');
 
 INSERT INTO grants (SupplierID, GrantName, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount, GrantStatus)
 VALUES
@@ -185,18 +185,18 @@ VALUES
 (9, 9),
 (10, 10);
 
-INSERT INTO grantNotes (GrantID, Content, noteDate)
+INSERT INTO grantNotes (GrantID, AuthorID, Content, noteDate)
 VALUES
-(1, 'Took out trash', '2025-02-20'),
-(2, 'Emptied Dishwasher', '2025-04-15'),
-(3, 'Eggs are my favorite food', '2025-08-01'),
-(4, 'Dogs > Cats', '2025-03-20'),
-(5, 'Money money money money!', '2025-05-15'),
-(6, 'Elephant Ellipses', '2025-07-01'),
-(7, 'Eta more like beta', '2025-09-01'),
-(8, 'icloud.com/checkthispage', '2025-11-01'),
-(9, 'im running out of notes to write', '2025-02-15'),
-(10, 'thank god this is the last one', '2025-10-01');
+(1, 1, 'Took out trash', '2025-02-20'),
+(2, 2, 'Emptied Dishwasher', '2025-04-15'),
+(3, 3, 'Eggs are my favorite food', '2025-08-01'),
+(4, 4, 'Dogs > Cats', '2025-03-20'),
+(5, 5, 'Money money money money!', '2025-05-15'),
+(6, 6, 'Elephant Ellipses', '2025-07-01'),
+(7, 7, 'Eta more like beta', '2025-09-01'),
+(8, 8, 'icloud.com/checkthispage', '2025-11-01'),
+(9, 9, 'im running out of notes to write', '2025-02-15'),
+(10, 10, 'thank god this is the last one', '2025-10-01');
 
 /*INSERT INTO grantStatus (GrantID, StatusName, ChangeDate)
 VALUES
@@ -233,7 +233,7 @@ INSERT INTO userMessage (SenderID, RecipientID, SubjectTitle, Contents, SentTime
 VALUES
 (1, 2, 'Hello', 'This is a test message', '2025-02-20 10:00:00'),
 (2, 3, 'Reminder', 'Dont forget the meeting tomorrow', '2025-02-21 11:00:00'),
-(3, 1, 'Thank you', N'😡😡😡😡😡😡😡😡', '2025-02-22 09:00:00'),
+(3, 1, 'Thank you', 'Thanks for your help!', '2025-02-22 09:00:00'),
 (4, 5, 'Meeting Update', 'The meeting has been rescheduled', '2025-02-23 08:00:00'),
 (5, 6, 'Project Update', 'Here is the latest update on the project', '2025-02-24 07:00:00'),
 (6, 4, 'Task Reminder', 'Dont forget to complete your tasks', '2025-02-25 06:00:00'),
