@@ -15,7 +15,7 @@ namespace lab484.Pages.Faculty
         public GrantSimple grant {  get; set; } = new GrantSimple();
         public User user { get; set; } = new User();
         public int GrantID { get; set; }
-        public IActionResult OnGet(int GrantID)
+        public IActionResult OnGet(int? GrantID)
         {
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
@@ -28,9 +28,19 @@ namespace lab484.Pages.Faculty
                 return RedirectToPage("../Index"); // Redirect to login page
             }
 
-            this.GrantID = GrantID;
+            if (GrantID == null)
+            {
+                GrantID = HttpContext.Session.GetInt32("grantID") ?? 0;
+            }
+            else
+            {
+                HttpContext.Session.SetInt32("grantID", Convert.ToInt32(GrantID));
+            }
 
-            SqlDataReader grantReader = DBClass.SingleGrantReader(GrantID);
+
+            this.GrantID = Convert.ToInt32(GrantID);
+
+            SqlDataReader grantReader = DBClass.SingleGrantReader(Convert.ToInt32(GrantID));
             while (grantReader.Read())
             {
                 grant.GrantName = grantReader["GrantName"].ToString();
@@ -40,7 +50,7 @@ namespace lab484.Pages.Faculty
             user = DBClass.GetUserByID(Convert.ToInt32(HttpContext.Session.GetInt32("userID")));
             DBClass.DBConnection.Close();
 
-            newGrantNote.GrantID = GrantID;
+            newGrantNote.GrantID = Convert.ToInt32(GrantID);
             newGrantNote.AuthorFirst = user.FirstName;
             newGrantNote.AuthorLast = user.LastName;
             newGrantNote.AuthorID = user.UserID;
@@ -63,7 +73,8 @@ namespace lab484.Pages.Faculty
         {
             ModelState.Clear();
             newGrantNote = new GrantNote();
-            return Page();
+            return RedirectToPage("AddGrantNote", new { GrantID = HttpContext.Session.GetInt32("grantID") });
         }
+
     }
 }

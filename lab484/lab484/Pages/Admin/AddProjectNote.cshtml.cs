@@ -13,7 +13,7 @@ namespace lab484.Pages.Admin
         public ProjectSimple project { get; set; } = new ProjectSimple();
         public User user { get; set; } = new User();
         public int ProjectID { get; set; }
-        public IActionResult OnGet(int ProjectID)
+        public IActionResult OnGet(int? ProjectID)
         {
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
@@ -26,9 +26,18 @@ namespace lab484.Pages.Admin
                 return RedirectToPage("../Index"); // Redirect to login page
             }
 
-            this.ProjectID = ProjectID;
+            if (ProjectID == null || ProjectID == 0)
+            {
+                ProjectID = HttpContext.Session.GetInt32("projectID") ?? 0;
+            }
+            else
+            {
+                HttpContext.Session.SetInt32("projectID", ProjectID.Value);
+            }
 
-            SqlDataReader projectReader = DBClass.singleProjectReader(ProjectID);
+            this.ProjectID = Convert.ToInt32(ProjectID);
+
+            SqlDataReader projectReader = DBClass.singleProjectReader(Convert.ToInt32(ProjectID));
             while (projectReader.Read())
             {
                 project.ProjectName = projectReader["ProjectName"].ToString();
@@ -38,7 +47,7 @@ namespace lab484.Pages.Admin
             user = DBClass.GetUserByID(Convert.ToInt32(HttpContext.Session.GetInt32("userID")));
             DBClass.DBConnection.Close();
 
-            newProjectNote.ProjectID = ProjectID;
+            newProjectNote.ProjectID = Convert.ToInt32(ProjectID);
             newProjectNote.AuthorFirst = user.FirstName;
             newProjectNote.AuthorLast = user.LastName;
             newProjectNote.AuthorID = user.UserID;
@@ -56,12 +65,11 @@ namespace lab484.Pages.Admin
             }
             return Page();
         }
-
         public IActionResult OnPostClear()
         {
             ModelState.Clear();
             newProjectNote = new ProjectNote();
-            return Page();
+            return RedirectToPage("AddProjectNote", new { ProjectID = HttpContext.Session.GetInt32("projectID") });
         }
     }
 }
