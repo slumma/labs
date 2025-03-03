@@ -2,6 +2,7 @@ html {
   font-size: 14px;
 }
 
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -18,7 +19,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: #CBC3E3;
+    margin-bottom: 60px;
 }
 
 
@@ -50,3 +52,67 @@ body {
 .username-select {
     width: 200px;
 }
+
+.table th {
+    background-color: #7d6f8e; /* Muted purple for headers */
+    color: #d4af37; /* Gold text for headers */
+}
+
+.table td {
+    background-color: #ede7f6; /* Light muted purple for cells */
+    color: #4b4453; /* Darker text for contrast */
+}
+
+.btn-outline-primary {
+    border: 2px solid #258cfb; /* Primary color border */
+    color: #258cfb; /* Text color matches border */
+    background-color: transparent; /* Keeps it outlined */
+    padding: 10px 20px; /* Add some padding for better aesthetics */
+    border-radius: 10px; /* Rounded corners */
+    font-weight: bold; /* Make the text bold */
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+    .btn-outline-primary:hover {
+        background-color: #258cfb; /* Fill background on hover */
+        color: #ffffff; /* White text on hover */
+        border-color: #0056b3; /* Darker border on hover */
+        /* Navbar General Styling */
+        .navbar
+
+{
+    background-color: #4b4453; /* Muted dark purple background */
+    border-bottom: 2px solid #d4af37; /* Gold border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
+}
+
+
+
+/* Styling for the Container */
+.container {
+    background-color: white; /* Sets the container's inside to white */
+    border: 1px solid #d4af37; /* Gold border for elegance */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px; /* Rounded corners */
+}
+
+
+
+/* Styling for the Table */
+.table {
+    color: #4b4453; /* Dark purple for text */
+    background-color: #ede7f6; /* Light muted purple for table background */
+    border-collapse: separate;
+    border-spacing: 0; /* Ensures borders are consistent */
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #d4af37; /* Gold border for cells */
+}
+
+.table-hover tbody tr:hover {
+    background-color: #d4af37; /* Gold highlight on hover */
+    color: #4b4453; /* Dark purple text when hovered */
+}
+
+
