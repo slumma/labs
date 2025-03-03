@@ -15,6 +15,7 @@ namespace lab484.Pages.Admin
         public String TableButton { get; set; } = "Expand";
         public IActionResult OnGet()
         {
+            // control validating if the user is an admin trying to access the page 
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");
@@ -63,20 +64,25 @@ namespace lab484.Pages.Admin
 
         public IActionResult OnPostToggleTable()
         {
+
+            // method for the collapse / expand button 
+            // stores the choice of the user in session state 
             bool DisplayAll = (HttpContext.Session.GetInt32("DisplayAll") == 1);
 
-
+            // if true, set the button to expand 
             if (DisplayAll)
             {
                 TableButton = "Expand";
                 HttpContext.Session.SetInt32("DisplayAll", 0);
             }
+            // if false set the button title to collapse 
             else
             {
                 TableButton = "Collapse";
                 HttpContext.Session.SetInt32("DisplayAll", 1);
             }
 
+            // same validation from the top of page 
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");
@@ -88,6 +94,7 @@ namespace lab484.Pages.Admin
                 return RedirectToPage("../Index"); // Redirect to login page
             }
 
+            // loads projects 
             SqlDataReader projectReader = DBClass.ProjectReader();
             while (projectReader.Read())
             {

@@ -18,6 +18,7 @@ namespace lab484.Pages.Admin
         public List<ProjectNote> noteList { get; set; } = new List<ProjectNote>();
         public IActionResult OnGet(int projectID)
         {
+            // control validating if the user is an admin trying to access the page 
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");
@@ -77,6 +78,7 @@ namespace lab484.Pages.Admin
             }
             DBClass.DBConnection.Close();
 
+            // populate the taskList
             SqlDataReader taskReader = DBClass.taskReader(projectID);
             while (taskReader.Read())
             {
@@ -89,6 +91,7 @@ namespace lab484.Pages.Admin
             }
             DBClass.DBConnection.Close();
 
+            // populate the notes list with notes left on the project
             SqlDataReader noteReader = DBClass.ProjectNoteReader(projectID);
             while (noteReader.Read())
             {

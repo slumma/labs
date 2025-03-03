@@ -13,6 +13,7 @@ namespace lab484.Pages.Admin
 
         public IActionResult OnGet()
         {
+            // control validating if the user is an admin trying to access the page 
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");
@@ -27,6 +28,7 @@ namespace lab484.Pages.Admin
             SqlDataReader BPReader = DBClass.BPReader();
             BP = new BusinessPartner();
 
+            // gets the bp id 
             while (BPReader.Read())
             {
                 BP.SupplierID = Convert.ToInt32(BPReader["SupplierID"].ToString());

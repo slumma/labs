@@ -4,6 +4,8 @@
 
 }
 
+<br />
+<br />
 <h2 class="text-center">Grant Management System</h2>
 <p class="text-center">Created by: Nick Clement and Sam Ogden</p>
 <br />
@@ -20,11 +22,14 @@
 @{
     if (HttpContext.Session.GetString("username") != null)
     {
+        <div class="text-center">
         <p>@HttpContext.Session.GetString("username") logged in</p>
 
+        
         <form asp-page="Index" asp-page-handler="LogoutHandler">
             <input type="submit" class="btn btn-danger" value="Logout">
         </form>
+        </div>
     }
     else
     {

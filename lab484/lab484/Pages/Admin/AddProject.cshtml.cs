@@ -18,6 +18,7 @@ namespace lab484.Pages.Admin
         // creates new project object and adds faculty to list
         public IActionResult OnGet()
         {
+            // control validating if the user is an admin trying to access the page 
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");
@@ -29,6 +30,7 @@ namespace lab484.Pages.Admin
                 return RedirectToPage("../Index"); // Redirect to login page
             }
 
+            // populate the project variable with info 
             newProject = new ProjectSimple()
             {
                 ProjectName = null,
@@ -39,6 +41,7 @@ namespace lab484.Pages.Admin
 
             SqlDataReader facultyReader = DBClass.facReader();
 
+            // populate the faculty list to see available people to add 
             while (facultyReader.Read())
             {
                 facultyList.Add(new User

@@ -1,49 +1,72 @@
 /* _content/lab484/Pages/Shared/_Layout.cshtml.rz.scp.css */
-/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand[b-hxqnmwzsjt] {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+html[b-hxqnmwzsjt], body[b-hxqnmwzsjt] {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-a[b-hxqnmwzsjt] {
-  color: #0077cc;
+.container[b-hxqnmwzsjt] {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    
 }
 
-.btn-primary[b-hxqnmwzsjt] {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+
+header[b-hxqnmwzsjt] {
+    background: #B599CE;
+    color: #ffffff;
+    padding-top: 5px;
+
+}
+header a[b-hxqnmwzsjt] {
+        color: #ffffff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 16px;
 }
 
-.nav-pills .nav-link.active[b-hxqnmwzsjt], .nav-pills .show > .nav-link[b-hxqnmwzsjt] {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+main[b-hxqnmwzsjt] {
+    flex: 1;
+}
+
+.button[b-hxqnmwzsjt] {
+    display: inline-block;
+    font-size: 18px;
+    color: #ffffff;
+    background: #e8491d;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover[b-hxqnmwzsjt] {
+        background: #35424a;
+}
+
+
+.footer[b-hxqnmwzsjt] {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #B599CE;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+}
+
+
+.border-top[b-hxqnmwzsjt]{
+    border-top: 1px solid #e5e5e5
 }
 
 .border-top[b-hxqnmwzsjt] {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom[b-hxqnmwzsjt] {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5
 }
 
-.box-shadow[b-hxqnmwzsjt] {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy[b-hxqnmwzsjt] {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-.footer[b-hxqnmwzsjt] {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+.css-text[b-hxqnmwzsjt] {
+    color: black;
 }

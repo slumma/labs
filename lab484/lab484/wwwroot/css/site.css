@@ -25,14 +25,14 @@ body {
 
 
 .btn {
-    border-radius: 20px; /* Rounded buttons */
-    padding: 10px 20px; /* More padding for buttons */
+    border-radius: 20px; 
+    padding: 10px 20px;
     font-weight: bold;
 }
 
 .btn-primary {
-    background-color: #258cfb;
-    border-color: #258cfb;
+    background-color: #B599CE;
+    border-color: #B599CE;
 }
 .btn-primary:hover {
         background-color: #0056b3;
@@ -54,57 +54,71 @@ body {
 }
 
 .table th {
-    background-color: #7d6f8e; /* Muted purple for headers */
-    color: #d4af37; /* Gold text for headers */
+    background-color: #7d6f8e; 
+    color: #d4af37;
 }
 
 .table td {
-    background-color: #ede7f6; /* Light muted purple for cells */
-    color: #4b4453; /* Darker text for contrast */
+    background-color: #ede7f6; 
+    color: #4b4453; 
 }
 
 .btn-outline-primary {
-    border: 2px solid #258cfb; /* Primary color border */
-    color: #258cfb; /* Text color matches border */
-    background-color: transparent; /* Keeps it outlined */
-    padding: 10px 20px; /* Add some padding for better aesthetics */
-    border-radius: 10px; /* Rounded corners */
-    font-weight: bold; /* Make the text bold */
-    transition: all 0.3s ease; /* Smooth hover effect */
+    border: 2px solid #B599CE;
+    color: #B599CE;
+    background-color: transparent;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
-.btn-outline-primary:hover {
-        background-color: #258cfb; /* Fill background on hover */
-        color: #ffffff; /* White text on hover */
-        border-color: #0056b3; /* Darker border on hover */
-}
+    .btn-outline-primary:hover {
+        background-color: #DACCE6;
+        color: #ffffff;
+        border-color: #DACCE6;
+    }
 
 
-/* Styling for the Container */
 .container {
-    background-color: white; /* Sets the container's inside to white */
-    border: 1px solid #d4af37; /* Gold border for elegance */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    border-radius: 10px; /* Rounded corners */
+    background-color: white; 
+    border: 1px solid #d4af37; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
 }
 
 
-
-/* Styling for the Table */
 .table {
-    color: #4b4453; /* Dark purple for text */
-    background-color: #ede7f6; /* Light muted purple for table background */
+    color: #4b4453; 
+    background-color: #ede7f6; 
     border-collapse: separate;
-    border-spacing: 0; /* Ensures borders are consistent */
+    border-spacing: 0; 
 }
 
 .table-bordered th, .table-bordered td {
-    border: 1px solid #d4af37; /* Gold border for cells */
+    border: 1px solid #d4af37; 
 }
 
 .table-hover tbody tr:hover {
-    background-color: #d4af37; /* Gold highlight on hover */
-    color: #4b4453; /* Dark purple text when hovered */
+    background-color: #d4af37; 
+    color: #4b4453; 
 }
 
 
+.subject-input, .message-textarea {
+    width: 90%; 
+    max-width: 90%; 
+    margin: 0 auto; 
+}
+
+.sendbutton {
+    color: #ffffff; 
+    padding: 10px 20px; 
+    border-radius: 10px; 
+    font-weight: bold; 
+    transition: all 0.3s ease;
+}
+
+.css-text {
+    color: black;
+}

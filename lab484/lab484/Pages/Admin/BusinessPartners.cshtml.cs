@@ -12,6 +12,7 @@ namespace lab484.Pages.Admin
         public required List<BusinessPartner> bpList { get; set; } = new List<BusinessPartner>();
         public IActionResult OnGet()
         {
+            // control validating if the user is an admin trying to access the page 
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");

@@ -335,6 +335,8 @@ namespace InventoryManagement.Pages.DB
             string insertProjectQuery = "INSERT INTO dbo.project (ProjectName, DueDate) VALUES (@ProjectName, @DueDate); SELECT SCOPE_IDENTITY();";
             string insertProjectStaffQuery = "INSERT INTO dbo.projectStaff (ProjectID, UserID, Leader, Active) VALUES (@ProjectID, @UserID, @Leader, @Active)";
 
+            // help from AI (copilot) to insert a project into the db if it was not already created
+
             using (SqlConnection connection = new SqlConnection(DBClass.DBConnString))
             {
                 connection.Open();
@@ -674,6 +676,8 @@ public static void InsertGrant(GrantSimple g, int supplierID, int projectID, int
 
             int GrantID;
 
+
+            // used AI to help implement the grants into the DB without the grantStaff freaking out 
             using (SqlCommand cmdInsertGrant = new SqlCommand(insertGrantQuery, DBConnection))
             {
                 cmdInsertGrant.Connection.ConnectionString = DBConnString;
@@ -711,6 +715,8 @@ public static void InsertGrant(GrantSimple g, int supplierID, int projectID, int
             String sqlQuery = "INSERT INTO users (Username, Password, FirstName, LastName, Email, Phone, HomeAddress) " +
                               "VALUES (@Username, @Password, @FirstName, @LastName, @Email, @Phone, @HomeAddress)";
 
+
+            // helped with AI to generate the insertion queries 
             using (SqlCommand cmdInsertUser = new SqlCommand(sqlQuery, DBConnection))
             {
                 cmdInsertUser.Connection.ConnectionString = DBConnString;
@@ -765,6 +771,7 @@ public static void InsertGrant(GrantSimple g, int supplierID, int projectID, int
             String sqlQuery = "INSERT INTO UserMessage (SenderID, RecipientID, SubjectTitle, Contents, SentTime) " +
                               "VALUES (@SenderID, @RecipientID, @SubjectTitle, @Contents, GETDATE())";
 
+            // helped with AI for insertion statemetns so it doesnt break
             using (SqlCommand cmdInsertUserMessage = new SqlCommand(sqlQuery, DBConnection))
             {
                 cmdInsertUserMessage.Connection.ConnectionString = DBConnString;

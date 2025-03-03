@@ -21,8 +21,8 @@ namespace lab484.Pages.Admin
 
         public IActionResult OnGet(int ProjectID )
         {
-            
 
+            // control validating if the user is an admin trying to access the page 
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
             {
                 HttpContext.Session.SetString("LoginError", "You must login to access that page!");
