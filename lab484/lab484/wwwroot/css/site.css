@@ -73,19 +73,11 @@ body {
     transition: all 0.3s ease; /* Smooth hover effect */
 }
 
-    .btn-outline-primary:hover {
+.btn-outline-primary:hover {
         background-color: #258cfb; /* Fill background on hover */
         color: #ffffff; /* White text on hover */
         border-color: #0056b3; /* Darker border on hover */
-        /* Navbar General Styling */
-        .navbar
-
-{
-    background-color: #4b4453; /* Muted dark purple background */
-    border-bottom: 2px solid #d4af37; /* Gold border */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
 }
-
 
 
 /* Styling for the Container */
