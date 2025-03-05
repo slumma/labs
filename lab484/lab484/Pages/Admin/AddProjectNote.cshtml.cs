@@ -1,4 +1,4 @@
-using InventoryManagement.Pages.DB;
+using lab484.Pages.DB;
 using lab484.Pages.Data_Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -42,7 +42,7 @@ namespace lab484.Pages.Admin
             this.ProjectID = Convert.ToInt32(ProjectID);
 
             // populate project Name
-            SqlDataReader projectReader = DBClass.singleProjectReader(Convert.ToInt32(ProjectID));
+            SqlDataReader projectReader = DBAdmin.singleProjectReader(Convert.ToInt32(ProjectID));
             while (projectReader.Read())
             {
                 project.ProjectName = projectReader["ProjectName"].ToString();

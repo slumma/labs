@@ -1,4 +1,4 @@
-using InventoryManagement.Pages.DB;
+using lab484.Pages.DB;
 using lab484.Pages.Data_Classes;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;

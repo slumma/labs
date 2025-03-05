@@ -1,4 +1,4 @@
-using InventoryManagement.Pages.DB;
+using lab484.Pages.DB;
 using lab484.Pages.Data_Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -38,7 +38,7 @@ namespace lab484.Pages.Admin
 
             // populates the ProjectName variable so it can be used
             // checks if there are any staff in list first
-            SqlDataReader projectReader = DBClass.singleProjectReader(this.ProjectID);
+            SqlDataReader projectReader = DBAdmin.singleProjectReader(this.ProjectID);
             if (projectReader.Read())
             {
                 this.ProjectName = projectReader["ProjectName"].ToString();
@@ -88,7 +88,7 @@ namespace lab484.Pages.Admin
             // Retrieve the User object based on UserID
             User user = DBClass.GetUserByID(UserID);
 
-            SqlDataReader projectReader = DBClass.singleProjectReader(this.ProjectID);
+            SqlDataReader projectReader = DBAdmin.singleProjectReader(this.ProjectID);
             if (projectReader.Read())
             {
                 this.ProjectName = projectReader["ProjectName"].ToString();

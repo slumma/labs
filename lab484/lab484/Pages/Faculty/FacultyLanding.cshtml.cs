@@ -1,4 +1,4 @@
-using InventoryManagement.Pages.DB;
+using lab484.Pages.DB;
 using lab484.Pages.Data_Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -48,7 +48,7 @@ namespace lab484.Pages.Faculty
 
             if (HttpContext.Session.GetInt32("adminStatus") == 1)
             {
-                SqlDataReader grantReader = DBClass.adminGrantReader();
+                SqlDataReader grantReader = DBAdmin.adminGrantReader();
                 while (grantReader.Read())
                 {
                     grantList.Add(new GrantSimple
@@ -154,7 +154,7 @@ namespace lab484.Pages.Faculty
 
             if (HttpContext.Session.GetInt32("adminStatus") == 1)
             {
-                SqlDataReader grantReader = DBClass.adminGrantReader();
+                SqlDataReader grantReader = DBAdmin.adminGrantReader();
                 while (grantReader.Read())
                 {
                     grantList.Add(new GrantSimple

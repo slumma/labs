@@ -28,6 +28,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRkUHJvamVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/CIS 484/labs/lab484/lab484/Pages/Admin/AddProjectNote.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRkUHJvamVjdE5vdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/CIS 484/labs/lab484/lab484/Pages/Admin/AdminLanding.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5MYW5kaW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -40,8 +44,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQnVzaW5lc3NQYXJ0bmVycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/CIS 484/labs/lab484/lab484/Pages/Admin/ProjectAssociateFac.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUHJvamVjdEFzc29jaWF0ZUZhYy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/CIS 484/labs/lab484/lab484/Pages/Admin/ProjectDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUHJvamVjdERldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CIS 484/labs/lab484/lab484/Pages/Admin/TaskDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVGFza0RldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/CIS 484/labs/lab484/lab484/Pages/Error.cshtml]
@@ -50,6 +62,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/CIS 484/labs/lab484/lab484/Pages/Faculty/AddGrant.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxBZGRHcmFudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/CIS 484/labs/lab484/lab484/Pages/Faculty/AddGrantNote.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmFjdWx0eVxBZGRHcmFudE5vdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/CIS 484/labs/lab484/lab484/Pages/Faculty/AssociateFac.cshtml]

@@ -1,7 +1,7 @@
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using InventoryManagement.Pages.DB;
+using lab484.Pages.DB;
 using lab484.Pages.Data_Classes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

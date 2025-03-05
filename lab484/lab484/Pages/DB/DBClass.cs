@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
-namespace InventoryManagement.Pages.DB
+namespace lab484.Pages.DB
 {
     public class DBClass
     {
@@ -235,34 +235,6 @@ namespace InventoryManagement.Pages.DB
 
             cmdGrantReader.Connection.Open();
             cmdGrantReader.Parameters.AddWithValue("@UserID", currentUserID);
-            SqlDataReader tempReader = cmdGrantReader.ExecuteReader();
-            return tempReader;
-        }
-
-        public static SqlDataReader adminGrantReader()
-        {
-            SqlCommand cmdGrantReader = new SqlCommand();
-            cmdGrantReader.Connection = DBConnection;
-            cmdGrantReader.Connection.ConnectionString = DBConnString;
-            cmdGrantReader.CommandText = @"SELECT 
-                                            g.GrantID, 
-                                            g.GrantName,
-                                            p.ProjectID,
-                                            s.SupplierName AS Supplier, 
-                                            p.ProjectName AS Project, 
-                                            g.Amount,
-                                            g.Category,
-                                            g.GrantStatus, 
-                                            g.descriptions,
-                                            g.SubmissionDate, 
-                                            g.AwardDate
-                                        FROM grants g
-                                        JOIN grantSupplier s ON g.SupplierID = s.SupplierID
-                                        LEFT JOIN project p ON g.ProjectID = p.ProjectID
-                                        ORDER BY g.AwardDate";
-
-
-            cmdGrantReader.Connection.Open();
             SqlDataReader tempReader = cmdGrantReader.ExecuteReader();
             return tempReader;
         }
