@@ -25,7 +25,7 @@ namespace lab484.Pages.Admin
                 return RedirectToPage("../Index"); // Redirect to login page
             }
 
-            SqlDataReader BPReader = DBClass.BPReader();
+            SqlDataReader BPReader = DBGrantSupplier.BPReader();
             BP = new BusinessPartner();
 
             // gets the bp id 

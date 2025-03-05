@@ -71,7 +71,7 @@ namespace lab484.Pages.Faculty
             {
                 // reads the db for grants for specific user
                 int currentUserID = Convert.ToInt32(HttpContext.Session.GetInt32("userID"));
-                SqlDataReader grantReader = DBClass.facGrantReader(currentUserID);
+                SqlDataReader grantReader = DBGrant.facGrantReader(currentUserID);
                 while (grantReader.Read())
                 {
                     grantList.Add(new GrantSimple
@@ -177,7 +177,7 @@ namespace lab484.Pages.Faculty
             {
                 // reads the db for grants for specific user
                 int currentUserID = Convert.ToInt32(HttpContext.Session.GetInt32("userID"));
-                SqlDataReader grantReader = DBClass.facGrantReader(currentUserID);
+                SqlDataReader grantReader = DBGrant.facGrantReader(currentUserID);
                 while (grantReader.Read())
                 {
                     grantList.Add(new GrantSimple

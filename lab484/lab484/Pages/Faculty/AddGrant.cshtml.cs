@@ -113,7 +113,7 @@ namespace lab484.Pages.Faculty
         private List<GrantSupplier> LoadSuppliers()
         {
             var suppliers = new List<GrantSupplier>();
-            using (SqlDataReader reader = DBClass.GrantSupplierReader())
+            using (SqlDataReader reader = DBGrantSupplier.GrantSupplierReader())
             {
                 while (reader.Read())
                 {
@@ -136,7 +136,7 @@ namespace lab484.Pages.Faculty
         private List<ProjectSimple> LoadProjects()
         {
             var projects = new List<ProjectSimple>();
-            using (SqlDataReader reader = DBClass.ProjectReader())
+            using (SqlDataReader reader = DBProject.ProjectReader())
             {
                 while (reader.Read())
                 {

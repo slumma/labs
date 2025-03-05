@@ -45,7 +45,7 @@ namespace lab484.Pages.Admin
             DBClass.DBConnection.Close();
 
             // populates the staff list 
-            SqlDataReader projectStaffReader = DBClass.projectStaffReader(projectID);
+            SqlDataReader projectStaffReader = DBProject.projectStaffReader(projectID);
             while (projectStaffReader.Read())
             {
                 userProjectList.Add(new User
@@ -59,7 +59,7 @@ namespace lab484.Pages.Admin
             DBClass.DBConnection.Close();
 
             // populates the task list
-            SqlDataReader taskStaffReader = DBClass.taskStaffReader(projectID);
+            SqlDataReader taskStaffReader = DBProject.taskStaffReader(projectID);
             while (taskStaffReader.Read())
             {
                 taskStaffList.Add(new TaskStaff
@@ -79,7 +79,7 @@ namespace lab484.Pages.Admin
             DBClass.DBConnection.Close();
 
             // populate the taskList
-            SqlDataReader taskReader = DBClass.taskReader(projectID);
+            SqlDataReader taskReader = DBProject.taskReader(projectID);
             while (taskReader.Read())
             {
                 taskList.Add(new Tasks

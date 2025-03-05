@@ -25,22 +25,22 @@ namespace lab484.Pages.Admin
             }
 
             // populate BusinessPartners to be shown in view 
-            SqlDataReader bpReader = DBClass.BPReader();
-            while (bpReader.Read())
+            SqlDataReader BPReader = DBGrantSupplier.BPReader();
+            while (BPReader.Read())
             {
                 bpList.Add(new BusinessPartner
                 {
-                    UserID = Int32.Parse(bpReader["UserID"].ToString()),
-                    FirstName = bpReader["FirstName"].ToString(),
-                    LastName = bpReader["LastName"].ToString(),
-                    Email = bpReader["Email"].ToString(),
-                    Phone = bpReader["Phone"].ToString(),
-                    HomeAddress = bpReader["HomeAddress"].ToString(),
-                    CommunicationStatus = bpReader["CommunicationStatus"].ToString(),
-                    SupplierID = Int32.Parse(bpReader["SupplierID"].ToString()),
-                    SupplierName = bpReader["SupplierName"].ToString(),
-                    OrgType = bpReader["OrgType"].ToString(),
-                    SupplierStatus = bpReader["SupplierStatus"].ToString()
+                    UserID = Int32.Parse(BPReader["UserID"].ToString()),
+                    FirstName = BPReader["FirstName"].ToString(),
+                    LastName = BPReader["LastName"].ToString(),
+                    Email = BPReader["Email"].ToString(),
+                    Phone = BPReader["Phone"].ToString(),
+                    HomeAddress = BPReader["HomeAddress"].ToString(),
+                    CommunicationStatus = BPReader["CommunicationStatus"].ToString(),
+                    SupplierID = Int32.Parse(BPReader["SupplierID"].ToString()),
+                    SupplierName = BPReader["SupplierName"].ToString(),
+                    OrgType = BPReader["OrgType"].ToString(),
+                    SupplierStatus = BPReader["SupplierStatus"].ToString()
                 });
             }
             DBClass.DBConnection.Close();

@@ -27,7 +27,7 @@ namespace lab484.Pages.Admin
                 return RedirectToPage("../Index"); // Redirect to login page
             }
 
-            SqlDataReader projectReader = DBClass.ProjectReader();
+            SqlDataReader projectReader = DBProject.ProjectReader();
             while (projectReader.Read())
             {
                 // populate the projectList 
@@ -95,7 +95,7 @@ namespace lab484.Pages.Admin
             }
 
             // loads projects 
-            SqlDataReader projectReader = DBClass.ProjectReader();
+            SqlDataReader projectReader = DBProject.ProjectReader();
             while (projectReader.Read())
             {
                 // populate the projectList 

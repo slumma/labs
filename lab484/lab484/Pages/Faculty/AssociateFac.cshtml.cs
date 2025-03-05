@@ -36,14 +36,14 @@ namespace lab484.Pages.Faculty
 
             // populates the ProjectName variable so it can be used
             // checks if there are any staff in list first
-            SqlDataReader grantReader = DBClass.SingleGrantReader(GrantID);
+            SqlDataReader grantReader = DBGrant.SingleGrantReader(GrantID);
             if (grantReader.Read())
             {
                 GrantName = grantReader["GrantName"].ToString();
             }
             DBClass.DBConnection.Close();
 
-            SqlDataReader facultyReader = DBClass.singleFacultyReader(GrantID);
+            SqlDataReader facultyReader = DBFaculty.singleFacultyReader(GrantID);
             while (facultyReader.Read())
             {
                 StaffList.Add(new GrantStaff
@@ -61,7 +61,7 @@ namespace lab484.Pages.Faculty
             DBClass.DBConnection.Close();
 
             // as long as there are faculty in the db for the method to read from the user will be added to the userList 
-            using (SqlDataReader facReader = DBClass.facReader())
+            using (SqlDataReader facReader = DBFaculty.facReader())
             {
                 while (facReader.Read())
                 {

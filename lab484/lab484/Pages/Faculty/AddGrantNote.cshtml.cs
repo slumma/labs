@@ -40,7 +40,7 @@ namespace lab484.Pages.Faculty
 
             this.GrantID = Convert.ToInt32(GrantID);
 
-            SqlDataReader grantReader = DBClass.SingleGrantReader(Convert.ToInt32(GrantID));
+            SqlDataReader grantReader = DBGrant.SingleGrantReader(Convert.ToInt32(GrantID));
             while (grantReader.Read())
             {
                 grant.GrantName = grantReader["GrantName"].ToString();

@@ -24,7 +24,7 @@ namespace lab484.Pages.Faculty
             }
             // fills the grant object with the info in the db so the user can see and edit it 
             grant = new GrantSimple(); // Initialize the grant object
-            SqlDataReader grantReader = DBClass.SingleGrantReader(grantID);
+            SqlDataReader grantReader = DBGrant.SingleGrantReader(grantID);
 
             while (grantReader.Read())
             {

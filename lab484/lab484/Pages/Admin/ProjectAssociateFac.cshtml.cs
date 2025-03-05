@@ -45,7 +45,7 @@ namespace lab484.Pages.Admin
             }
             DBClass.DBConnection.Close();
 
-            SqlDataReader facultyReader = DBClass.singleProjectFacultyReader(ProjectID);
+            SqlDataReader facultyReader = DBFaculty.singleProjectFacultyReader(ProjectID);
             while (facultyReader.Read())
             {
                 StaffList.Add(new ProjectStaff
@@ -66,7 +66,7 @@ namespace lab484.Pages.Admin
             DBClass.DBConnection.Close();
 
             // as long as there are faculty in the db for the method to read from the user will be added to the userList 
-            using (SqlDataReader facReader = DBClass.facReader())
+            using (SqlDataReader facReader = DBFaculty.facReader())
             {
                 while (facReader.Read())
                 {
