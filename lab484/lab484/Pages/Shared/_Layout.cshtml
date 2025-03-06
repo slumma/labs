@@ -52,12 +52,12 @@
                                             <a class="dropdown-item" asp-area="" asp-page="/Faculty/FacultyLanding">Faculty Landing</a>
                                             <a class="dropdown-item" asp-area="" asp-page="/Faculty/AddGrant">Add Grant</a>
                                         </ul>
-                                        
+
                                     </li>
                                 </ul>
                                 <span class="fw-semibold text-dark fs-5">@username</span>
                                 <form asp-page="/Index" asp-page-handler="LogoutHandler" class="d-flex ms-3">
-                                    <button type="submit" class="btn btn-secondary">Logout</button>
+                                    <button type="submit" class="btn btn-outline-success">Logout</button>
                                 </form>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                 </ul>
                                 <span class="fw-semibold text-dark fs-5">@username</span>
                                 <form asp-page="/Index" asp-page-handler="LogoutHandler" class="d-flex ms-3">
-                                    <button type="submit" class="btn btn-secondary">Logout</button>
+                                    <button type="submit" class="btn btn-outline-success">Logout</button>
                                 </form>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                 </ul>
                                 <span class="fw-semibold text-dark fs-5">@username</span>
                                 <form asp-page="/Index" asp-page-handler="LogoutHandler" class="d-flex ms-3">
-                                    <button type="submit" class="btn btn-secondary">Logout</button>
+                                    <button type="submit" class="btn btn-outline-success">Logout</button>
                                 </form>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
             }
 
         }
-        else 
+        else
         {
             <header>
                 <nav class="navbar navbar-expand-sm bg-body-tertiary border-bottom box-shadow mb-3">
@@ -144,7 +144,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarScroll">
                             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                                <!-- Empty navigation list for potential future items -->
+                                
                             </ul>
                             <span class="fw-semibold text-dark fs-5">@username</span>
 
@@ -162,9 +162,9 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        
-            <a>Nick Clement and Sam Ogden - CIS 484</a>
-       
+
+        <a>Nick Clement and Sam Ogden - CIS 484</a>
+
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

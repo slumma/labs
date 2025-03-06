@@ -10,7 +10,6 @@ html, body {
     width: 80%;
     margin: auto;
     overflow: hidden;
-    
 }
 
 
@@ -18,14 +17,14 @@ header {
     background: #B599CE;
     color: #ffffff;
     padding-top: 5px;
-
 }
-header a {
+
+    header a {
         color: #ffffff;
         text-decoration: none;
         text-transform: uppercase;
         font-size: 16px;
-}
+    }
 
 main {
     flex: 1;
@@ -41,9 +40,9 @@ main {
     cursor: pointer;
 }
 
-.button:hover {
+    .button:hover {
         background: #35424a;
-}
+    }
 
 
 .footer {
@@ -58,7 +57,7 @@ main {
 }
 
 
-.border-top{
+.border-top {
     border-top: 1px solid #e5e5e5
 }
 
