@@ -33,7 +33,7 @@ namespace lab484.Pages.Admin
             {
                 BP.SupplierID = Convert.ToInt32(BPReader["SupplierID"].ToString());
             }
-            DBClass.DBConnection.Close();
+            DBGrantSupplier.DBConnection.Close();
 
             return Page();
         }

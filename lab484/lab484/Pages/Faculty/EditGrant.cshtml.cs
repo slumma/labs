@@ -49,7 +49,7 @@ namespace lab484.Pages.Faculty
             }
 
             grantReader.Close();
-            DBClass.DBConnection.Close();
+            DBGrant.DBConnection.Close();
             return Page();
         }
 

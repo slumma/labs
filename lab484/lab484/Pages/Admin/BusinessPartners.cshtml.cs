@@ -43,7 +43,7 @@ namespace lab484.Pages.Admin
                     SupplierStatus = BPReader["SupplierStatus"].ToString()
                 });
             }
-            DBClass.DBConnection.Close();
+            DBGrantSupplier.DBConnection.Close();
             return Page();
         }
     }

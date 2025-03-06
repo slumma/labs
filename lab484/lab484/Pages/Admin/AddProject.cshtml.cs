@@ -51,7 +51,7 @@ namespace lab484.Pages.Admin
                     UserID = Int32.Parse(facultyReader["UserID"].ToString())
                 });
             }
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
             return Page();
         }
 
@@ -81,10 +81,10 @@ namespace lab484.Pages.Admin
                         UserID = Int32.Parse(facultyReader["UserID"].ToString())
                     });
                 }
-                DBClass.DBConnection.Close();
+                DBFaculty.DBConnection.Close();
                 return Page();
             }
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
             return RedirectToPage("AdminLanding");
         }
 
@@ -109,7 +109,7 @@ namespace lab484.Pages.Admin
                     UserID = Int32.Parse(facultyReader["UserID"].ToString())
                 });
             }
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
 
             return Page();
         }
@@ -137,7 +137,7 @@ namespace lab484.Pages.Admin
                     UserID = Int32.Parse(facultyReader["UserID"].ToString())
                 });
             }
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
 
             return Page();
         }

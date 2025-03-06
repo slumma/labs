@@ -41,7 +41,7 @@ namespace lab484.Pages.Faculty
             {
                 GrantName = grantReader["GrantName"].ToString();
             }
-            DBClass.DBConnection.Close();
+            DBGrant.DBConnection.Close();
 
             SqlDataReader facultyReader = DBFaculty.singleFacultyReader(GrantID);
             while (facultyReader.Read())
@@ -58,7 +58,7 @@ namespace lab484.Pages.Faculty
                     GrantName = facultyReader["GrantName"].ToString()
                 });
             }
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
 
             // as long as there are faculty in the db for the method to read from the user will be added to the userList 
             using (SqlDataReader facReader = DBFaculty.facReader())
@@ -74,7 +74,7 @@ namespace lab484.Pages.Faculty
             }
 
             // Close your connection in DBClass
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
             return Page();
         }
 
@@ -89,7 +89,7 @@ namespace lab484.Pages.Faculty
             if (user != null)
             {
                 // why does ProjectID keep showing as 0 omg 
-                DBClass.InsertGrantStaff(user, this.GrantID);
+                DBGrant.InsertGrantStaff(user, this.GrantID);
             }
 
 

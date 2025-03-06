@@ -38,12 +38,12 @@ namespace lab484.Pages.Admin
 
             // populates the ProjectName variable so it can be used
             // checks if there are any staff in list first
-            SqlDataReader projectReader = DBAdmin.singleProjectReader(this.ProjectID);
+            SqlDataReader projectReader = DBProject.singleProjectReader(this.ProjectID);
             if (projectReader.Read())
             {
                 this.ProjectName = projectReader["ProjectName"].ToString();
             }
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
 
             SqlDataReader facultyReader = DBFaculty.singleProjectFacultyReader(ProjectID);
             while (facultyReader.Read())
@@ -63,7 +63,7 @@ namespace lab484.Pages.Admin
                     Active = bool.Parse(facultyReader["Active"].ToString())
                 });
             }
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
 
             // as long as there are faculty in the db for the method to read from the user will be added to the userList 
             using (SqlDataReader facReader = DBFaculty.facReader())
@@ -79,7 +79,7 @@ namespace lab484.Pages.Admin
             }
 
             // Close your connection in DBClass
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
             return Page();
         }
 
@@ -88,17 +88,17 @@ namespace lab484.Pages.Admin
             // Retrieve the User object based on UserID
             User user = DBClass.GetUserByID(UserID);
 
-            SqlDataReader projectReader = DBAdmin.singleProjectReader(this.ProjectID);
+            SqlDataReader projectReader = DBProject.singleProjectReader(this.ProjectID);
             if (projectReader.Read())
             {
                 this.ProjectName = projectReader["ProjectName"].ToString();
             }
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
 
             if (user != null)
             {
                 // why does ProjectID keep showing as 0 omg 
-                DBClass.InsertProjectStaff(user, this.ProjectID);
+                DBProject.InsertProjectStaff(user, this.ProjectID);
             }
 
 

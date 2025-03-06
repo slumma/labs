@@ -12,7 +12,33 @@ namespace lab484.Pages.DB
         // Connection String - How to find and connect to DB
         private static readonly String? DBConnString =
             "Server=Localhost;Database=Lab2;Trusted_Connection=True";
+        public static SqlDataReader adminGrantReader()
+        {
+            SqlCommand cmdGrantReader = new SqlCommand();
+            cmdGrantReader.Connection = DBConnection;
+            cmdGrantReader.Connection.ConnectionString = DBConnString;
+            cmdGrantReader.CommandText = @"SELECT 
+                                            g.GrantID, 
+                                            g.GrantName,
+                                            p.ProjectID,
+                                            s.SupplierName AS Supplier, 
+                                            p.ProjectName AS Project, 
+                                            g.Amount,
+                                            g.Category,
+                                            g.GrantStatus, 
+                                            g.descriptions,
+                                            g.SubmissionDate, 
+                                            g.AwardDate
+                                        FROM grants g
+                                        JOIN grantSupplier s ON g.SupplierID = s.SupplierID
+                                        LEFT JOIN project p ON g.ProjectID = p.ProjectID
+                                        ORDER BY g.AwardDate";
 
+
+            cmdGrantReader.Connection.Open();
+            SqlDataReader tempReader = cmdGrantReader.ExecuteReader();
+            return tempReader;
+        }
         public static SqlDataReader facGrantReader(int currentUserID)
         {
             SqlCommand cmdGrantReader = new SqlCommand();
@@ -43,6 +69,93 @@ namespace lab484.Pages.DB
             cmdGrantReader.Parameters.AddWithValue("@UserID", currentUserID);
             SqlDataReader tempReader = cmdGrantReader.ExecuteReader();
             return tempReader;
+        }
+        public static SqlDataReader GrantNoteReader(int GrantID)
+        {
+            SqlCommand cmdViewNotes = new SqlCommand(DBConnString);
+            cmdViewNotes.Connection = DBConnection;
+            cmdViewNotes.Connection.ConnectionString = DBConnString;
+            cmdViewNotes.CommandText = @"SELECT * FROM grantNotes JOIN users ON grantNotes.AuthorID = users.UserID WHERE GrantID = @GrantID;";
+
+            cmdViewNotes.Parameters.AddWithValue("@GrantID", GrantID);
+
+            cmdViewNotes.Connection.Open();
+
+            SqlDataReader tempReader = cmdViewNotes.ExecuteReader();
+
+            return tempReader;
+        }
+        public static void InsertGrant(GrantSimple g, int supplierID, int projectID, int userID)
+        {
+            String insertGrantQuery = "INSERT INTO grants (SupplierID, GrantName, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount) " +
+                              "VALUES (@SupplierID, @GrantName, @ProjectID, @StatusName, @Category, @SubmissionDate, @Descriptions, @AwardDate, @Amount); SELECT SCOPE_IDENTITY();";
+            String insertGrantStaffQuery = "INSERT INTO grantStaff (GrantID, UserID) VALUES (@GrantID, @UserID);";
+
+            int GrantID;
+
+
+            // used AI to help implement the grants into the DB without the grantStaff freaking out 
+            using (SqlCommand cmdInsertGrant = new SqlCommand(insertGrantQuery, DBConnection))
+            {
+                cmdInsertGrant.Connection.ConnectionString = DBConnString;
+
+                cmdInsertGrant.Parameters.AddWithValue("@SupplierID", supplierID);
+                cmdInsertGrant.Parameters.AddWithValue("@GrantName", g.GrantName);
+                cmdInsertGrant.Parameters.AddWithValue("@ProjectID", projectID);
+                cmdInsertGrant.Parameters.AddWithValue("@StatusName", g.Status);
+                cmdInsertGrant.Parameters.AddWithValue("@Category", g.Category);
+                cmdInsertGrant.Parameters.AddWithValue("@SubmissionDate", g.SubmissionDate);
+                cmdInsertGrant.Parameters.AddWithValue("@Descriptions", g.Description);
+                cmdInsertGrant.Parameters.AddWithValue("@AwardDate", g.AwardDate);
+                cmdInsertGrant.Parameters.AddWithValue("@Amount", g.Amount);
+
+
+                cmdInsertGrant.Connection.Open();
+                GrantID = Convert.ToInt32(cmdInsertGrant.ExecuteScalar());
+                cmdInsertGrant.Connection.Close();
+            }
+            using (SqlCommand cmdInsertGrantStaff = new SqlCommand(insertGrantStaffQuery, DBConnection))
+            {
+                cmdInsertGrantStaff.Parameters.AddWithValue("@GrantID", GrantID);
+                cmdInsertGrantStaff.Parameters.AddWithValue("@UserID", userID);
+
+                cmdInsertGrantStaff.Connection.Open();
+                cmdInsertGrantStaff.ExecuteNonQuery();
+                cmdInsertGrantStaff.Connection.Close();
+            }
+        }
+
+        public static void InsertGrantStaff(User u, int grantID)
+        {
+
+            SqlConnection connection = new SqlConnection(DBConnString);
+
+            String sqlQuery = "INSERT INTO grantStaff (UserID, grantID) VALUES (@UserID, @ProjectID);";
+            SqlCommand cmdInsertGrantStaff = new SqlCommand(sqlQuery, connection);
+
+            // Add parameters to the command
+            cmdInsertGrantStaff.Parameters.AddWithValue("@UserID", u.UserID);
+            cmdInsertGrantStaff.Parameters.AddWithValue("@ProjectID", grantID);
+
+            connection.Open();
+            int rowsAffected = cmdInsertGrantStaff.ExecuteNonQuery();
+
+            connection.Close();
+        }
+        public static void InsertGrantNote(GrantNote newNote)
+        {
+            SqlConnection connection = new SqlConnection(DBConnString);
+
+            String sqlQuery = "INSERT INTO grantNotes(GrantID, Content, AuthorID) VALUES (@GrantID, @Content, @AuthorID);";
+            SqlCommand cmdInsertGrantNote = new SqlCommand(sqlQuery, connection);
+
+            cmdInsertGrantNote.Parameters.AddWithValue("@GrantID", newNote.GrantID);
+            cmdInsertGrantNote.Parameters.AddWithValue("@Content", newNote.Content);
+            cmdInsertGrantNote.Parameters.AddWithValue("@AuthorID", newNote.AuthorID);
+
+            connection.Open();
+            cmdInsertGrantNote.ExecuteNonQuery();
+            connection.Close();
         }
 
         public static SqlDataReader SingleGrantReader(int GrantID)

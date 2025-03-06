@@ -11,7 +11,6 @@ html[b-hxqnmwzsjt], body[b-hxqnmwzsjt] {
     width: 80%;
     margin: auto;
     overflow: hidden;
-    
 }
 
 
@@ -19,14 +18,14 @@ header[b-hxqnmwzsjt] {
     background: #B599CE;
     color: #ffffff;
     padding-top: 5px;
-
 }
-header a[b-hxqnmwzsjt] {
+
+    header a[b-hxqnmwzsjt] {
         color: #ffffff;
         text-decoration: none;
         text-transform: uppercase;
         font-size: 16px;
-}
+    }
 
 main[b-hxqnmwzsjt] {
     flex: 1;
@@ -42,9 +41,9 @@ main[b-hxqnmwzsjt] {
     cursor: pointer;
 }
 
-.button:hover[b-hxqnmwzsjt] {
+    .button:hover[b-hxqnmwzsjt] {
         background: #35424a;
-}
+    }
 
 
 .footer[b-hxqnmwzsjt] {
@@ -59,7 +58,7 @@ main[b-hxqnmwzsjt] {
 }
 
 
-.border-top[b-hxqnmwzsjt]{
+.border-top[b-hxqnmwzsjt] {
     border-top: 1px solid #e5e5e5
 }
 

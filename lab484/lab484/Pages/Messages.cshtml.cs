@@ -124,7 +124,7 @@ namespace lab484.Pages
             if (ModelState.IsValid)
             {
                 Trace.WriteLine("Its not null!");
-                DBClass.InsertUserMessage(activeUserID, SelectedUsername, MessageSubject, MessageContent);
+                DBMessage.InsertUserMessage(activeUserID, SelectedUsername, MessageSubject, MessageContent);
                 SuccessMessage = "Message sent successfully!";
 
                 MessageContent = string.Empty;
@@ -160,7 +160,7 @@ namespace lab484.Pages
         {
             receivedList = new List<Message>();
 
-            using (SqlDataReader receivedReader = DBClass.singleRecipientReader(userId))
+            using (SqlDataReader receivedReader = DBMessage.singleRecipientReader(userId))
             {
                 while (receivedReader.Read())
                 {

@@ -58,7 +58,7 @@ namespace lab484.Pages.Admin
             }
 
             // Close your connection in DBClass
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
             return Page();
         }
 
@@ -123,7 +123,7 @@ namespace lab484.Pages.Admin
                     projectList.Last().Amount = 0f;
                 }
             }
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
             return Page();
         }
     }

@@ -42,12 +42,12 @@ namespace lab484.Pages.Admin
             this.ProjectID = Convert.ToInt32(ProjectID);
 
             // populate project Name
-            SqlDataReader projectReader = DBAdmin.singleProjectReader(Convert.ToInt32(ProjectID));
+            SqlDataReader projectReader = DBProject.singleProjectReader(Convert.ToInt32(ProjectID));
             while (projectReader.Read())
             {
                 project.ProjectName = projectReader["ProjectName"].ToString();
             }
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
 
             user = DBClass.GetUserByID(Convert.ToInt32(HttpContext.Session.GetInt32("userID")));
             DBClass.DBConnection.Close();
@@ -66,7 +66,7 @@ namespace lab484.Pages.Admin
             // if inputs are valid 
             if (ModelState.IsValid)
             {
-                DBClass.InsertProjectNote(newProjectNote);
+                DBProject.InsertProjectNote(newProjectNote);
                 // anonymous identity to pass to the Project Detail page
                 // used Copilot to resolve errors, this was the most *barbaric* way of doing it with things that we knew
                 return RedirectToPage("ProjectDetail", new { ProjectID = newProjectNote.ProjectID });

@@ -47,6 +47,54 @@ namespace lab484.Pages.DB
                 }
             }
         }
+        public static void InsertProjectNote(ProjectNote newNote)
+        {
+            SqlConnection connection = new SqlConnection(DBConnString);
+
+            String sqlQuery = "INSERT INTO projectNotes(ProjectID, Content, AuthorID) VALUES (@GrantID, @Content, @AuthorID);";
+            SqlCommand cmdInsertGrantNote = new SqlCommand(sqlQuery, connection);
+
+            cmdInsertGrantNote.Parameters.AddWithValue("@GrantID", newNote.ProjectID);
+            cmdInsertGrantNote.Parameters.AddWithValue("@Content", newNote.Content);
+            cmdInsertGrantNote.Parameters.AddWithValue("@AuthorID", newNote.AuthorID);
+
+            connection.Open();
+            cmdInsertGrantNote.ExecuteNonQuery();
+            connection.Close();
+        }
+        public static void InsertProjectStaff(User u, int projectID)
+        {
+
+            SqlConnection connection = new SqlConnection(DBConnString);
+
+            String sqlQuery = "INSERT INTO projectStaff (UserID, ProjectID, Leader, Active) VALUES(@UserID, @ProjectID, 0, 1);";
+            SqlCommand cmdInsertProjectStaff = new SqlCommand(sqlQuery, connection);
+
+            // Add parameters to the command
+            cmdInsertProjectStaff.Parameters.AddWithValue("@UserID", u.UserID);
+            cmdInsertProjectStaff.Parameters.AddWithValue("@ProjectID", projectID);
+
+            connection.Open();
+            int rowsAffected = cmdInsertProjectStaff.ExecuteNonQuery();
+
+            connection.Close();
+        }
+        public static SqlDataReader ProjectNoteReader(int ProjectID)
+        {
+            SqlCommand cmdViewNotes = new SqlCommand(DBConnString);
+            cmdViewNotes.Connection = DBConnection;
+            cmdViewNotes.Connection.ConnectionString = DBConnString;
+            cmdViewNotes.CommandText = @"SELECT * FROM projectNotes JOIN users ON projectNotes.AuthorID = users.UserID WHERE projectID = @ProjectID;";
+
+            cmdViewNotes.Parameters.AddWithValue("@ProjectID", ProjectID);
+
+            cmdViewNotes.Connection.Open();
+
+            SqlDataReader tempReader = cmdViewNotes.ExecuteReader();
+
+            return tempReader;
+        }
+
         public static SqlDataReader ProjectReader()
         {
             SqlCommand cmdProjectRead = new SqlCommand();
@@ -91,7 +139,19 @@ namespace lab484.Pages.DB
 
             return tempReader;
         }
-
+        public static SqlDataReader singleProjectReader(int ProjectID)
+        {
+            SqlCommand cmdProjectRead = new SqlCommand();
+            cmdProjectRead.Connection = DBConnection;
+            cmdProjectRead.Connection.ConnectionString = DBConnString;
+            cmdProjectRead.CommandText = "SELECT project.ProjectID, project.ProjectName, project.DueDate, sum(grants.amount) AS Amount from project" +
+                                            " JOIN grants on project.ProjectID = grants.ProjectID where project.ProjectID = @ProjectID" +
+                                            " group by project.ProjectID, project.ProjectName, project.duedate;";
+            cmdProjectRead.Parameters.AddWithValue("@ProjectID", ProjectID);
+            cmdProjectRead.Connection.Open();
+            SqlDataReader tempReader = cmdProjectRead.ExecuteReader();
+            return tempReader;
+        }
         public static SqlDataReader taskReader(int projectID)
         {
             SqlCommand cmdTaskRead = new SqlCommand();
