@@ -11,7 +11,7 @@ namespace lab484.Pages.DB
 
         // Connection String - How to find and connect to DB
         private static readonly String? DBConnString =
-            "Server=Localhost;Database=Lab2;Trusted_Connection=True";
+            "Server=Localhost;Database=Lab3;Trusted_Connection=True";
 
         //Methods
         public static SqlDataReader BPReader()

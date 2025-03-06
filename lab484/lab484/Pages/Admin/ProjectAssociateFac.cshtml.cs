@@ -19,8 +19,9 @@ namespace lab484.Pages.Admin
         public required List<ProjectStaff> StaffList { get; set; } = new List<ProjectStaff>();
         public List<User> UserList { get; set; } = new List<User>();
 
-        public IActionResult OnGet(int ProjectID )
+        public IActionResult OnGet(int ProjectID)
         {
+            StaffList.Clear();
 
             // control validating if the user is an admin trying to access the page 
             if (HttpContext.Session.GetInt32("loggedIn") != 1)
