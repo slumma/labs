@@ -41,6 +41,7 @@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" asp-area="" asp-page="/Admin/AdminLanding">Admin Landing</a></li>
+                                            <li><a class="dropdown-item" asp-area="" asp-page="/Admin/BusinessPartners">Business Partners</a></li>
                                             <li><a class="dropdown-item" asp-area="" asp-page="/Admin/AddProject">Add Project</a></li>
                                         </ul>
                                     </li>
@@ -54,10 +55,16 @@
                                         </ul>
 
                                     </li>
+
+                                    <li class="nav-item">
+                                        <a class="css-text nav-link" asp-area="" asp-page="/Search">Search</a>
+                                    </li>
                                 </ul>
+                                
+                                
                                 <span class="fw-semibold text-dark fs-5">@username</span>
                                 <form asp-page="/Index" asp-page-handler="LogoutHandler" class="d-flex ms-3">
-                                    <button type="submit" class="btn btn-outline-success">Logout</button>
+                                    <button type="submit" class="btn-outline-danger">Logout</button>
                                 </form>
                             </div>
                         </div>
