@@ -178,7 +178,7 @@ namespace lab484.Pages
                 }
                 receivedReader.Close();
             }
-            DBClass.DBConnection.Close();
+            DBMessage.DBConnection.Close();
         }
 
     }
