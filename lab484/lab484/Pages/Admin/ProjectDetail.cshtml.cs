@@ -35,17 +35,17 @@ namespace lab484.Pages.Admin
             project = new ProjectSimple();
 
             // populates the project object with details 
-            SqlDataReader singleProjectReader = DBAdmin.singleProjectReader(projectID);
+            SqlDataReader singleProjectReader = DBProject.singleProjectReader(projectID);
             while (singleProjectReader.Read())
             {
                 project.ProjectName = singleProjectReader["ProjectName"].ToString();
                 project.DueDate = DateTime.Parse(singleProjectReader["DueDate"].ToString());
                 project.Amount = float.Parse(singleProjectReader["Amount"].ToString());
             }
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
 
             // populates the staff list 
-            SqlDataReader projectStaffReader = DBClass.projectStaffReader(projectID);
+            SqlDataReader projectStaffReader = DBProject.projectStaffReader(projectID);
             while (projectStaffReader.Read())
             {
                 userProjectList.Add(new User
@@ -56,10 +56,10 @@ namespace lab484.Pages.Admin
                     Email = projectStaffReader["Email"].ToString()
                 });
             }
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
 
             // populates the task list
-            SqlDataReader taskStaffReader = DBClass.taskStaffReader(projectID);
+            SqlDataReader taskStaffReader = DBProject.taskStaffReader(projectID);
             while (taskStaffReader.Read())
             {
                 taskStaffList.Add(new TaskStaff
@@ -76,10 +76,10 @@ namespace lab484.Pages.Admin
                     LastName = taskStaffReader["LastName"].ToString()
                 });
             }
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
 
             // populate the taskList
-            SqlDataReader taskReader = DBClass.taskReader(projectID);
+            SqlDataReader taskReader = DBProject.taskReader(projectID);
             while (taskReader.Read())
             {
                 taskList.Add(new Tasks
@@ -89,10 +89,10 @@ namespace lab484.Pages.Admin
                     DueDate = DateTime.Parse(taskReader["DueDate"].ToString())
                 });
             }
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
 
             // populate the notes list with notes left on the project
-            SqlDataReader noteReader = DBClass.ProjectNoteReader(projectID);
+            SqlDataReader noteReader = DBProject.ProjectNoteReader(projectID);
             while (noteReader.Read())
             {
                 noteList.Add(new ProjectNote
@@ -104,7 +104,7 @@ namespace lab484.Pages.Admin
                     TimeAdded = Convert.ToDateTime(noteReader["NoteDate"].ToString())
                 });
             }
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
 
             return Page();
 

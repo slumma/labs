@@ -25,7 +25,7 @@ namespace lab484.Pages.Faculty
                 return RedirectToPage("../Index"); // Redirect to login page
             }
             // Fetch grant details using the grantID and populate GrantToUpdate
-            SqlDataReader grantReader = DBClass.SingleGrantReader(grantID);
+            SqlDataReader grantReader = DBGrant.SingleGrantReader(grantID);
 
             if (grantReader.HasRows)
             {
@@ -49,7 +49,7 @@ namespace lab484.Pages.Faculty
             }
 
             grantReader.Close();
-            DBClass.DBConnection.Close();
+            DBGrant.DBConnection.Close();
             return Page();
         }
 
@@ -59,7 +59,7 @@ namespace lab484.Pages.Faculty
             if (ModelState.IsValid)
             {
                 // Update grant details
-                DBClass.UpdateGrant(GrantToUpdate);
+                DBGrant.UpdateGrant(GrantToUpdate);
                 return RedirectToPage("FacultyLanding");
             }
             else

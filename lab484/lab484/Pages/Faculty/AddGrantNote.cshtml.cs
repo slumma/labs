@@ -40,12 +40,12 @@ namespace lab484.Pages.Faculty
 
             this.GrantID = Convert.ToInt32(GrantID);
 
-            SqlDataReader grantReader = DBClass.SingleGrantReader(Convert.ToInt32(GrantID));
+            SqlDataReader grantReader = DBGrant.SingleGrantReader(Convert.ToInt32(GrantID));
             while (grantReader.Read())
             {
                 grant.GrantName = grantReader["GrantName"].ToString();
             }
-            DBClass.DBConnection.Close();
+            DBGrant.DBConnection.Close();
 
             user = DBClass.GetUserByID(Convert.ToInt32(HttpContext.Session.GetInt32("userID")));
             DBClass.DBConnection.Close();
@@ -63,7 +63,7 @@ namespace lab484.Pages.Faculty
         {
             if (ModelState.IsValid)
             {
-                DBClass.InsertGrantNote(newGrantNote);
+                DBGrant.InsertGrantNote(newGrantNote);
                 return RedirectToPage("DetailedView", new { GrantID = newGrantNote.GrantID });
             }
             return Page();

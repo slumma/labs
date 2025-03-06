@@ -41,18 +41,5 @@ namespace lab484.Pages.DB
             SqlDataReader tempReader = cmdGrantReader.ExecuteReader();
             return tempReader;
         }
-            public static SqlDataReader singleProjectReader(int ProjectID)
-        {
-            SqlCommand cmdProjectRead = new SqlCommand();
-            cmdProjectRead.Connection = DBConnection;
-            cmdProjectRead.Connection.ConnectionString = DBConnString;
-            cmdProjectRead.CommandText = "SELECT project.ProjectID, project.ProjectName, project.DueDate, sum(grants.amount) AS Amount from project" +
-                                            " JOIN grants on project.ProjectID = grants.ProjectID where project.ProjectID = @ProjectID" +
-                                            " group by project.ProjectID, project.ProjectName, project.duedate;";
-            cmdProjectRead.Parameters.AddWithValue("@ProjectID", ProjectID);
-            cmdProjectRead.Connection.Open();
-            SqlDataReader tempReader = cmdProjectRead.ExecuteReader();
-            return tempReader;
-        }
     }
 }

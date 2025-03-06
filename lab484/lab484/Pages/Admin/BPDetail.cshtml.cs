@@ -25,7 +25,7 @@ namespace lab484.Pages.Admin
                 return RedirectToPage("../Index"); // Redirect to login page
             }
 
-            SqlDataReader BPReader = DBClass.BPReader();
+            SqlDataReader BPReader = DBGrantSupplier.BPReader();
             BP = new BusinessPartner();
 
             // gets the bp id 
@@ -33,7 +33,7 @@ namespace lab484.Pages.Admin
             {
                 BP.SupplierID = Convert.ToInt32(BPReader["SupplierID"].ToString());
             }
-            DBClass.DBConnection.Close();
+            DBGrantSupplier.DBConnection.Close();
 
             return Page();
         }

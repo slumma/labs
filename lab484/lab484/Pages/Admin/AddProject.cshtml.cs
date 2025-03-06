@@ -39,7 +39,7 @@ namespace lab484.Pages.Admin
             // resets the facList
             facultyList.Clear();
 
-            SqlDataReader facultyReader = DBClass.facReader();
+            SqlDataReader facultyReader = DBFaculty.facReader();
 
             // populate the faculty list to see available people to add 
             while (facultyReader.Read())
@@ -51,7 +51,7 @@ namespace lab484.Pages.Admin
                     UserID = Int32.Parse(facultyReader["UserID"].ToString())
                 });
             }
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
             return Page();
         }
 
@@ -66,12 +66,12 @@ namespace lab484.Pages.Admin
             // adds the project if it has employees selected to work on it 
             if (assignedFacultyList != null && assignedFacultyList.Any())
             {
-                DBClass.AddProject(newProject, assignedFacultyList);
+                DBProject.AddProject(newProject, assignedFacultyList);
             }
             else
             {
                 facultyList.Clear();
-                SqlDataReader facultyReader = DBClass.facReader();
+                SqlDataReader facultyReader = DBFaculty.facReader();
                 while (facultyReader.Read())
                 {
                     facultyList.Add(new User
@@ -81,10 +81,10 @@ namespace lab484.Pages.Admin
                         UserID = Int32.Parse(facultyReader["UserID"].ToString())
                     });
                 }
-                DBClass.DBConnection.Close();
+                DBFaculty.DBConnection.Close();
                 return Page();
             }
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
             return RedirectToPage("AdminLanding");
         }
 
@@ -99,7 +99,7 @@ namespace lab484.Pages.Admin
             };
 
             //repopulate facultyList
-            SqlDataReader facultyReader = DBClass.facReader();
+            SqlDataReader facultyReader = DBFaculty.facReader();
             while (facultyReader.Read())
             {
                 facultyList.Add(new User
@@ -109,7 +109,7 @@ namespace lab484.Pages.Admin
                     UserID = Int32.Parse(facultyReader["UserID"].ToString())
                 });
             }
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
 
             return Page();
         }
@@ -127,7 +127,7 @@ namespace lab484.Pages.Admin
             assignedFacultyList = new List<int>();
 
             //repopulate facultyList
-            SqlDataReader facultyReader = DBClass.facReader();
+            SqlDataReader facultyReader = DBFaculty.facReader();
             while (facultyReader.Read())
             {
                 facultyList.Add(new User
@@ -137,7 +137,7 @@ namespace lab484.Pages.Admin
                     UserID = Int32.Parse(facultyReader["UserID"].ToString())
                 });
             }
-            DBClass.DBConnection.Close();
+            DBFaculty.DBConnection.Close();
 
             return Page();
         }

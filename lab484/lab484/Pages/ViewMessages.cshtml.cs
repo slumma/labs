@@ -24,7 +24,7 @@ namespace lab484.Pages
             this.userID = userID;
 
             // Retrieve sent messages
-            SqlDataReader sentReader = DBClass.singleSenderReader(userID);
+            SqlDataReader sentReader = DBMessage.singleSenderReader(userID);
             while (sentReader.Read())
             {
                 sentList.Add(new Message
@@ -42,7 +42,7 @@ namespace lab484.Pages
             DBClass.DBConnection.Close();
 
             // Retrieve received messages
-            SqlDataReader receivedReader = DBClass.singleRecipientReader(userID);
+            SqlDataReader receivedReader = DBMessage.singleRecipientReader(userID);
             while (receivedReader.Read())
             {
                 receivedList.Add(new Message

@@ -48,7 +48,7 @@ namespace lab484.Pages.Faculty
 
             if (HttpContext.Session.GetInt32("adminStatus") == 1)
             {
-                SqlDataReader grantReader = DBAdmin.adminGrantReader();
+                SqlDataReader grantReader = DBGrant.adminGrantReader();
                 while (grantReader.Read())
                 {
                     grantList.Add(new GrantSimple
@@ -71,7 +71,7 @@ namespace lab484.Pages.Faculty
             {
                 // reads the db for grants for specific user
                 int currentUserID = Convert.ToInt32(HttpContext.Session.GetInt32("userID"));
-                SqlDataReader grantReader = DBClass.facGrantReader(currentUserID);
+                SqlDataReader grantReader = DBGrant.facGrantReader(currentUserID);
                 while (grantReader.Read())
                 {
                     grantList.Add(new GrantSimple
@@ -93,7 +93,7 @@ namespace lab484.Pages.Faculty
             
 
             // Close your connection in DBClass
-            DBClass.DBConnection.Close();
+            DBGrant.DBConnection.Close();
 
             // links up to AI usage on the view, this switch statement allows the program to sort the grants by the selected sort order
             // allows for the columns to be sorted 
@@ -154,7 +154,7 @@ namespace lab484.Pages.Faculty
 
             if (HttpContext.Session.GetInt32("adminStatus") == 1)
             {
-                SqlDataReader grantReader = DBAdmin.adminGrantReader();
+                SqlDataReader grantReader = DBGrant.adminGrantReader();
                 while (grantReader.Read())
                 {
                     grantList.Add(new GrantSimple
@@ -177,7 +177,7 @@ namespace lab484.Pages.Faculty
             {
                 // reads the db for grants for specific user
                 int currentUserID = Convert.ToInt32(HttpContext.Session.GetInt32("userID"));
-                SqlDataReader grantReader = DBClass.facGrantReader(currentUserID);
+                SqlDataReader grantReader = DBGrant.facGrantReader(currentUserID);
                 while (grantReader.Read())
                 {
                     grantList.Add(new GrantSimple
@@ -197,7 +197,7 @@ namespace lab484.Pages.Faculty
                 }
             }
             // Close your connection in DBClass
-            DBClass.DBConnection.Close();
+            DBGrant.DBConnection.Close();
 
             // links up to AI usage on the view, this switch statement allows the program to sort the grants by the selected sort order
             // allows for the columns to be sorted 

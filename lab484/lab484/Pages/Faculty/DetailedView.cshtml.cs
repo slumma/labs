@@ -24,7 +24,7 @@ namespace lab484.Pages.Faculty
             }
             // fills the grant object with the info in the db so the user can see and edit it 
             grant = new GrantSimple(); // Initialize the grant object
-            SqlDataReader grantReader = DBClass.SingleGrantReader(grantID);
+            SqlDataReader grantReader = DBGrant.SingleGrantReader(grantID);
 
             while (grantReader.Read())
             {
@@ -40,9 +40,9 @@ namespace lab484.Pages.Faculty
                 grant.SubmissionDate = DateTime.Parse(grantReader["SubmissionDate"].ToString());
                 grant.AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString());
             }
-            DBClass.DBConnection.Close();
+            DBGrant.DBConnection.Close();
 
-            SqlDataReader noteReader = DBClass.GrantNoteReader(grantID);
+            SqlDataReader noteReader = DBGrant.GrantNoteReader(grantID);
             while (noteReader.Read())
             {
                 noteList.Add(new GrantNote
@@ -54,7 +54,7 @@ namespace lab484.Pages.Faculty
                     TimeAdded = Convert.ToDateTime(noteReader["NoteDate"].ToString())
                 });
             }
-            DBClass.DBConnection.Close();
+            DBGrant.DBConnection.Close();
 
 
             return Page();

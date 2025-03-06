@@ -51,7 +51,7 @@ namespace lab484.Pages.Faculty
                 int supplierID = selectedSupplier.SupplierID;
                 int projectID = selectedProject.ProjectID;
 
-                DBClass.InsertGrant(newGrant, supplierID, projectID, Convert.ToInt32(HttpContext.Session.GetInt32("userID")));
+                DBGrant.InsertGrant(newGrant, supplierID, projectID, Convert.ToInt32(HttpContext.Session.GetInt32("userID")));
                 return RedirectToPage("FacultyLanding");
             }
 
@@ -100,7 +100,6 @@ namespace lab484.Pages.Faculty
                 AwardDate = DateTime.Now
             };
 
-
             SupplierList = LoadSuppliers();// Reload supplier list
             ProjectList = LoadProjects();
 
@@ -113,7 +112,7 @@ namespace lab484.Pages.Faculty
         private List<GrantSupplier> LoadSuppliers()
         {
             var suppliers = new List<GrantSupplier>();
-            using (SqlDataReader reader = DBClass.GrantSupplierReader())
+            using (SqlDataReader reader = DBGrantSupplier.GrantSupplierReader())
             {
                 while (reader.Read())
                 {
@@ -127,7 +126,7 @@ namespace lab484.Pages.Faculty
                 }
             }
 
-            DBClass.DBConnection.Close();
+            DBGrantSupplier.DBConnection.Close();
 
             return suppliers;
         }
@@ -136,7 +135,7 @@ namespace lab484.Pages.Faculty
         private List<ProjectSimple> LoadProjects()
         {
             var projects = new List<ProjectSimple>();
-            using (SqlDataReader reader = DBClass.ProjectReader())
+            using (SqlDataReader reader = DBProject.ProjectReader())
             {
                 while (reader.Read())
                 {
@@ -148,7 +147,7 @@ namespace lab484.Pages.Faculty
                 }
             }
 
-            DBClass.DBConnection.Close();
+            DBProject.DBConnection.Close();
 
             return projects;
         }
