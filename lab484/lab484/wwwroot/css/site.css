@@ -133,16 +133,6 @@ body {
     transition: all 0.3s ease;
 }
 
-.btn-outline-danger hover {
-    border: 2px solid #450084;
-    color: #450084;
-    background-color: #DACCE6;
-    padding: 10px 30px;
-    border-radius: 10px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
 .nav-item .nav-link {
     text-transform: none;
 }
