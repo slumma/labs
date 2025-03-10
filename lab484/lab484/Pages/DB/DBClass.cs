@@ -103,33 +103,33 @@ namespace lab484.Pages.DB
                 cmdInsertUser.Connection.Close();
             }
         }
-        public static int LoginQuery(string loginQuery)
+
+        public static int LoginQuery(string query, string username, string password)
         {
-            // This method expects to receive an SQL SELECT
-            // query that uses the COUNT command.
             SqlCommand cmdLogin = new SqlCommand();
             cmdLogin.Connection = DBConnection;
             cmdLogin.Connection.ConnectionString = DBConnString;
-            cmdLogin.CommandText = loginQuery;
+            cmdLogin.CommandText = query;
+            cmdLogin.Parameters.AddWithValue("@Username", username);
+            cmdLogin.Parameters.AddWithValue("@Password", password);
+
             cmdLogin.Connection.Open();
-            // ExecuteScalar() returns back data type Object
-            // Use a typecast to convert this to an int.
-            // Method returns first column of first row.
             int rowCount = (int)cmdLogin.ExecuteScalar();
+            cmdLogin.Connection.Close();
+
             return rowCount;
         }
 
-        public static int loggedInUser(string findUserID)
+        public static int loggedInUser(string query, string username, string password)
         {
-            SqlCommand cmdUserID = new SqlCommand();
-            cmdUserID.Connection = DBConnection;
-            cmdUserID.Connection.ConnectionString = DBConnString;
-            cmdUserID.CommandText = findUserID;
-            cmdUserID.Connection.Open();
-            // ExecuteScalar() returns back data type Object
-            // Use a typecast to convert this to an int.
-            // Method returns first column of first row.
+            SqlCommand cmdUserID = new SqlCommand(query, DBConnection);
+            cmdUserID.Parameters.AddWithValue("@Username", username);
+            cmdUserID.Parameters.AddWithValue("@Password", password);
+
+            DBConnection.Open();
             int userID = Convert.ToInt32(cmdUserID.ExecuteScalar());
+            DBConnection.Close();
+
             return userID;
         }
         public static int employeeCheck(int userID)

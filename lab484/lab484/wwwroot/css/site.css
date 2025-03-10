@@ -53,15 +53,6 @@ body {
     width: 200px;
 }
 
-.table th {
-    background-color: #7d6f8e; 
-    color: #d4af37;
-}
-
-.table td {
-    background-color: #ede7f6; 
-    color: #4b4453; 
-}
 
 .btn-outline-primary {
     border: 2px solid #B599CE;
@@ -88,21 +79,7 @@ body {
 }
 
 
-.table {
-    color: #4b4453; 
-    background-color: #ede7f6; 
-    border-collapse: separate;
-    border-spacing: 0; 
-}
 
-.table-bordered th, .table-bordered td {
-    border: 1px solid #d4af37; 
-}
-
-.table-hover tbody tr:hover {
-    background-color: #d4af37; 
-    color: #4b4453; 
-}
 
 
 .subject-input, .message-textarea {
@@ -136,3 +113,28 @@ body {
 .nav-item .nav-link {
     text-transform: none;
 }
+
+
+
+.table {
+    color: #4b4453;
+    background-color: #ede7f6;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #d4af37;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #d4af37;
+    color: #4b4453;
+}
+
+.table th {
+    background-color: #7d6f8e;
+    color: #d4af37;
+}
+
+

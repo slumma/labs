@@ -87,7 +87,7 @@ namespace lab484.Pages.DB
         }
         public static void InsertGrant(GrantSimple g, int supplierID, int projectID, int userID)
         {
-            String insertGrantQuery = "INSERT INTO grants (SupplierID, GrantName, ProjectID, StatusName, Category, SubmissionDate, descriptions, AwardDate, Amount) " +
+            String insertGrantQuery = "INSERT INTO grants (SupplierID, GrantName, ProjectID, GrantStatus, Category, SubmissionDate, descriptions, AwardDate, Amount) " +
                               "VALUES (@SupplierID, @GrantName, @ProjectID, @StatusName, @Category, @SubmissionDate, @Descriptions, @AwardDate, @Amount); SELECT SCOPE_IDENTITY();";
             String insertGrantStaffQuery = "INSERT INTO grantStaff (GrantID, UserID) VALUES (@GrantID, @UserID);";
 
@@ -102,7 +102,7 @@ namespace lab484.Pages.DB
                 cmdInsertGrant.Parameters.AddWithValue("@SupplierID", supplierID);
                 cmdInsertGrant.Parameters.AddWithValue("@GrantName", g.GrantName);
                 cmdInsertGrant.Parameters.AddWithValue("@ProjectID", projectID);
-                cmdInsertGrant.Parameters.AddWithValue("@StatusName", g.Status);
+                cmdInsertGrant.Parameters.AddWithValue("@GrantStatus", g.Status);
                 cmdInsertGrant.Parameters.AddWithValue("@Category", g.Category);
                 cmdInsertGrant.Parameters.AddWithValue("@SubmissionDate", g.SubmissionDate);
                 cmdInsertGrant.Parameters.AddWithValue("@Descriptions", g.Description);
@@ -172,7 +172,7 @@ namespace lab484.Pages.DB
                                             p.ProjectName AS Project, 
                                             g.Amount,
                                             g.Category,
-                                            g.StatusName, 
+                                            g.GrantStatus, 
                                             g.descriptions,
                                             g.SubmissionDate, 
                                             g.AwardDate
@@ -203,7 +203,7 @@ namespace lab484.Pages.DB
                                       "GrantName = @GrantName," +
                                       "Amount = @Amount, " +
                                       "Category = @Category, " +
-                                      "StatusName = @StatusName, " +
+                                      "GrantStatus = @GrantStatus, " +
                                       "descriptions = @Description, " +
                                       "SubmissionDate = @SubmissionDate, " +
                                       "AwardDate = @AwardDate " +
@@ -237,7 +237,7 @@ namespace lab484.Pages.DB
                     cmdGrantUpdate.Parameters.AddWithValue("@GrantName", grant.GrantName);
                     cmdGrantUpdate.Parameters.AddWithValue("@Amount", grant.Amount);
                     cmdGrantUpdate.Parameters.AddWithValue("@Category", grant.Category);
-                    cmdGrantUpdate.Parameters.AddWithValue("@StatusName", grant.Status);
+                    cmdGrantUpdate.Parameters.AddWithValue("@GrantStatus", grant.Status);
                     cmdGrantUpdate.Parameters.AddWithValue("@Description", grant.Description);
                     cmdGrantUpdate.Parameters.AddWithValue("@SubmissionDate", grant.SubmissionDate);
                     cmdGrantUpdate.Parameters.AddWithValue("@AwardDate", grant.AwardDate);

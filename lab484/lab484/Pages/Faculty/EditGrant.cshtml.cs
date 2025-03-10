@@ -40,7 +40,7 @@ namespace lab484.Pages.Faculty
                         Project = grantReader["Project"] != DBNull.Value ? grantReader["Project"].ToString() : null,
                         Amount = float.Parse(grantReader["Amount"].ToString()),
                         Category = grantReader["Category"].ToString(),
-                        Status = grantReader["StatusName"].ToString(),
+                        Status = grantReader["GrantStatus"].ToString(),
                         Description = grantReader["descriptions"].ToString(),
                         SubmissionDate = DateTime.Parse(grantReader["SubmissionDate"].ToString()),
                         AwardDate = DateTime.Parse(grantReader["AwardDate"].ToString())

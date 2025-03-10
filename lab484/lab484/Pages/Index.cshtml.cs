@@ -34,28 +34,23 @@ namespace lab484.Pages
 
         public IActionResult OnPost()
         {
-            string loginQuery = "SELECT COUNT(*) FROM users WHERE Username = '";
-            loginQuery += Username + "' AND Password='" + Password + "'";
+            string loginQuery = "SELECT COUNT(*) FROM users WHERE Username = @Username AND Password = @Password";
+            string findUserID = "SELECT UserID FROM users WHERE Username = @Username AND Password = @Password";
 
-            string findUserID = "SELECT UserID FROM users WHERE Username = '";
-            findUserID += Username + "' AND Password='" + Password + "'";
-
-            if (DBClass.LoginQuery(loginQuery) > 0)
+            // check if login credentials are valid
+            if (DBClass.LoginQuery(loginQuery, Username, Password) > 0)
             {
+                DBClass.DBConnection.Close();
                 HttpContext.Session.SetInt32("loggedIn", 1);
-
-                DBClass.DBConnection.Close();
                 HttpContext.Session.SetString("username", Username);
-                
-                //get userID into session state
-                int userID = DBClass.loggedInUser(findUserID);
-                DBClass.DBConnection.Close();
+
+                // retrieve userIDs
+                int userID = DBClass.loggedInUser(findUserID, Username, Password);
                 HttpContext.Session.SetInt32("userID", userID);
 
-                //check user permissions
+                // check user permissions
                 int adminStatus = DBClass.adminCheck(userID);
                 DBClass.DBConnection.Close();
-
                 if (adminStatus == 1)
                 {
                     HttpContext.Session.SetInt32("adminStatus", 1);
@@ -64,8 +59,6 @@ namespace lab484.Pages
                 else
                 {
                     int facultyStatus = DBClass.facultyCheck(userID);
-                    DBClass.DBConnection.Close();
-
                     if (facultyStatus == 1)
                     {
                         HttpContext.Session.SetInt32("facultyStatus", 1);
@@ -76,16 +69,15 @@ namespace lab484.Pages
                         return RedirectToPage("/NoPermissions");
                     }
                 }
-                
-
+                DBClass.DBConnection.Close();
             }
             else
             {
                 ViewData["LoginMessage"] = "Username and/or Password Incorrect";
-                DBClass.DBConnection.Close();
                 return Page();
             }
         }
+
 
         public IActionResult OnPostLogoutHandler()
         {
