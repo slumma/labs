@@ -5,10 +5,10 @@ VALUES
 ('nadeemhudson', 'password789', 'nadeem', 'hudson', 'nadeemhudson@example.com', '555-9876', '789 Pine St', 0, 1, 1, 1),
 ('joshwhite', 'password234', 'josh', 'White', 'joshwhite@example.com', '555-2234', '321 Birch St', 0, 1, 0, 1),
 ('sharons', 'password567', 'sharon', 'sanchez', 'shrnsnchz@example.com', '555-6789', '654 Cedar St', 0, 0, 0, 1),
-('theGoat', 'password890', 'the', 'goat', 'thegoat17@example.com', '555-7890', '987 Spruce St', 1, 1, 1, 1),
-('haileyWelch', 'password101', 'hailey', 'welch', 'haileyWelch238@example.com', '555-1010', '109 Maple St', 1, 1, 1, 1),
-('hawkTuah', 'password112', 'hawk', 'tuah', 'hawktuah838@example.com', '555-1212', '210 Oak St', 0, 0, 0, 0),
-('yourBoy', 'password213', 'your', 'boy', 'yourboy87392@example.com', '555-1414', '312 Pine St', 1, 1, 1, 1),
+('jezell', 'password890', 'jeremy', 'ezell', 'jezell@example.com', '555-7890', '987 Spruce St', 1, 1, 1, 1),
+('benfrench', 'password101', 'hailey', 'welch', 'benfrench@example.com', '555-1010', '109 Maple St', 1, 1, 1, 1),
+('royrinehart', 'password112', 'roy', 'rinehart', 'royr838@example.com', '555-1212', '210 Oak St', 0, 0, 0, 0),
+('ryanbucciero', 'password213', 'ryan', 'bucciero', 'rbucc87392@example.com', '555-1414', '312 Pine St', 1, 1, 1, 1),
 ('BabikDmx', 'password314', 'dmytro', 'babik', 'dmytrobabik43@example.com', '555-1515', '413 Elm St', 1, 1, 1, 1),
 ('samO', 'password314', 'sam', 'o', 'samoGden@example.com', '555-1515', '413 Elm St', 1, 1, 1, 1);
 

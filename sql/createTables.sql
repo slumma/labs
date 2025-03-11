@@ -1,7 +1,7 @@
 CREATE TABLE users(
     UserID int Identity(1,1) PRIMARY KEY,
     Username nvarchar(200),
-    Password nvarchar(200),
+	Password nvarchar(200),
     FirstName nvarchar(200),
     LastName nvarchar(200),
     Email nvarchar(200),

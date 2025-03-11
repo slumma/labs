@@ -38,15 +38,16 @@ namespace lab484.Pages
             string findUserID = "SELECT UserID FROM users WHERE Username = @Username AND Password = @Password";
 
             // check if login credentials are valid
-            if (DBClass.LoginQuery(loginQuery, Username, Password) > 0)
+            if (DBClass.HashedLogin(Username, Password))
             {
                 DBClass.DBConnection.Close();
                 HttpContext.Session.SetInt32("loggedIn", 1);
                 HttpContext.Session.SetString("username", Username);
 
                 // retrieve userIDs
-                int userID = DBClass.loggedInUser(findUserID, Username, Password);
+                int userID = DBClass.hashedUserID(Username);
                 HttpContext.Session.SetInt32("userID", userID);
+                DBClass.DBConnection.Close();
 
                 // check user permissions
                 int adminStatus = DBClass.adminCheck(userID);
@@ -61,15 +62,16 @@ namespace lab484.Pages
                     int facultyStatus = DBClass.facultyCheck(userID);
                     if (facultyStatus == 1)
                     {
+                        DBClass.DBConnection.Close();
                         HttpContext.Session.SetInt32("facultyStatus", 1);
                         return RedirectToPage("/Faculty/FacultyLanding");
                     }
                     else
                     {
+                        DBClass.DBConnection.Close();
                         return RedirectToPage("/NoPermissions");
                     }
                 }
-                DBClass.DBConnection.Close();
             }
             else
             {

@@ -1,0 +1,21 @@
+﻿@page
+@model InventoryManagement.Pages.Practice.CreateHashedLoginModel
+@{
+}
+
+<form asp-page="CreateHashedLogin">
+    <label>Enter New Username:</label>
+    <input asp-for="Username" class="form-control" placeholder="Enter Username" />
+    <br />
+    <label>Enter New User's Password:</label>
+    <input asp-for="Password" class="form-control" type="password" />
+    <br />
+    <input type="submit" class="btn btn-primary" />
+</form>
+@{
+    if (ViewData["UserCreate"] != null)
+    {
+        <p class="text-success">@ViewData["UserCreate"]</p>
+    }
+
+}

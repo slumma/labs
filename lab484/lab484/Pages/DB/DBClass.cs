@@ -17,6 +17,9 @@ namespace lab484.Pages.DB
         private static readonly String? DBConnString = 
             "Server=Localhost;Database=Lab3;Trusted_Connection=True";
 
+        private static readonly String? AUTHConnString =
+            "Server=Localhost;Database=AUTH;Trusted_Connection=True";
+
         //Connection Methods:
 
         //Basic Product Reader
@@ -178,7 +181,101 @@ namespace lab484.Pages.DB
             return status;
         }
 
+        public static bool HashedLogin(string Username, string Password)
+        {
+            string loginQuery =
+                "SELECT Password FROM HashedCredentials WHERE Username = @Username";
 
+            SqlCommand cmdLogin = new SqlCommand();
+            cmdLogin.Connection = DBConnection;
+            cmdLogin.Connection.ConnectionString = AUTHConnString;
+
+            cmdLogin.CommandText = loginQuery;
+            cmdLogin.Parameters.AddWithValue("@Username", Username);
+
+            cmdLogin.Connection.Open();
+
+            // ExecuteScalar() returns back data type Object
+            // Use a typecast to convert this to an int.
+            // Method returns first column of first row.
+            SqlDataReader hashReader = cmdLogin.ExecuteReader();
+            if (hashReader.Read())
+            {
+                string correctHash = hashReader["Password"].ToString();
+
+                if (PasswordHash.ValidatePassword(Password, correctHash))
+                {
+                    return true;
+                }
+            }
+            cmdLogin.Connection.Close();
+            return false;
+        }
+
+        public static int hashedUserID(string Username)
+        {
+            SqlCommand cmdGetHashedUserID = new SqlCommand();
+
+            cmdGetHashedUserID.Connection = DBConnection;
+            cmdGetHashedUserID.Connection.ConnectionString = AUTHConnString;
+
+            cmdGetHashedUserID.CommandText = "SELECT UserID FROM HashedCredentials WHERE Username = @Username";
+            cmdGetHashedUserID.Parameters.AddWithValue("@Username", Username);
+
+            cmdGetHashedUserID.Connection.Open();
+
+            SqlDataReader hashReader = cmdGetHashedUserID.ExecuteReader();
+
+            int UserID = 0;
+            if (hashReader.Read())
+            {
+                UserID = Convert.ToInt32(hashReader["UserID"].ToString());
+            }
+            cmdGetHashedUserID.Connection.Close();
+            return UserID;
+        }
+
+        public static void CreateUser(int UserID) //POST-HASH
+        {
+            string createUser =
+                "INSERT INTO HashedCredentials (UserID) values (@UserID)";
+
+            SqlCommand cmdLogin = new SqlCommand();
+            cmdLogin.Connection = DBConnection;
+            cmdLogin.Connection.ConnectionString = AUTHConnString;
+
+            cmdLogin.CommandText = createUser;
+            cmdLogin.Parameters.AddWithValue("@UserID", UserID);
+
+            cmdLogin.Connection.Open();
+
+            cmdLogin.ExecuteNonQuery();
+
+            cmdLogin.Connection.Close();
+        }
+
+        public static void CreateHashedUser(string Username, string Password)
+        {
+            string loginQuery =
+                "INSERT INTO HashedCredentials (Username,Password) values (@Username, @Password)";
+
+            SqlCommand cmdLogin = new SqlCommand();
+            cmdLogin.Connection = DBConnection;
+            cmdLogin.Connection.ConnectionString = AUTHConnString;
+
+            cmdLogin.CommandText = loginQuery;
+            cmdLogin.Parameters.AddWithValue("@Username", Username);
+            cmdLogin.Parameters.AddWithValue("@Password", PasswordHash.HashPassword(Password));
+
+            cmdLogin.Connection.Open();
+
+            // ExecuteScalar() returns back data type Object
+            // Use a typecast to convert this to an int.
+            // Method returns first column of first row.
+            cmdLogin.ExecuteNonQuery();
+
+            cmdLogin.Connection.Close();
+        }
     }
 }
 
