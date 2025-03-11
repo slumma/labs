@@ -1,23 +1,29 @@
 ﻿@page
 @model lab484.Pages.SearchModel
+@{
+}
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<br />
+<h2 class="text-center">Search System</h2>
+<br />
 
-<h2>Search</h2>
-
-<form method="post">
-    <div>
-        <label for="searchWord">Search:</label>
-        <input type="text" id="searchWord" name="searchWord" asp-for="searchWord" />
+<form method="post" class="mb-3">
+    <div class="form-group">
+        <input type="text" placeholder="Search Term..." name="searchWord" class="form-control" asp-for="searchWord" />
     </div>
-    <div>
-        <button type="submit">Submit</button>
+    <br />
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
+<br />
 
 @if (Model.searchList != null && Model.searchList.Count > 0)
 {
-    <h3>Results for "@Model.searchWord":</h3>
-    <table border="1" cellpadding="5" cellspacing="0">
-        <thead>
+    <h3 class="text-center">Results for "<span class="text-primary">@Model.searchWord</span>":</h3>
+    <br />
+    <table class="table table-bordered table-hover table-responsive">
+        <thead class="thead-dark">
             <tr>
                 <th>Table Name</th>
                 <th>Column Name</th>
@@ -38,6 +44,7 @@
 }
 else if (!string.IsNullOrEmpty(Model.searchWord))
 {
-    <p>No results found for "@Model.searchWord".</p>
+    <div class="alert alert-warning text-center">
+        No results found for "<span class="text-danger">@Model.searchWord</span>".
+    </div>
 }
-
