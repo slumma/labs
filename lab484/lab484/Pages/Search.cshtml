@@ -1,9 +1,43 @@
 ﻿@page
 @model lab484.Pages.SearchModel
-@{
+
+<h2>Search</h2>
+
+<form method="post">
+    <div>
+        <label for="searchWord">Search:</label>
+        <input type="text" id="searchWord" name="searchWord" asp-for="searchWord" />
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+@if (Model.searchList != null && Model.searchList.Count > 0)
+{
+    <h3>Results for "@Model.searchWord":</h3>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Table Name</th>
+                <th>Column Name</th>
+                <th>Found Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var result in Model.searchList)
+            {
+                <tr>
+                    <td>@result.TableName</td>
+                    <td>@result.ColumnName</td>
+                    <td>@result.foundValue</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (!string.IsNullOrEmpty(Model.searchWord))
+{
+    <p>No results found for "@Model.searchWord".</p>
 }
 
-<div class="text-center">
-    <br />
-    <h2>Search</h2>
-</div>

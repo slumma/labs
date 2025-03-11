@@ -276,6 +276,109 @@ namespace lab484.Pages.DB
 
             cmdLogin.Connection.Close();
         }
+
+        public static SqlDataReader SearchFunction(string searchWord)
+        {
+            string SearchQuery = @"
+                    SELECT 'Users' AS TableName, 'Username' AS ColumnName, Username AS FoundValue 
+                    FROM users 
+                    WHERE Username LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Users', 'Email', Email 
+                    FROM users 
+                    WHERE Email LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Users', 'FirstName', FirstName 
+                    FROM users 
+                    WHERE FirstName LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Users', 'LastName', LastName 
+                    FROM users 
+                    WHERE LastName LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Users', 'Phone', Phone 
+                    FROM users 
+                    WHERE Phone LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Users', 'HomeAddress', HomeAddress 
+                    FROM users 
+                    WHERE HomeAddress LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Projects', 'ProjectName', ProjectName 
+                    FROM project 
+                    WHERE ProjectName LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Grants', 'GrantName', GrantName 
+                    FROM grants 
+                    WHERE GrantName LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Grants', 'Descriptions', CAST(descriptions AS NVARCHAR(MAX)) 
+                    FROM grants 
+                    WHERE CAST(descriptions AS NVARCHAR(MAX)) LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Grants', 'StatusName', StatusName 
+                    FROM grants 
+                    WHERE StatusName LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Grants', 'Category', Category 
+                    FROM grants 
+                    WHERE Category LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Grant Suppliers', 'SupplierName', SupplierName 
+                    FROM grantSupplier 
+                    WHERE SupplierName LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Grant Suppliers', 'OrgType', OrgType 
+                    FROM grantSupplier 
+                    WHERE OrgType LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Grant Suppliers', 'BusinessAddress', BusinessAddress 
+                    FROM grantSupplier 
+                    WHERE BusinessAddress LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Business Prep', 'CommunicationStatus', CommunicationStatus 
+                    FROM BPrep 
+                    WHERE CommunicationStatus LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Tasks', 'Objective', Objective 
+                    FROM task 
+                    WHERE Objective LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Meetings', 'Purpose', Purpose 
+                    FROM meeting 
+                    WHERE Purpose LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Project Notes', 'Content', CAST(Content AS NVARCHAR(MAX)) 
+                    FROM projectNotes 
+                    WHERE CAST(Content AS NVARCHAR(MAX)) LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'Grant Notes', 'Content', CAST(Content AS NVARCHAR(MAX)) 
+                    FROM grantNotes 
+                    WHERE CAST(Content AS NVARCHAR(MAX)) LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'User Messages', 'SubjectTitle', SubjectTitle 
+                    FROM userMessage 
+                    WHERE SubjectTitle LIKE '%' + @searchWord + '%'
+                    UNION ALL
+                    SELECT 'User Messages', 'Contents', Contents 
+                    FROM userMessage 
+                    WHERE Contents LIKE '%' + @searchWord + '%';
+                ";
+
+
+            SqlCommand cmdSearch = new SqlCommand();
+            cmdSearch.Connection = DBConnection;
+            cmdSearch.Connection.ConnectionString = DBConnString;
+
+            cmdSearch.CommandText = SearchQuery;
+            cmdSearch.Parameters.AddWithValue("@searchWord", searchWord);
+
+            cmdSearch.Connection.Open();
+
+            SqlDataReader tempReader = cmdSearch.ExecuteReader();
+
+            return tempReader;
+        }
     }
 }
 
