@@ -20,14 +20,14 @@
 
 @if (Model.searchList != null && Model.searchList.Count > 0)
 {
-    <h3 class="text-center">Results for "<span class="text-primary">@Model.searchWord</span>":</h3>
+    <h3 class="text-center">@Model.searchList.Count Results for "<span class="text-primary">@Model.searchWord</span>":</h3>
     <br />
     <table class="table table-bordered table-hover table-responsive">
         <thead class="thead-dark">
             <tr>
                 <th>Table Name</th>
                 <th>Column Name</th>
-                <th>Found Value</th>
+                <th>Value</th>
             </tr>
         </thead>
         <tbody>
