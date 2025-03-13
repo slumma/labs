@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Formats.Asn1;
 
 namespace lab484.Pages.DB
 {
@@ -82,30 +83,7 @@ namespace lab484.Pages.DB
 
             return tempReader;
         }
-        public static void InsertUser(User user)
-        {
-            String sqlQuery = "INSERT INTO users (Username, Password, FirstName, LastName, Email, Phone, HomeAddress) " +
-                              "VALUES (@Username, @Password, @FirstName, @LastName, @Email, @Phone, @HomeAddress)";
-
-
-            // helped with AI to generate the insertion queries 
-            using (SqlCommand cmdInsertUser = new SqlCommand(sqlQuery, DBConnection))
-            {
-                cmdInsertUser.Connection.ConnectionString = DBConnString;
-
-                cmdInsertUser.Parameters.AddWithValue("@Username", user.UserName);
-                cmdInsertUser.Parameters.AddWithValue("@Password", user.Password);
-                cmdInsertUser.Parameters.AddWithValue("@FirstName", user.FirstName);
-                cmdInsertUser.Parameters.AddWithValue("@LastName", user.LastName);
-                cmdInsertUser.Parameters.AddWithValue("@Email", user.Email);
-                cmdInsertUser.Parameters.AddWithValue("@Phone", user.Phone);
-                cmdInsertUser.Parameters.AddWithValue("@HomeAddress", user.HomeAddress);
-
-                cmdInsertUser.Connection.Open();
-                cmdInsertUser.ExecuteNonQuery();
-                cmdInsertUser.Connection.Close();
-            }
-        }
+        
 
         public static int LoginQuery(string query, string username, string password)
         {
@@ -181,38 +159,44 @@ namespace lab484.Pages.DB
             return status;
         }
 
+        public static string StoredProcedureLogin(string Username)
+        {
+            string correctHash = "";
+
+            SqlCommand cmdProductRead = new SqlCommand();
+
+            cmdProductRead.Connection = DBConnection;
+            cmdProductRead.Connection.ConnectionString = AUTHConnString;
+            cmdProductRead.CommandType = System.Data.CommandType.StoredProcedure;
+
+            cmdProductRead.Parameters.AddWithValue("@Username", Username);
+            cmdProductRead.CommandText = "sp_Lab3Login";
+
+            cmdProductRead.Connection.Open();
+
+            SqlDataReader passReader = cmdProductRead.ExecuteReader();
+            if (passReader.Read())
+            {
+                correctHash = passReader["Password"].ToString();
+            }
+            cmdProductRead.Connection.Close();
+            return correctHash;
+        }
+
         public static bool HashedLogin(string Username, string Password)
         {
-            string loginQuery =
-                "SELECT Password FROM HashedCredentials WHERE Username = @Username";
+            
+            string correctHash = StoredProcedureLogin(Username);
 
-            SqlCommand cmdLogin = new SqlCommand();
-            cmdLogin.Connection = DBConnection;
-            cmdLogin.Connection.ConnectionString = AUTHConnString;
-
-            cmdLogin.CommandText = loginQuery;
-            cmdLogin.Parameters.AddWithValue("@Username", Username);
-
-            cmdLogin.Connection.Open();
-
-            // ExecuteScalar() returns back data type Object
-            // Use a typecast to convert this to an int.
-            // Method returns first column of first row.
-            SqlDataReader hashReader = cmdLogin.ExecuteReader();
-            if (hashReader.Read())
+            if (PasswordHash.ValidatePassword(Password, correctHash))
             {
-                string correctHash = hashReader["Password"].ToString();
-
-                if (PasswordHash.ValidatePassword(Password, correctHash))
-                {
-                    return true;
-                }
+                return true;
             }
-            cmdLogin.Connection.Close();
+
             return false;
         }
 
-        public static int hashedUserID(string Username)
+        public static int HashedUserID(string Username)
         {
             SqlCommand cmdGetHashedUserID = new SqlCommand();
 
@@ -235,23 +219,30 @@ namespace lab484.Pages.DB
             return UserID;
         }
 
-        public static void CreateUser(int UserID) //POST-HASH
+        public static void InsertUser(User user)
         {
-            string createUser =
-                "INSERT INTO HashedCredentials (UserID) values (@UserID)";
+            String insertToUsers = "INSERT INTO users (Username, Password, FirstName, LastName, Email, Phone, HomeAddress) " +
+                              "VALUES (@Username, @Password, @FirstName, @LastName, @Email, @Phone, @HomeAddress)";
 
-            SqlCommand cmdLogin = new SqlCommand();
-            cmdLogin.Connection = DBConnection;
-            cmdLogin.Connection.ConnectionString = AUTHConnString;
+            CreateHashedUser(user.UserName, user.Password);
 
-            cmdLogin.CommandText = createUser;
-            cmdLogin.Parameters.AddWithValue("@UserID", UserID);
+            // helped with AI to generate the insertion queries 
+            using (SqlCommand cmdInsertUser = new SqlCommand(insertToUsers, DBConnection))
+            {
+                cmdInsertUser.Connection.ConnectionString = DBConnString;
 
-            cmdLogin.Connection.Open();
+                cmdInsertUser.Parameters.AddWithValue("@Username", user.UserName);
+                cmdInsertUser.Parameters.AddWithValue("@Password", user.Password);
+                cmdInsertUser.Parameters.AddWithValue("@FirstName", user.FirstName);
+                cmdInsertUser.Parameters.AddWithValue("@LastName", user.LastName);
+                cmdInsertUser.Parameters.AddWithValue("@Email", user.Email);
+                cmdInsertUser.Parameters.AddWithValue("@Phone", user.Phone);
+                cmdInsertUser.Parameters.AddWithValue("@HomeAddress", user.HomeAddress);
 
-            cmdLogin.ExecuteNonQuery();
-
-            cmdLogin.Connection.Close();
+                cmdInsertUser.Connection.Open();
+                cmdInsertUser.ExecuteNonQuery();
+                cmdInsertUser.Connection.Close();
+            }
         }
 
         public static void CreateHashedUser(string Username, string Password)

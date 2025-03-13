@@ -45,7 +45,7 @@ namespace lab484.Pages
                 HttpContext.Session.SetString("username", Username);
 
                 // retrieve userIDs
-                int userID = DBClass.hashedUserID(Username);
+                int userID = DBClass.HashedUserID(Username);
                 HttpContext.Session.SetInt32("userID", userID);
                 DBClass.DBConnection.Close();
 
