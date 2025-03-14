@@ -77,9 +77,6 @@
 			}
 		</tbody>
 	</table>
-	<div>
-		<a class="btn btn-outline-primary" asp-page="/Admin/ProjectDetail">Add Task</a>
-	</div>
 </div>
 
 <br />
@@ -107,16 +104,14 @@
 			}
 		</tbody>
 	</table>
-</div>
-<div class="text-center">
-	<br />
-	<a class="btn btn-outline-primary" asp-page="AddProjectNote" asp-route-projectID="@Model.projectID">Add Note</a>
-</div>
+
+	<div">
+		<a class="btn btn-outline-primary" asp-page="AddProjectNote" asp-route-projectID="@Model.projectID">Add Note</a>
+	</div>
 
 <br />
-
 <div class="text-center">
 	<a class="btn btn-outline-primary" asp-page="AdminLanding">Return to Projects</a>
 </div>
-<br />
-<br />
+</div>
+
